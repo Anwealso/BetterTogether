@@ -4,6 +4,11 @@
 
 * Python Django
 
+Tools:
+
+* Python 3
+* Conda Virtual Env
+
 ## Frontend
 
 * React

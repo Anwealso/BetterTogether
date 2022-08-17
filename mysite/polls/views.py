@@ -25,7 +25,6 @@ def results(request, question_id):
     return render(request, 'polls/results.html', {'question': question})
 
 
-
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -43,3 +42,7 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+
+def reefly(request):
+    return render(request, 'polls/reefly.html')

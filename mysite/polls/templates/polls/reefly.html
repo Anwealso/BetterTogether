@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+		<!-- <link rel="stylesheet" href="css/style.css"> -->
+
+		<link rel="icon" href="{% static 'polls/images/logos/coral_logo_filled.png' %}"' %}" type="image/icon">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Home | Reefly</title>
+	</head>
+	<body>
+
+		<header class="navbar" id="navbar">
+			<a href="index.html" class="navbar-item navbar-logo-wrapper">
+				<img src="{% static 'polls/images/logos/coral_logo_filled.png' %}"' %}" alt="" class="nav-logo-img">
+		
+				<div class="nav-logo-text">
+					Reef.ly
+				</div>
+			</a>
+		
+			<nav class="nav">
+				<a class="navbar-item navbar-toggle navbar-open" id="navOpen">
+					<img src="{% static 'polls/images/icons/hamburger_icon_grey.png' %}"' %}" alt="" class="nav-toggle-img">
+				</a>
+		
+				<ul class="navbar-links" id="navLinks">
+					<a href="about.html" class="navbar-item navbar-link">About</a>					
+					<a href="careers.html" class="navbar-item navbar-link">Careers</a>					
+					<a href="news.html" class="navbar-item navbar-link">News</a>					
+					
+				</ul>
+		
+				<ul class="navbar-links-right">
+					<a href="signup.html" class="navbar-item">Sign Up</a>
+					<a href="login.html" class="navbar-item login-btn btn btn-sml">
+						Log in
+					</a>				
+				</ul>
+		
+			</nav>
+		</header>
+
+		<dialog class="navbar-mobile" id="navbarMobile">
+			<button class="navbar-toggle navbar-close" id="navClose">
+				<img src="{% static 'polls/images/icons/x_icon_grey.png' %}"" alt="" class="nav-toggle-img">
+			</button>
+		
+			<nav class="navbar-links-mobile" id="navLinksMobile">
+				<a href="about.html" class="navbar-link-mobile">About</a>					
+				<a href="careers.html" class="navbar-link-mobile">Careers</a>					
+				<a href="news.html" class="navbar-link-mobile">News</a>					
+				
+				<div class="navbar-mobile-btn-cluster">
+					<a href="login.html" class="navbar-item login-btn btn btn-sml">
+						Log in
+					</a>
+					<a href="signup.html" class="navbar-item">
+						Sign Up
+					</a>
+				</div>
+			</nav>
+		</dialog>
+
+		<main class="content" id="content">
+
+			<section class="hero-video-section">
+				<div class="hero-video-overlay">
+					<div class="hero-video-text">
+						Discover a smarter way to invest
+						<a href="signup.html" class="hero-btn btn">Get started now</a>
+					</div>
+				</div>
+				<div class="hero-video-wrapper">
+					<video src="{% static 'polls/files/diver.mp4" muted autoplay loop playsinline class="hero-video"></video>
+				</div>
+			</section>
+
+			<section class="side-by-side-section">
+				<div class="side-by-side-row">
+					<div class="side-by-side-column">
+						<div class="side-by-side-column-abstract-wrapper">
+							<img class="side-by-side-column-abstract" src="{% static 'polls/images/abstract/abstract1.png' %}"" alt="">
+							<div class="side-by-side-column-icon-wrapper">
+								<img class="side-by-side-column-icon" src="{% static 'polls/images/icons/icon_drawer.png' %}"" alt="">
+							</div>
+						</div>
+					</div>
+					<div class="side-by-side-column">
+						<div class="side-by-side-column-textarea">
+							<h2>Reefly Portfolios</h2>
+							<p>With Reefly Porfolios, quickly build a diversified portfolio tailored exactly to your needs and values. It's super simple and affordable. The way investing should be.
+							</p>
+							<ul>
+								<li>Ultra low fees of just 0.1% yearly.</li>
+								<li>No minimum investment.</li>
+								<li>Custom fit to your financial goals.</li>
+							</ul>
+							<a href="signup.html" class="hero-btn btn">Get started now</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="side-by-side-row side-by-side-row-reverse">
+					<div class="side-by-side-column">
+						<div class="side-by-side-column-textarea">
+							<h2>Reefly Trading</h2>
+							<p>Reefly Trading is your one stop shop for shares brokerage, we give you the highest performance brokerage so that you can take advantage of any opportunity across any market.
+							</p>
+							<ul>
+								<li>Instant transfers, lighting fast trades.</li>
+								<li>Access to every major world market.</li>
+								<li>Zero commission.</li>
+							</ul>
+							<a href="signup.html" class="hero-btn btn">Get started now</a>
+						</div>
+					</div>
+					<div class="side-by-side-column">
+						<div class="side-by-side-column-abstract-wrapper">
+							<img class="side-by-side-column-abstract" src="{% static 'polls/images/abstract/abstract2.png' %}"" alt="">
+							<div class="side-by-side-column-icon-wrapper">
+								<img class="side-by-side-column-icon" src="{% static 'polls/images/icons/icon_bar-chart.png' %}"" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="side-by-side-row">
+					<div class="side-by-side-column">
+						<div class="side-by-side-column-abstract-wrapper">
+							<img class="side-by-side-column-abstract" src="{% static 'polls/images/abstract/abstract3.png' %}"" alt="">
+							<div class="side-by-side-column-icon-wrapper">
+								<img class="side-by-side-column-icon" src="{% static 'polls/images/icons/icon_administrator.png' %}"" alt="">
+							</div>
+						</div>
+					</div>
+					<div class="side-by-side-column">
+						<div class="side-by-side-column-textarea">
+							<h2>Reefly Platform</h2>
+							<p>The Reefly platform keeps all your asset classes and managed funds in one place so you can keep track of everything and see your asset split in real time. We put all the power in your hands so you can be the master of your own ship.
+							</p>
+							<ul>
+								<li>Managed funds, ETFs, stocks, bonds, and cash all in one place.</li>
+								<li>One annual statement for all your tax reporting.</li>
+								<li>Create automatic trading workflows.</li>
+							</ul>
+							<a href="signup.html" class="hero-btn btn">Get started now</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="testimonials-section">
+				<div class="side-by-side-row">
+					<div class="testimonial-column">
+						<div class="testimonials-wrapper">
+							<div class="test-card" id="test-card-1">
+								<div class="front">
+									<h1>Flip to view</h1>
+								</div>
+								<div class="back">
+									<h1 class="name">John Scott</h1>
+									<p>
+										I love Reefly! It really helped me get my finances under control and got me on a path to saving for my goals.
+									</p>
+								</div>
+							</div>
+							<div class="test-card" id="test-card-2">
+								<div class="front">
+									<h1>Flip to view</h1>
+								</div>
+								<div class="back">
+									<h1 class="name">Bill Wurst</h1>
+									<p>
+										I didn't know how important investing was until I found Reefly - now I find it so satisfying to watch my money work for me.
+									</p>
+								</div>
+							</div>
+							<div class="test-card" id="test-card-3">
+								<div class="front">
+									<h1>Flip to view</h1>
+								</div>
+								<div class="back">
+									<h1 class="name">Elsie Robins</h1>
+									<p>
+										Reefly is way easier to use than any investing platform I had ever used before - it keeps things organised and lets me see all of my investments in one place.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="testimonial-column">
+						What are people saying about Reefly?
+					</div>
+				</div>
+			</section>
+
+			<section class="triple-icon-section">
+				<h1>Get started in 3 simple steps</h1>
+				<div class="triple-icon-group">
+					<div class="triple-icon-column">
+						<div class="triple-icon-icon-wrapper">
+							<img class="triple-icon-icon" src="{% static 'polls/images/icons/phone.png' %}"" alt="">
+						</div>
+						<div class="triple-icon-text">
+							1. Download the app
+						</div>
+					</div>
+					<div class="triple-icon-column">
+						<div class="triple-icon-icon-wrapper">
+							<img class="triple-icon-icon" src="{% static 'polls/images/icons/gauge.png' %}"" alt="">
+						</div>
+						<div class="triple-icon-text">
+							2. Select your risk tolerance and investment timeline
+						</div>					
+					</div>
+					<div class="triple-icon-column">
+						<div class="triple-icon-icon-wrapper">
+							<img class="triple-icon-icon" src="{% static 'polls/images/icons/pie-chart.png' %}"" alt="">
+						</div>
+						<div class="triple-icon-text">
+							3. Let us design a custom investment portfolio for you
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="cta-section">
+				<div class="cta-main-text">
+					Invest in your future, so you can live the life you want to live
+				</div>
+				<div class="cta-subtitle">
+					Get started in only five minutes
+				</div>
+				<a href="login.html" class="cta-btn btn">
+					Sign Up
+				</a>
+			</section>
+
+		</main>
+
+		<footer class="footer" id="footer">
+			<div class="footer-wrapper">
+		
+				<div class="footer-item col1">
+					<a href="index.html" class="navbar-logo-wrapper">
+						<img src="{% static 'polls/images/logos/coral_logo_filled.png' %}"" alt="" class="nav-logo-img">
+			
+						<div class="nav-logo-text">
+							Reef.ly
+						</div>
+					</a>
+				</div>
+		
+				<div style="width: 20%;">
+				</div>
+		
+				<div class="footer-item col2">
+					<div>
+						<strong>FIND US</strong>
+					</div>
+					<br>
+					<div>
+						42 Wallaby Way, NSW 2044
+						Sydney, Australia
+					</div>
+				</div>
+		
+				<div class="footer-item col2">
+					<div>
+						<strong>CONNECT WITH US</strong>
+					</div>
+					<br>
+					<div>
+						Ph: +61 3797 0876
+					</div>
+					<br>
+					<div>
+						Facebook: Reef.ly
+					</div>      
+					<br>
+					<div>
+						Facebook: @Reef.ly
+					</div>
+				</div>
+			</div>
+		</footer>
+		
+		<!-- <script src="{% static 'polls/js/script.js"></script> -->
+		<script src="{% static 'polls/index.js"></script>
+
+	</body>
+</html>

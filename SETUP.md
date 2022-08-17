@@ -39,6 +39,8 @@ conda activate onigiri
 
 ## Start the django server
 
+Run the following command from within the **mysite** directory
+
 ```bash
 python ./mysite/manage.py runserver
 ```

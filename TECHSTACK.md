@@ -8,6 +8,7 @@ Tools:
 
 * Python 3
 * Conda Virtual Env
+* Sqlite3
 
 ## Frontend
 

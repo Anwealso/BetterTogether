@@ -2,9 +2,12 @@
 
 ## Install Anaconda
 
-Follow this guide: https://docs.anaconda.com/anaconda/install/
+Follow [this guide](https://docs.anaconda.com/anaconda/install/)
 
-## Create Virtual Environment with Conda
+## Setup the Virtual Environment with Conda
 
-Following this guide: https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
+Run Alex's bash script (from the project root dir) that sets up the env installs all the required dependancies
 
+```bash
+bash install.sh
+```

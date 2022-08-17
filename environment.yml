@@ -1,0 +1,10 @@
+name: onigiri
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - Django
+    - numpy
+    - pandas
+    - sklearn
+    - matplotlib

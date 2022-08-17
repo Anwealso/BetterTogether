@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		
 		{% load static %}
-		<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+		<meta charset="utf-8" />
+
+		<link rel="stylesheet" href="{% static 'polls/css/style.css' %}">
 		<!-- <link rel="stylesheet" href="css/style.css"> -->
 
 		<link rel="icon" href="{% static 'polls/images/logos/coral_logo_filled.png' %}"' %}" type="image/icon">
@@ -75,7 +75,7 @@
 					</div>
 				</div>
 				<div class="hero-video-wrapper">
-					<video src="{% static 'polls/files/diver.mp4" muted autoplay loop playsinline class="hero-video"></video>
+					<video src="{% static 'polls/files/diver.mp4' %}" muted autoplay loop playsinline class="hero-video"></video>
 				</div>
 			</section>
 
@@ -289,8 +289,7 @@
 			</div>
 		</footer>
 		
-		<!-- <script src="{% static 'polls/js/script.js"></script> -->
-		<script src="{% static 'polls/index.js"></script>
+		<script src="{% static 'polls/js/script.js' %}"></script>
 
 	</body>
 </html>

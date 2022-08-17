@@ -3,13 +3,17 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
+    <title>Polls Detail</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <p>Welcome to the polls html page!</p>
-    <b>Yeet</b>
+    <h1>{{ question.question_text }}</h1>
+    <ul>
+    {% for choice in question.choice_set.all %}
+        <li>{{ choice.choice_text }}</li>
+    {% endfor %}
+    </ul>
+        
 	<script src="index.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-# Installation and Environment Setup Guide
+# Alex's Installation and Environment Setup Guide
 
 ## Install Anaconda
 

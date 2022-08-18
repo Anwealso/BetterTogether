@@ -3,8 +3,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+from rest_framework import generics
+
 from .models import Choice, Question
 
+from .serializers import QuestionSerializer
 
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
@@ -17,12 +20,12 @@ def index(request):
 
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/detail.html', {'question': question})
+    return render(request, 'detail.html', {'question': question})
 
 
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/results.html', {'question': question})
+    return render(request, 'results.html', {'question': question})
 
 
 def vote(request, question_id):
@@ -31,7 +34,7 @@ def vote(request, question_id):
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
-        return render(request, 'polls/detail.html', {
+        return render(request, 'detail.html', {
             'question': question,
             'error_message': "You didn't select a choice.",
         })
@@ -45,4 +48,9 @@ def vote(request, question_id):
 
 
 def reefly(request):
-    return render(request, 'polls/reefly.html')
+    return render(request, 'reefly.html')
+
+
+class QuestionView(generics.CreateAPIView): # TODO: maybe this should be def not class???
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer

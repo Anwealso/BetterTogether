@@ -4,6 +4,7 @@ dependencies:
   - pip
   - pip:
     - Django
+    - djangorestframework
     - numpy
     - pandas
     - sklearn

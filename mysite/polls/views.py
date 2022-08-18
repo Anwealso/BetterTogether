@@ -12,7 +12,7 @@ from .serializers import QuestionSerializer
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
-    return render(request, 'polls/index.html', context)
+    return render(request, 'index.html', context)
 
     # # Render the HTML template index.html with the data in the context variable
     # return render(request, 'index.html')

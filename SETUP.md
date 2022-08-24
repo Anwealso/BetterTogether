@@ -46,7 +46,7 @@ conda activate onigiri
 Run the following command from within the **mysite** directory
 
 ```bash
-python ./mysite/manage.py runserver
+python manage.py runserver
 ```
 
 As it says in the terminal output, view the server [on localhost port 8000 here](http://127.0.0.1:8000/) to check that its running.

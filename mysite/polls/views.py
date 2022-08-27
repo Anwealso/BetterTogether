@@ -56,7 +56,8 @@ def vote(request, survey_id):
     # Always return an HttpResponseRedirect after successfully dealing
     # with POST data. This prevents data from being posted twice if a
     # user hits the Back button.
-    return HttpResponseRedirect(reverse('polls:results', args=(survey.id,)))
+    # return HttpResponseRedirect(reverse('polls:results', args=(survey.id,)))
+    return HttpResponseRedirect(reverse('polls:thankyou'))
 
 
 def billboard(request):
@@ -83,3 +84,7 @@ def billboard(request):
 
     # Return the percentage to be shown on the screen
     return render(request, 'polls/billboard.html', {'percentage': percentage})
+
+def thankyou(request):
+    # Return the thankyou page
+    return render(request, 'polls/thankyou.html')

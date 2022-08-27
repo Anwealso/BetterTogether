@@ -19,4 +19,7 @@ urlpatterns = [
 
     # ex: /billboard
     path('billboard/', views.billboard, name='billboard'),
+
+    # ex: /thankyou
+    path('thankyou/', views.thankyou, name='thankyou'),
 ]

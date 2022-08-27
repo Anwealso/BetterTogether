@@ -14,22 +14,7 @@
   <body>
     <h1>Welcome to the polls home page!</h1>
     <div>
-
-    {% if latest_survey_list %}
-      <ul>
-      {% for survey in latest_survey_list %}
-        <li>
-          <a href="{% url 'polls:detail' survey.id %}">{{ survey.survey_name }}</a>
-        </li>
-      {% endfor %}
-      </ul>
-    {% else %}
-        <p>No polls are available.</p>
-    {% endif %}
-
-
-
-    <!-- {% if latest_question_list %}
+    {% if latest_question_list %}
       <ul>
       {% for question in latest_question_list %}
         <li>
@@ -39,7 +24,7 @@
       </ul>
     {% else %}
         <p>No polls are available.</p>
-    {% endif %} -->
+    {% endif %}
     </div>
     
 	<script src="{% static 'index.js' %}"></script>

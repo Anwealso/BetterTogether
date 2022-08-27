@@ -8,16 +8,25 @@
   </head>
   <body>
     
-    <form action="{% url 'polls:vote' question.id %}" method="post">
+    <form action="{% url 'polls:vote' survey.id %}" method="post">
       {% csrf_token %}
-      <fieldset>
-          <legend><h1>{{ question.question_text }}</h1></legend>
-          {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-          {% for choice in question.choice_set.all %}
-              <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-              <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-          {% endfor %}
-      </fieldset>
+
+      <legend><h1>{{ survey.survey_name }}</h1></legend>
+
+      {% for question in survey.question_set.all %}
+
+        <fieldset>
+            <legend><h2>{{ question.question_text }}</h2></legend>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            {% for choice in question.choice_set.all %}
+                <input type="radio" name="{{ question.id }}" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            {% endfor %}
+        </fieldset>
+
+      {% endfor %}
+
+
       <input type="submit" value="Vote">
     </form>
         

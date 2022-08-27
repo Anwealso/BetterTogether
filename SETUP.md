@@ -66,3 +66,11 @@ Run Alex's frontend bash script in the ./mysite/frontend (make sure to run it fr
 ```bash
 bash install_frontend.sh
 ```
+
+### Run the NPM React Server
+
+From the ./mysite/billboard directory, run:
+
+```bash
+npm run-script dev
+```

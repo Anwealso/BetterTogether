@@ -61,18 +61,28 @@ def vote(request, survey_id):
     survey = get_object_or_404(Survey, pk=survey_id)
 
     for question in survey.question_set.all():
+        print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
+        print(question)
         try:
-            selected_choice = question.choice_set.get(pk=request.POST['choice'])
+            print(1)
+            print(f"QID: {question.id}")
+            # print(question.choice_set.all())
+            # print(request.POST)
+            # print(request.POST[str(question.id)])
+            selected_choice = question.choice_set.get(pk=request.POST[str(question.id)])
         except (KeyError, Choice.DoesNotExist):
+            print(2)
             # Redisplay the question voting form.
             return render(request, 'polls/detail.html', {
                 'survey': survey,
                 'error_message': "You didn't select a choice.",
             })
         else:
+            print(3)
             selected_choice.votes += 1
             selected_choice.save()
-            # Always return an HttpResponseRedirect after successfully dealing
-            # with POST data. This prevents data from being posted twice if a
-            # user hits the Back button.
-            return HttpResponseRedirect(reverse('polls:results', args=(survey.id,)))
+            
+    # Always return an HttpResponseRedirect after successfully dealing
+    # with POST data. This prevents data from being posted twice if a
+    # user hits the Back button.
+    return HttpResponseRedirect(reverse('polls:results', args=(survey.id,)))

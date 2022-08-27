@@ -13,3 +13,13 @@ If you are setting up for the first time, please follow the  install guide in SE
 * Login credentials for the django server admin account:
 `Username: admin`
 `Password: 123`
+
+## Current Sitemap
+
+```/``` goes to the surveys homepage, which shows a list of all the available surveys
+
+```/<int:survey_id>/``` shows the details of a survey (quesitons, answer options, etc.)
+
+```/<int:survey_id>/results/``` see the results of a survey
+
+```/billboard``` a billboard displaying a particular survey result

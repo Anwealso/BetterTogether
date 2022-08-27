@@ -15,36 +15,23 @@
     <h1>Welcome to the polls home page!</h1>
     <div>
 
-    {% if latest_survey_list %}
-      <ul>
-      {% for survey in latest_survey_list %}
-        <li>
-          <a href="{% url 'polls:detail' survey.id %}">{{ survey.survey_name }}</a>
-        </li>
-      {% endfor %}
-      </ul>
-    {% else %}
-        <p>No polls are available.</p>
-    {% endif %}
-
-
-
-    <!-- {% if latest_question_list %}
-      <ul>
-      {% for question in latest_question_list %}
-        <li>
-          <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
-        </li>
-      {% endfor %}
-      </ul>
-    {% else %}
-        <p>No polls are available.</p>
-    {% endif %} -->
+      {% if latest_survey_list %}
+        <ul>
+        {% for survey in latest_survey_list %}
+          <li>
+            <a href="{% url 'polls:detail' survey.id %}">{{ survey.survey_name }}</a>
+          </li>
+        {% endfor %}
+        </ul>
+      {% else %}
+          <p>No polls are available.</p>
+      {% endif %}
+      
     </div>
     
-	<script src="{% static 'index.js' %}"></script>
-  <!-- Bootstrap Interactivity Javascript: -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> -->
+    <script src="{% static 'index.js' %}"></script>
+    <!-- Bootstrap Interactivity Javascript: -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> -->
 
   </body>
 </html>

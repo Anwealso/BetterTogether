@@ -93,3 +93,12 @@ ul {
 
   /* background-color: green; */
 }
+
+
+#survey-wrapper {
+  /* width: 50%; */
+  padding-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

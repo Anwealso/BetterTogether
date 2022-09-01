@@ -23,3 +23,7 @@ If you are setting up for the first time, please follow the  install guide in SE
 ```/<int:survey_id>/results/``` see the results of a survey
 
 ```/billboard``` a billboard displaying a particular survey result
+
+
+
+Hi, this is Alex.

@@ -24,7 +24,4 @@ If you are setting up for the first time, please follow the  install guide in SE
 
 ```/billboard``` a billboard displaying a particular survey result
 
-
-
-Hi, this is Alex.
 Hi, this is Joe

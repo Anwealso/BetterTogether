@@ -25,6 +25,6 @@ If you are setting up for the first time, please follow the  install guide in SE
 ```/billboard``` a billboard displaying a particular survey result
 
 
-I am king
+I am king, of kings 
 Hi, this is Alex.
 Hi, this is Joe

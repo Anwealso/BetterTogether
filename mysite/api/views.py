@@ -15,17 +15,17 @@ from .models import Survey, Choice, Question
 def index(request):
     latest_survey_list = Survey.objects.order_by('-pub_date')[:5]
     context = {'latest_survey_list': latest_survey_list}
-    return render(request, 'polls/index.html', context)
+    return render(request, 'api/index.html', context)
 
 
 def detail(request, survey_id):
     survey = get_object_or_404(Survey, pk=survey_id)
-    return render(request, 'polls/detail.html', {'survey': survey})
+    return render(request, 'api/detail.html', {'survey': survey})
 
 
 def results(request, survey_id):
     survey = get_object_or_404(Survey, pk=survey_id)
-    return render(request, 'polls/results.html', {'survey': survey})
+    return render(request, 'api/results.html', {'survey': survey})
 
 
 def vote(request, survey_id):
@@ -44,7 +44,7 @@ def vote(request, survey_id):
         except (KeyError, Choice.DoesNotExist):
             # print(2)
             # Redisplay the question voting form.
-            return render(request, 'polls/detail.html', {
+            return render(request, 'api/detail.html', {
                 'survey': survey,
                 'error_message': "You didn't select a choice.",
             })
@@ -56,8 +56,8 @@ def vote(request, survey_id):
     # Always return an HttpResponseRedirect after successfully dealing
     # with POST data. This prevents data from being posted twice if a
     # user hits the Back button.
-    # return HttpResponseRedirect(reverse('polls:results', args=(survey.id,)))
-    return HttpResponseRedirect(reverse('polls:thankyou'))
+    # return HttpResponseRedirect(reverse('api:results', args=(survey.id,)))
+    return HttpResponseRedirect(reverse('api:thankyou'))
 
 
 def billboard(request):
@@ -83,8 +83,8 @@ def billboard(request):
             percentage = round(percentage, 2)
 
     # Return the percentage to be shown on the screen
-    return render(request, 'polls/billboard.html', {'percentage': percentage})
+    return render(request, 'api/billboard.html', {'percentage': percentage})
 
 def thankyou(request):
     # Return the thankyou page
-    return render(request, 'polls/thankyou.html')
+    return render(request, 'api/thankyou.html')

@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls.apps.PollsConfig',
     'myapi.apps.MyapiConfig',
     'rest_framework',
     'frontend.apps.FrontendConfig',

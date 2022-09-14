@@ -35,7 +35,7 @@ class Choice(models.Model):
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.text
+        return self.option
 
 
 class Result(models.Model):
@@ -45,4 +45,4 @@ class Result(models.Model):
     sub_time = models.TimeField()
 
     def __str__(self):
-        return self.text
+        return self.choice_id

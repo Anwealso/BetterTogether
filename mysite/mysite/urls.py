@@ -20,6 +20,7 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('', RedirectView.as_view(url='polls/')),
+    path('api/', include('myapi.urls')),
     path('', include('frontend.urls')),
-    path('api/', include('api.urls')),
 ]

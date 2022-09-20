@@ -6,6 +6,8 @@ from .models import Choice
 from .models import Result
 
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
+    total_responses = serializers.IntegerField()
+
     class Meta:
         model = Question
-        fields = ['text']
+        fields = ['text', 'total_responses']

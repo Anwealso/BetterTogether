@@ -1,20 +1,5 @@
 from django.db import models
 
-# Create your models here.
-# class Hero(models.Model):
-#     name = models.CharField(max_length=60)
-#     alias = models.CharField(max_length=60)
-#     def __str__(self):
-#         return self.name
-
-# def validate_even(value):
-#     if value % 2 != 0:
-#         raise ValidationError(
-#             _('%(value)s is not an even number'),
-#             params={'value': value},
-#         )
-
-
 class Survey(models.Model):
     name = models.CharField(max_length=60)
 

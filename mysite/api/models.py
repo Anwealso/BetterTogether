@@ -12,7 +12,7 @@ class Question(models.Model):
     surveys = models.ManyToManyField(Survey, related_name='questions')
 
     def __str__(self):
-        return self.text + "_yeet"
+        return self.text
 
 
 class Choice(models.Model):

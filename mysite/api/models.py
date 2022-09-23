@@ -9,15 +9,15 @@ class Survey(models.Model):
 
 class Question(models.Model):
     text = models.CharField(max_length=60)
-    surveys = models.ManyToManyField(Survey)
+    surveys = models.ManyToManyField(Survey, related_name='questions')
 
     def __str__(self):
-        return self.text
+        return self.text + "_yeet"
 
 
 class Choice(models.Model):
     option = models.CharField(max_length=60)
-    question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question_id = models.ForeignKey(Question, related_name='choices', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.option

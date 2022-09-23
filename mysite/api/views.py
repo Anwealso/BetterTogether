@@ -6,11 +6,16 @@ from .models import Survey, Question, Choice, Result
 from .serializers import SurveySerializer, QuestionSerializer, ChoiceSerializer, ResultSerializer
 
 
-# # Create your views here.
+# from django.shortcuts import render
+# from django.http import JsonResponse
 
-# class HeroViewSet(viewsets.ModelViewSet):
-#     queryset = Hero.objects.all().order_by('name')
-#     serializer_class = HeroSerializer
+# from rest_framework import generics, status
+# from rest_framework.views import APIView
+# from rest_framework.response import Response
+
+# from .serializers import RoomSerializer, CreateRoomSerializer, UpdateRoomSerializer
+# from .models import Room
+
 
 class SurveyViewSet(viewsets.ModelViewSet):
     """

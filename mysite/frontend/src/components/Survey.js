@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Routes, Route, useParams } from 'react-router-dom';
-import { Grid, Button, Typography, Radio } from "@material-ui/core";
+import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup } from "@material-ui/core";
 
 export default class Survey extends Component {
   constructor(props) {
@@ -10,17 +10,20 @@ export default class Survey extends Component {
       surveyId: null,
       name: null,
       questions: [],
+      ligma: 0,
     };
 
     // let params = useParams();
     // console.log(params)
 
-    this.surveyId = this.props.match.params.surveyId;
+    this.surveyId = parseInt(this.props.match.params.surveyId);
     
     // this.leaveButtonPressed = this.leaveButtonPressed.bind(this);
-    // this.updateShowSettings = this.updateShowSettings.bind(this);
-    // this.renderSsettingsButton = this.renderSettingsButton.bind(this);
+
+    this.updateShowSettings = this.updateShowSettings.bind(this);
+    this.renderSettingsButton = this.renderSettingsButton.bind(this);
     // this.renderSettings = this.renderSettings.bind(this);
+    
     this.getSurveyDetails = this.getSurveyDetails.bind(this);
     this.getSurveyDetails();
   }
@@ -62,11 +65,11 @@ export default class Survey extends Component {
   //   });
   // }
 
-  // updateShowSettings(value) {
-  //   this.setState({
-  //     showSettings: value,
-  //   });
-  // }
+  updateShowSettings(value) {
+    this.setState({
+      surveyId: value,
+    }, () => {console.log(this.state.surveyId)});
+  }
 
   // renderSettings() {
   //   return (
@@ -90,9 +93,11 @@ export default class Survey extends Component {
         <Button
           variant="contained"
           color="primary"
-          // onClick={() => this.updateShowSettings(true)}
+          onClick={() => {
+            this.updateShowSettings(this.state.surveyId+1)
+          }}
         >
-          Settings
+          Submit
         </Button>
       </Grid>
     );
@@ -103,74 +108,51 @@ export default class Survey extends Component {
     //   return this.renderSettings();
     // }
     return (
-      <Grid container spacing={1}>
+      <FormControl>
+        <Grid container spacing={1}>
+          <Grid item xs={12} align="center">
+              Survey ID: {this.surveyId}
+              <br/>
+              Survey Name: {this.state.name}
+              <br/>
+              Num Questions: {this.state.questions.length}
 
-        <Grid item xs={12} align="center">
-            Survey ID: {this.surveyId}
-            <br/>
-            Survey Name: {this.state.name}
-            <br/>
-            Num Questions: {this.state.questions.length}
+              <div>
+                {JSON.stringify(this.state.questions)}
+              </div>
+              <br/>
 
-            <div>
-              {JSON.stringify(this.state.questions)}
-            </div>
-            <br/>
 
-            <div>
-              <h2>Questions:</h2>
-              {this.state.questions.map((question, index) => {
-                return (
-                  <div key={index} style={{backgroundColor: "cornflowerblue", margin: "10px"}}>
-                    <h3>Q{index+1}.</h3>
-                    <p>{question.text}</p>
-                    
-                    <div>
-                      {question.choices.map((choice, index) => {
-                        return (
-                          <div key={index}>
-                            <input type="radio" value="Male" name="gender" /> {choice.option}
-                          </div>
-                        );
-                      })}
+              <div>
+                <h2>Questions:</h2>
+                {this.state.questions.map((question, index) => {
+                  return (
+                    <div key={index} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
+                      <FormLabel id="demo-radio-buttons-group-label">Q{index+1}. {question.text}</FormLabel>
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="female"
+                        name="radio-buttons-group"
+                      >
+
+                        {question.choices.map((choice, index) => {
+                          return (
+                            <FormControlLabel key={index} value={choice.option} control={<Radio />} label={choice.option} />
+                          );
+                        })}
+
+                      </RadioGroup>
+                      <hr />
                     </div>
+                  );
+                })}
+              </div>
+          </Grid>
 
-                    <hr />
-                  </div>
-                );
-              })}
-            </div>
+          {this.renderSettingsButton()}
 
         </Grid>
-
-        {/* <Grid item xs={12} align="center">
-          <Typography variant="h6" component="h6">
-            Votes: {this.state.votesToSkip}
-          </Typography>
-        </Grid> */}
-
-        {/* <Grid item xs={12} align="center">
-          <Typography variant="h6" component="h6">
-            Guest Can Pause: {this.state.guestCanPause.toString()}
-          </Typography>
-        </Grid> */}
-
-        {/* <Grid item xs={12} align="center">
-          <Typography variant="h6" component="h6">
-            Host: {this.state.isHost.toString()}
-          </Typography>
-        </Grid> */}
-
-        {/* {this.state.isHost ? this.renderSettingsButton() : null} */}
-        {this.renderSettingsButton()}
-
-        {/* <Grid item xs={12} align="center">
-          <Button variant="contained" color="secondary" onClick={this.leaveButtonPressed}>
-            Leave Room
-          </Button>
-        </Grid> */}
-
-      </Grid>
+      </FormControl>
     );
   }
 }

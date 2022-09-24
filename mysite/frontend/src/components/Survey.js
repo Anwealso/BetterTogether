@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Routes, Route, useParams } from 'react-router-dom';
-import { Grid, Button, Typography } from "@material-ui/core";
+import { Grid, Button, Typography, Radio } from "@material-ui/core";
 
 export default class Survey extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      surveyId: null
+      surveyId: null,
+      name: null,
+      questions: [],
     };
 
     // let params = useParams();
@@ -23,28 +25,28 @@ export default class Survey extends Component {
     this.getSurveyDetails();
   }
 
-  render() {
-    // console.log("Testing...")
-
-    return (<div>Hello, ""</div>);
-  }
-
-
   getSurveyDetails() {
     return fetch("/api/get-survey" + "?id=" + this.surveyId)
       .then((response) => {
         if (!response.ok) {
-          console.log("Respone not okayyyyy")
+          console.log("Response not okay")
           // this.props.leaveRoomCallback();
-          // this.props.history.push("/");
+          this.props.history.push("/");
         }
         return response.json();
       })
       .then((data) => {
+        console.log("Retrieved data from API")
+        console.log(data)
+        console.log(data.questions[0].text)
+        console.log(this.state.questions.concat(data.questions))
+        console.log(this.state.questions.concat(data.questions)[0].text)
+        console.log(this.state.questions.concat(data.questions)[0]['text'])
+        console.log(Object.keys(this.state.questions.concat(data.questions)[0]))
+        
         this.setState({
           name: data.name,
-          // guestCanPause: data.guest_can_pause,
-          // isHost: data.is_host,
+          questions: this.state.questions.concat(...data.questions)
         });
       });
   }
@@ -104,9 +106,41 @@ export default class Survey extends Component {
       <Grid container spacing={1}>
 
         <Grid item xs={12} align="center">
-          <Typography variant="h4" component="h4">
             Survey ID: {this.surveyId}
-          </Typography>
+            <br/>
+            Survey Name: {this.state.name}
+            <br/>
+            Num Questions: {this.state.questions.length}
+
+            <div>
+              {JSON.stringify(this.state.questions)}
+            </div>
+            <br/>
+
+            <div>
+              <h2>Questions:</h2>
+              {this.state.questions.map((question, index) => {
+                return (
+                  <div key={index} style={{backgroundColor: "cornflowerblue", margin: "10px"}}>
+                    <h3>Q{index+1}.</h3>
+                    <p>{question.text}</p>
+                    
+                    <div>
+                      {question.choices.map((choice, index) => {
+                        return (
+                          <div key={index}>
+                            <input type="radio" value="Male" name="gender" /> {choice.option}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    <hr />
+                  </div>
+                );
+              })}
+            </div>
+
         </Grid>
 
         {/* <Grid item xs={12} align="center">

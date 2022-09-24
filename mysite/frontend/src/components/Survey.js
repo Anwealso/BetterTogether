@@ -7,29 +7,24 @@ export default class Survey extends Component {
     super(props);
 
     this.state = {
-      surveyId: null,
+      surveyId: parseInt(this.props.match.params.surveyId),
       name: null,
       questions: [],
-      ligma: 0,
+      isToggleOn: true
     };
 
-    // let params = useParams();
-    // console.log(params)
-
-    this.surveyId = parseInt(this.props.match.params.surveyId);
-    
     // this.leaveButtonPressed = this.leaveButtonPressed.bind(this);
 
     this.updateShowSettings = this.updateShowSettings.bind(this);
     this.renderSettingsButton = this.renderSettingsButton.bind(this);
     // this.renderSettings = this.renderSettings.bind(this);
-    
+
     this.getSurveyDetails = this.getSurveyDetails.bind(this);
     this.getSurveyDetails();
   }
 
   getSurveyDetails() {
-    return fetch("/api/get-survey" + "?id=" + this.surveyId)
+    return fetch("/api/get-survey" + "?id=" + this.state.surveyId)
       .then((response) => {
         if (!response.ok) {
           console.log("Response not okay")
@@ -68,7 +63,8 @@ export default class Survey extends Component {
   updateShowSettings(value) {
     this.setState({
       surveyId: value,
-    }, () => {console.log(this.state.surveyId)});
+    });
+    console.log(this.state.surveyId)
   }
 
   // renderSettings() {
@@ -111,7 +107,7 @@ export default class Survey extends Component {
       <FormControl>
         <Grid container spacing={1}>
           <Grid item xs={12} align="center">
-              Survey ID: {this.surveyId}
+              Survey ID: {this.state.surveyId}
               <br/>
               Survey Name: {this.state.name}
               <br/>

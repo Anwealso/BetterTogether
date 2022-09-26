@@ -17,8 +17,7 @@ export default class HomePage extends Component {
     };
   }
 
-
-  renderHomePage() {
+  render() {
     return (
       <Grid container spacing={3}>
         <Grid item xs={12} align="center">
@@ -39,13 +38,7 @@ export default class HomePage extends Component {
           </ButtonGroup>
         </Grid>
       </Grid>
-    );
-  }
-
-
-  render() {
-    return this.renderHomePage()
-  }
+    );  }
 
   // render() {
   //   return (

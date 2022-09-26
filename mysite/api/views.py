@@ -94,23 +94,27 @@ class SubmitSurvey(APIView):
             if len(survey_instances) > 0:
                 survey_instance = survey_instances[0]
 
-
-                sub_time = request.data.get("submitTime")
+                # TODO: Fix up this fiasco with the date not properly being shown in admin protal (and maybe not even being recorded)
+                # sub_time = request.data.get("submitTime")
+                # sub_time = make_aware(datetime.strptime(sub_time, "%d/%m/%Y, %H:%M:%S")) # convert datetime string format
+                sub_time = make_aware(datetime.now())
                 logging.debug(sub_time)
-                sub_time = make_aware(datetime.strptime(sub_time, "%d/%m/%Y, %H:%M:%S")) # convert datetime string format
 
                 for question in request.data.get("questions"):
                     # logging.debug(question)
 
                     question_instance = Question.objects.filter(id=question["id"])[0]
-                    selected_choice_instance = Choice.objects.filter(id=question["selectedChoice"])[0]
+                    selected_choice_instance = Choice.objects.filter(id=question["selectedChoiceId"])[0]
 
 
                     # Save the survey results to the database
                     result = Result(question_id=question_instance, choice_id=selected_choice_instance, survey_id=survey_instance, sub_time=sub_time)
+                    
+                    logging.debug(result)
+                    logging.debug(result.sub_time)
                     result.save()
-                    # self.request.session['room_code'] = room.code
-                    # return Response(RoomSerializer(room).data, status=status.HTTP_201_CREATED)
+
+                # return Response(ResultSerializer(result).data, status=status.HTTP_201_CREATED)
 
                 return Response({'message': 'Survey Submitted!'}, status=status.HTTP_200_OK)
 

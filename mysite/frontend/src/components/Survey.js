@@ -13,8 +13,9 @@ export default class Survey extends Component {
 
     // this.leaveButtonPressed = this.leaveButtonPressed.bind(this);
 
-    this.updateShowSettings = this.updateShowSettings.bind(this);
+    // this.updateShowSettings = this.updateShowSettings.bind(this);
     this.submitButtonPressed = this.submitButtonPressed.bind(this);
+    this.handleVoteChange = this.handleVoteChange.bind(this);
 
     this.renderSubmitButton = this.renderSubmitButton.bind(this);
 
@@ -51,23 +52,50 @@ export default class Survey extends Component {
       });
   }
 
+  handleVoteChange(e) {
+    let questions = [...this.state.questions];
+
+    var questionIndex = e.target.name.split("-").at(-1)
+    // let question = questions[this.state.currentQuestionIndex];
+    let question = questions[questionIndex];
+ 
+    // 2. Replace the property you're intested in
+    var selectedChoiceOption = e.target.value; // TODO: repklace this wil pulling the real choice id out of the form in DOM
+    // console.log(selectedChoiceOption)
+
+    question.choices.map((choice, index) => {
+      if (choice.option === selectedChoiceOption) {
+        question.selectedChoiceId = choice.id
+      }
+    })
+    // console.log(questions)
+
+    // 4. Set the state to our new copy
+    this.setState({
+      questions: questions
+    });
+  }
+
   submitButtonPressed() {
     // Need some way to prevent the defgault behaviour of the sumbit (i.e. stop it reloading the page)
 
-    let questions = [...this.state.questions];
-    questions.map((question, index) => {
-      // Log the selected choice
-      // 2. Replace the property you're intested in
-      question.selectedChoice = 1; // TODO: repklace this wil pulling the real choice id out of the form in DOM
-      // 3. Put it back into our array. N.B. we *are* mutating the array here, 
-      //    but that's why we made a copy first
-      questions[index] = question;
-      // 4. Set the state to our new copy
-      this.setState({
-        questions: questions
-      });
-    });
+    // TODO: Fix this so that submitting without seleecting an option frst doesnt break everything
+    // let questions = [...this.state.questions];
+    // questions.map((question, index) => {
+    //   // Log the selected choice
+    //   // 2. Replace the property you're intested in
+    //   question.selectedChoiceId = 1; // TODO: repklace this wil pulling the real choice id out of the form in DOM
+    //   // 3. Put it back into our array. N.B. we *are* mutating the array here, 
+    //   //    but that's why we made a copy first
+    //   questions[index] = question;
+    //   // 4. Set the state to our new copy
+    //   this.setState({
+    //     questions: questions
+    //   });
+    // });
     // console.log(JSON.stringify(this.state.questions))
+
+    // TODO: Ideally want to associate this set of answers with a user/session id somehow so we can relate all the question responses to the same user
 
     const requestOptions = {
       method: "POST",
@@ -113,12 +141,12 @@ export default class Survey extends Component {
   //   });
   // }
 
-  updateShowSettings(value) {
-    this.setState({
-      surveyId: value,
-    });
-    console.log(this.state.surveyId)
-  }
+  // updateShowSettings(value) {
+  //   this.setState({
+  //     surveyId: value,
+  //   });
+  //   console.log(this.state.surveyId)
+  // }
 
   // renderSettings() {
   //   return (
@@ -175,6 +203,7 @@ export default class Survey extends Component {
 
               <div>
                 <h2>Questions:</h2>
+
                 {this.state.questions.map((question, index) => {
                   return (
                     <div key={index} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
@@ -182,7 +211,8 @@ export default class Survey extends Component {
                       <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
                         defaultValue="female"
-                        name="radio-buttons-group"
+                        name={"radio-buttons-group-" + index}
+                        onChange={this.handleVoteChange}
                       >
 
                         {question.choices.map((choice, index) => {
@@ -192,10 +222,11 @@ export default class Survey extends Component {
                         })}
 
                       </RadioGroup>
-                      <hr />
+                      {/* <hr /> */}
                     </div>
                   );
                 })}
+
               </div>
           </Grid>
 

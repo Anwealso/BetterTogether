@@ -27,7 +27,7 @@ router.register(r'results', ResultViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('get-survey', GetSurvey.as_view()),
-    # path('get-survey/*', GetSurvey.as_view()),
+    path('submit-survey', SubmitSurvey.as_view()),
 
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))

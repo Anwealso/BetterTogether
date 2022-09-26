@@ -8,15 +8,16 @@ export default class Survey extends Component {
 
     this.state = {
       surveyId: parseInt(this.props.match.params.surveyId),
-      name: null,
       questions: [],
-      isToggleOn: true
     };
 
     // this.leaveButtonPressed = this.leaveButtonPressed.bind(this);
 
     this.updateShowSettings = this.updateShowSettings.bind(this);
-    this.renderSettingsButton = this.renderSettingsButton.bind(this);
+    this.submitButtonPressed = this.submitButtonPressed.bind(this);
+
+    this.renderSubmitButton = this.renderSubmitButton.bind(this);
+
     // this.renderSettings = this.renderSettings.bind(this);
 
     this.getSurveyDetails = this.getSurveyDetails.bind(this);
@@ -26,6 +27,7 @@ export default class Survey extends Component {
   getSurveyDetails() {
     return fetch("/api/get-survey" + "?id=" + this.state.surveyId)
       .then((response) => {
+        console.log(response)
         if (!response.ok) {
           console.log("Response not okay")
           // this.props.leaveRoomCallback();
@@ -49,14 +51,65 @@ export default class Survey extends Component {
       });
   }
 
-  // leaveButtonPressed() {
+  submitButtonPressed() {
+    // Need some way to prevent the defgault behaviour of the sumbit (i.e. stop it reloading the page)
+
+    let questions = [...this.state.questions];
+    questions.map((question, index) => {
+      // Log the selected choice
+      // 2. Replace the property you're intested in
+      question.selectedChoice = 1; // TODO: repklace this wil pulling the real choice id out of the form in DOM
+      // 3. Put it back into our array. N.B. we *are* mutating the array here, 
+      //    but that's why we made a copy first
+      questions[index] = question;
+      // 4. Set the state to our new copy
+      this.setState({
+        questions: questions
+      });
+    });
+    // console.log(JSON.stringify(this.state.questions))
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        surveyId: this.state.surveyId,
+        questions: this.state.questions,
+        submitTime: new Date().toLocaleString() ,
+      }),
+    };
+    fetch("/api/submit-survey", requestOptions)
+      .then((response) => {
+        console.log(response)
+
+        if (response.ok) {
+          this.props.history.push("/");
+        } else {
+          this.setState({ error: "Survey not found." });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  // submitButtonPressed() {
+  //   // Need some way to prevent the defgault behaviour of the sumbit (i.e. stop it reloading the page)
+
+  //   // console.log(JSON.stringify(this.state.questions))
+
   //   const requestOptions = {
   //     method: "POST",
   //     headers: { "Content-Type": "application/json" },
+  //     // body: {surveyId: this.state.surveyId, questions: this.state.questions, submitTime: new Date()},
+  //     body: {title: 'React POST Request Example'},
   //   };
-  //   fetch("/api/leave-room", requestOptions).then((_response) => {
-  //     this.props.leaveRoomCallback();
-  //     this.props.history.push("/");
+  //   fetch("/api/submit-survey", requestOptions).then((response) => {
+  //     // TODO: Need to add some more error and response processing to infor the user if thery are messing up
+  //     console.log(response)
+
+  //     // this.props.leaveRoomCallback();
+  //     // this.props.history.push("/");
   //   });
   // }
 
@@ -83,14 +136,15 @@ export default class Survey extends Component {
   //   );
   // }
 
-  renderSettingsButton() {
+  renderSubmitButton() {
     return (
       <Grid item xs={12} align="center">
         <Button
           variant="contained"
           color="primary"
           onClick={() => {
-            this.updateShowSettings(this.state.surveyId+1)
+            // this.updateShowSettings(this.state.surveyId+1)
+            this.submitButtonPressed()
           }}
         >
           Submit
@@ -145,7 +199,7 @@ export default class Survey extends Component {
               </div>
           </Grid>
 
-          {this.renderSettingsButton()}
+          {this.renderSubmitButton()}
 
         </Grid>
       </FormControl>

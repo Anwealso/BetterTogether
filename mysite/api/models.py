@@ -27,7 +27,7 @@ class Result(models.Model):
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_id = models.ForeignKey(Choice, on_delete=models.CASCADE)
     survey_id = models.ForeignKey(Survey, on_delete=models.CASCADE)
-    sub_time = models.TimeField()
+    sub_time = models.DateTimeField()
 
     def __str__(self):
-        return self.choice_id
+        return str(self.choice_id)

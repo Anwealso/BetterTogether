@@ -1,10 +1,5 @@
 import React, { Component } from "react";
 
-// import RoomJoinPage from "./RoomJoinPage";
-// import CreateRoomPage from "./CreateRoomPage";
-import Survey from "./Survey";
-import Submitted from "./Submitted";
-
 import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
 
 import {
@@ -19,36 +14,27 @@ export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // surveyId: null,
     };
-    // this.clearSurveyId = this.clearSurveyId.bind(this);
   }
 
-  // async componentDidMount() {
-  //   fetch("/api/user-in-room")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       this.setState({
-  //         roomCode: data.code,
-  //       });
-  //     });
-  // }
 
   renderHomePage() {
-    // return <h1>HomePage</h1>;
-
     return (
       <Grid container spacing={3}>
         <Grid item xs={12} align="center">
           <Typography variant="h3" compact="h3">
-            Eldery Wellness Data System
+            Success!
+          </Typography>
+
+          <Typography variant="h5" compact="h5">
+            Your responses have been submitted. Thank you for your feedback.
           </Typography>
 
           <ButtonGroup disableElevation variant="contained" color="primary">
 
-            <Button color="primary" to="/survey/1" component={Link}>
-              Try the Survey
-            </Button>
+            <Link color="primary" to="/">
+              Take the survey again
+            </Link>
             
           </ButtonGroup>
         </Grid>
@@ -58,40 +44,7 @@ export default class HomePage extends Component {
 
 
   render() {
-    return (
-      <Router>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => {
-              return this.renderHomePage()
-            }}
-          />
-          
-          <Route
-            path="/submitted" 
-            render={() => {
-              return <Submitted />
-            }}
-          />
-          
-          <Route
-            path="/create" 
-            render={() => {
-              return <Join />
-            }}
-          />
-          
-          <Route
-            path="/survey/:surveyId"
-            render={(props) => {
-              return <Survey {...props}/>
-            }}
-          />
-        </Switch>
-      </Router>
-    );
+    return this.renderHomePage()
   }
 
   // render() {

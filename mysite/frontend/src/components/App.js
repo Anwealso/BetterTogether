@@ -11,9 +11,7 @@ export default class App extends Component {
     // return <h1>Testing React Code</h1>;
     
     return (
-      <div className="center">
-        <HomePage />
-      </div>
+      <HomePage />
     );
   }
 }

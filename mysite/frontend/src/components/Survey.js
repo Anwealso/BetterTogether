@@ -111,7 +111,7 @@ export default class Survey extends Component {
         console.log(response)
 
         if (response.ok) {
-          this.props.history.push("/");
+          this.props.history.push("/submitted");
         } else {
           this.setState({ error: "Survey not found." });
         }

@@ -15,6 +15,16 @@ export default class Billboard extends Component {
     this.getBillboardDetails();
   }
 
+  componentDidMount() {
+    this.timer = setInterval(()=> this.getBillboardDetails(), 1000);
+  }
+  
+  componentWillUnmount() {
+    clearInterval(this.timer) 
+    this.timer = null;
+    // Fix the fact that this is not unmounting when we go to another page
+  }
+
   getBillboardDetails() {
     return fetch("/api/get-billboard" + "?id=" + this.state.billboardId)
       .then((response) => {

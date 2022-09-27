@@ -136,27 +136,35 @@ class GetBillboard(APIView):
 
     def get(self, request, format=None):
         billboard_id = int(request.GET.get(self.lookup_url_kwarg))
-        
+
         if billboard_id != None:
-            if billboard_id == 0:
-                # Do billboard 0 logic
-
-                # Gather the data required for billboard 1
-                # data = ... # package the data into the required json string format
-                
-                # Send the data required for billboard 1
-                # return Response(data, status=status.HTTP_200_OK)
-                return Response(status=status.HTTP_200_OK)
-
             if billboard_id == 1:
-                # Do billboard 1 logic
-
-                # Gather the data required for billboard 1
-                # data = ... # package the data into the required json string format
+                # Do billboard 0 logic...
+                # Get the percentage votes for red
                 
-                # Send the data required for billboard 1
-                # return Response(data, status=status.HTTP_200_OK)
-                return Response(status=status.HTTP_200_OK)
+
+                num_red = len(Result.objects.filter(question_id=1).filter(choice_id=Choice.objects.filter(question_id=1).filter(option="Red")[0].id))
+                num_blue = len(Result.objects.filter(question_id=1).filter(choice_id=Choice.objects.filter(question_id=1).filter(option="Blue")[0].id))
+                if num_red + num_blue == 0:
+                    percentage_red = 0
+                else:
+                    percentage_red = num_red / (num_red + num_blue)
+
+                # Package the data into the required json string format and send
+                return Response({'text': percentage_red}, status=status.HTTP_200_OK)
+
+            elif billboard_id == 2:
+                # Do billboard 1 logic...
+                # Get the percentage votes for blue                
+                num_red = len(Result.objects.filter(question_id=1).filter(choice_id=Choice.objects.filter(question_id=1).filter(option="Red")[0].id))
+                num_blue = len(Result.objects.filter(question_id=1).filter(choice_id=Choice.objects.filter(question_id=1).filter(option="Blue")[0].id))
+                if num_red + num_blue == 0:
+                    percentage_red = 0
+                else:
+                    percentage_blue = num_blue / (num_red + num_blue)
+                    
+                # Package the data into the required json string format and send
+                return Response({'text': percentage_blue}, status=status.HTTP_200_OK)
 
             else:
                 return Response({'Billboard Not Found': 'Invalid Billboard ID.'}, status=status.HTTP_404_NOT_FOUND)

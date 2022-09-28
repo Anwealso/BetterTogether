@@ -14,7 +14,7 @@ If you are setting up for the first time, please follow the  install guide in SE
 `Username: admin`
 `Password: 123`
 
-## Current Sitemap
+## Current Sitemap (Depracated)
 
 ```/``` goes to the surveys homepage, which shows a list of all the available surveys
 
@@ -23,8 +23,3 @@ If you are setting up for the first time, please follow the  install guide in SE
 ```/<int:survey_id>/results/``` see the results of a survey
 
 ```/billboard``` a billboard displaying a particular survey result
-
-
-I am king
-Hi, this is Alex.
-Hi, this is Joe

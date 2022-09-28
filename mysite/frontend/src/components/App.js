@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
+import HomePage from "./HomePage";
 
 export default class App extends Component {
   constructor(props) {
@@ -20,16 +21,10 @@ export default class App extends Component {
   }
 
   render() {
+    // return <h1>Testing React Code</h1>;
+    
     return (
-      <div className="posts-container">
-        {posts.map((post) => { // needs to be changed
-          return (
-            <div className="post-card" key={post.id}>
-               <h2 className="post-title">{post.title}</h2>
-            </div>
-         );
-      })}
-    </div>
+      <HomePage />
     );
   }
 }

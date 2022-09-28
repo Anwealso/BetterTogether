@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('myapi', '0004_survey'),
+        ('api', '0004_survey'),
     ]
 
     operations = [
@@ -30,8 +30,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('sub_time', models.TimeField()),
-                ('choice_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='myapi.choice')),
-                ('question_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='myapi.question')),
+                ('choice_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.choice')),
+                ('question_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.question')),
             ],
         ),
         migrations.DeleteModel(
@@ -44,16 +44,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='result',
             name='survey_id',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='myapi.survey'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.survey'),
         ),
         migrations.AddField(
             model_name='question',
             name='surveys',
-            field=models.ManyToManyField(to='myapi.survey'),
+            field=models.ManyToManyField(to='api.survey'),
         ),
         migrations.AddField(
             model_name='choice',
             name='question_id',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='myapi.question'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.question'),
         ),
     ]

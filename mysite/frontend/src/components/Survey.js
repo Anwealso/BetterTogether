@@ -54,9 +54,7 @@ export default class Survey extends Component {
 
   handleVoteChange(e) {
     let questions = [...this.state.questions];
-
     var questionIndex = e.target.name.split("-").at(-1)
-    // let question = questions[this.state.currentQuestionIndex];
     let question = questions[questionIndex];
  
     // 2. Replace the property you're intested in
@@ -210,10 +208,27 @@ export default class Survey extends Component {
                       <FormLabel id="demo-radio-buttons-group-label">Q{index+1}. {question.text}</FormLabel>
                       <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="female"
+                        defaultValue=""
+
                         name={"radio-buttons-group-" + index}
                         onChange={this.handleVoteChange}
+
+                        // inputExtraProps={{
+                        //   name: "radio-buttons-group-" + index,
+                        //   onChange: handleVoteChange,
+                        // }}
                       >
+
+{/* handleOnChange(value) {
+  this.setState({ phone: value.target.value, }); 
+} 
+
+<ReactPhoneInput 
+  inputExtraProps={{ name: 'phone', onChange: this.handleOnChange }} 
+  value={this.state.phone} 
+  countryCodeEditable={false} 
+/> */}
+
 
                         {question.choices.map((choice, index) => {
                           return (

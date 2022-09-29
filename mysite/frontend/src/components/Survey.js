@@ -58,7 +58,7 @@ export default class Survey extends Component {
     let question = questions[questionIndex];
  
     // 2. Replace the property you're intested in
-    var selectedChoiceOption = e.target.value; // TODO: repklace this wil pulling the real choice id out of the form in DOM
+    var selectedChoiceOption = e.target.value; // TODO: replace this wil pulling the real choice id out of the form in DOM
     // console.log(selectedChoiceOption)
 
     question.choices.map((choice, index) => {

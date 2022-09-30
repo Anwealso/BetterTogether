@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Routes, Route, useParams } from 'react-router-dom';
 import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup } from "@material-ui/core";
-// import PosterImage from '../../static/images/ons_blanked.jpeg';
 
 export default class Billboard extends Component {
   constructor(props) {
@@ -51,39 +50,18 @@ export default class Billboard extends Component {
 
   render() {
     return (
-      <div>
-        
-        {/* <FormControl>
-          <Grid container spacing={1}>
-            
-            <Grid item xs={12} align="center">
-                Billboard ID: {this.state.billboardId}
-                <br/>
-                Billboard Text: {this.state.text}
-                <br/>
-            </Grid>
-
+      <FormControl>
+        <Grid container spacing={1}>
+          
+          <Grid item xs={12} align="center">
+              Billboard ID: {this.state.billboardId}
+              <br/>
+              Billboard Text: {this.state.text}
+              <br/>
           </Grid>
-        </FormControl> */}
 
-
-
-        <div id="page-wrapper">
-          <div id="overlay">
-            <div id="major-text-section">
-              {parseInt(this.state.text*10000)/100} %
-            </div>
-
-            <div id="minor-text-section">
-              of people over 70 in QLD were 'chronically' lonely
-            </div>
-          </div>
-
-          <img id="hero-image" src="../../static/images/ons_blanked.jpeg" alt="" />
-          {/* <img id="hero-image" src={PosterImage} alt="" /> */}
-        </div>
-
-      </div>
+        </Grid>
+      </FormControl>
     );
   }
 }

@@ -21,3 +21,68 @@ body {
   display: flex;
   overflow: auto;
 }
+
+
+/* -------------------------------------------------------------------------- */
+/*                              BILLBOARD STYLING                             */
+/* -------------------------------------------------------------------------- */
+
+#page-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+/* color: rgba(160, 176, 200); */
+
+}
+
+#hero-image-wrapper {
+  /* width: 50%; */
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+#hero-image {
+  /* width: 50%; */
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+#overlay {
+  position: absolute;
+  /* background-color: green; */
+  /* opacity: 10%; */
+  width: 700px;
+  height: 300px;
+  left: 41%;
+  top: 26%;
+  z-index: 2;
+}
+
+#major-text-section {
+  color: rgba(181, 56, 140);
+  font-weight: 500;
+  font-size: 120px;
+  line-height: 1.0em;
+
+  /* background-color: yellow; */
+}
+
+#minor-text-section {
+  color: black;
+  font-weight: 500;
+  font-size: 60px;
+  line-height: 1.1em;
+
+  /* background-color: green; */
+}
+
+#survey-wrapper {
+  /* width: 50%; */
+  padding-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

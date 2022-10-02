@@ -52,22 +52,6 @@ export default class Billboard extends Component {
   render() {
     return (
       <div>
-        
-        {/* <FormControl>
-          <Grid container spacing={1}>
-            
-            <Grid item xs={12} align="center">
-                Billboard ID: {this.state.billboardId}
-                <br/>
-                Billboard Text: {this.state.text}
-                <br/>
-            </Grid>
-
-          </Grid>
-        </FormControl> */}
-
-
-
         <div id="page-wrapper">
           <div id="overlay">
             <div id="major-text-section">

@@ -142,9 +142,11 @@ class GetBillboard(APIView):
                 # Do billboard 0 logic...
                 # Get the percentage votes for red
                 
+                logging.debug(Result.objects.filter(question_id=1))
+                logging.debug(Result.objects.filter(question_id=1))
 
-                num_red = len(Result.objects.filter(question_id=1).filter(choice_id=Choice.objects.filter(question_id=1).filter(option="Red")[0].id))
-                num_blue = len(Result.objects.filter(question_id=1).filter(choice_id=Choice.objects.filter(question_id=1).filter(option="Blue")[0].id))
+                num_red = len(Result.objects.filter(question_id=1).filter(choice_id=Choice.objects.filter(question_id=1).filter(option="4: Above Average")[0].id))
+                num_blue = len(Result.objects.filter(question_id=1).filter(choice_id=Choice.objects.filter(question_id=1).filter(option="2: Below Average")[0].id))
                 if num_red + num_blue == 0:
                     percentage_red = 0
                 else:

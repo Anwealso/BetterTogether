@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Routes, Route, useParams } from 'react-router-dom';
-import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup } from "@material-ui/core";
+import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup, TextField } from "@material-ui/core";
 
 export default class Survey extends Component {
   constructor(props) {
@@ -11,15 +11,10 @@ export default class Survey extends Component {
       questions: [],
     };
 
-    // this.leaveButtonPressed = this.leaveButtonPressed.bind(this);
-
-    // this.updateShowSettings = this.updateShowSettings.bind(this);
     this.submitButtonPressed = this.submitButtonPressed.bind(this);
     this.handleVoteChange = this.handleVoteChange.bind(this);
-
+    
     this.renderSubmitButton = this.renderSubmitButton.bind(this);
-
-    // this.renderSettings = this.renderSettings.bind(this);
 
     this.getSurveyDetails = this.getSurveyDetails.bind(this);
     this.getSurveyDetails();
@@ -53,6 +48,28 @@ export default class Survey extends Component {
   }
 
   handleVoteChange(e) {
+    let questions = [...this.state.questions];
+    var questionIndex = e.target.name.split("-").at(-1)
+    let question = questions[questionIndex];
+ 
+    // 2. Replace the property you're intested in
+    var selectedChoiceOption = e.target.value; // TODO: replace this wil pulling the real choice id out of the form in DOM
+    // console.log(selectedChoiceOption)
+
+    question.choices.map((choice, index) => {
+      if (choice.option === selectedChoiceOption) {
+        question.selectedChoiceId = choice.id
+      }
+    })
+    // console.log(questions)
+
+    // 4. Set the state to our new copy
+    this.setState({
+      questions: questions
+    });
+  }
+
+  handleVoteChangeText(e) { // TODO: Fill out theis funcitona and make it actually work
     let questions = [...this.state.questions];
     var questionIndex = e.target.name.split("-").at(-1)
     let question = questions[questionIndex];
@@ -119,49 +136,6 @@ export default class Survey extends Component {
       });
   }
 
-  // submitButtonPressed() {
-  //   // Need some way to prevent the defgault behaviour of the sumbit (i.e. stop it reloading the page)
-
-  //   // console.log(JSON.stringify(this.state.questions))
-
-  //   const requestOptions = {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     // body: {surveyId: this.state.surveyId, questions: this.state.questions, submitTime: new Date()},
-  //     body: {title: 'React POST Request Example'},
-  //   };
-  //   fetch("/api/submit-survey", requestOptions).then((response) => {
-  //     // TODO: Need to add some more error and response processing to infor the user if thery are messing up
-  //     console.log(response)
-
-  //     // this.props.leaveRoomCallback();
-  //     // this.props.history.push("/");
-  //   });
-  // }
-
-  // updateShowSettings(value) {
-  //   this.setState({
-  //     surveyId: value,
-  //   });
-  //   console.log(this.state.surveyId)
-  // }
-
-  // renderSettings() {
-  //   return (
-  //     <Grid container spacing={1}>
-  //       <Grid item xs={12} align="center">
-  //         <Button
-  //           variant="contained"
-  //           color="secondary"
-  //           onClick={() => this.updateShowSettings(false)}
-  //         >
-  //           Close
-  //         </Button>
-  //       </Grid>
-  //     </Grid>
-  //   );
-  // }
-
   renderSubmitButton() {
     return (
       <Grid item xs={12} align="center">
@@ -180,9 +154,6 @@ export default class Survey extends Component {
   }
 
   render() {
-    // if (this.state.showSettings) {
-    //   return this.renderSettings();
-    // }
     return (
       <FormControl>
         <Grid container spacing={1}>
@@ -202,6 +173,13 @@ export default class Survey extends Component {
               <div>
                 <h2>Questions:</h2>
 
+                {/* <TextField id="outlined-basic"
+                  label="MyTextField" 
+                  variant="outlined" 
+                  onChange={this.handleVoteChangeText}
+                /> */}
+
+
                 {this.state.questions.map((question, index) => {
                   return (
                     <div key={index} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
@@ -209,26 +187,9 @@ export default class Survey extends Component {
                       <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
                         defaultValue=""
-
                         name={"radio-buttons-group-" + index}
                         onChange={this.handleVoteChange}
-
-                        // inputExtraProps={{
-                        //   name: "radio-buttons-group-" + index,
-                        //   onChange: handleVoteChange,
-                        // }}
                       >
-
-{/* handleOnChange(value) {
-  this.setState({ phone: value.target.value, }); 
-} 
-
-<ReactPhoneInput 
-  inputExtraProps={{ name: 'phone', onChange: this.handleOnChange }} 
-  value={this.state.phone} 
-  countryCodeEditable={false} 
-/> */}
-
 
                         {question.choices.map((choice, index) => {
                           return (
@@ -237,7 +198,6 @@ export default class Survey extends Component {
                         })}
 
                       </RadioGroup>
-                      {/* <hr /> */}
                     </div>
                   );
                 })}

@@ -60,12 +60,12 @@ export default class HomePage extends Component {
             }}
           />
           
-          <Route
+          {/* <Route
             path="/create" 
             render={() => {
               return <Join />
             }}
-          />
+          /> */}
           
           <Route
             path="/survey/:surveyId"

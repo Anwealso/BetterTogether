@@ -8,7 +8,7 @@ class Survey(models.Model):
 
 
 class Question(models.Model):
-    text = models.CharField(max_length=60)
+    text = models.CharField(max_length=120)
     surveys = models.ManyToManyField(Survey, related_name='questions')
 
     def __str__(self):

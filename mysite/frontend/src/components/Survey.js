@@ -69,27 +69,27 @@ export default class Survey extends Component {
     });
   }
 
-  handleVoteChangeText(e) { // TODO: Fill out theis funcitona and make it actually work
-    let questions = [...this.state.questions];
-    var questionIndex = e.target.name.split("-").at(-1)
-    let question = questions[questionIndex];
+  // handleVoteChangeText(e) { // TODO: Fill out theis funcitona and make it actually work
+  //   let questions = [...this.state.questions];
+  //   var questionIndex = e.target.name.split("-").at(-1)
+  //   let question = questions[questionIndex];
  
-    // 2. Replace the property you're intested in
-    var selectedChoiceOption = e.target.value; // TODO: replace this wil pulling the real choice id out of the form in DOM
-    // console.log(selectedChoiceOption)
+  //   // 2. Replace the property you're intested in
+  //   var selectedChoiceOption = e.target.value; // TODO: replace this wil pulling the real choice id out of the form in DOM
+  //   // console.log(selectedChoiceOption)
 
-    question.choices.map((choice, index) => {
-      if (choice.option === selectedChoiceOption) {
-        question.selectedChoiceId = choice.id
-      }
-    })
-    // console.log(questions)
+  //   question.choices.map((choice, index) => {
+  //     if (choice.option === selectedChoiceOption) {
+  //       question.selectedChoiceId = choice.id
+  //     }
+  //   })
+  //   // console.log(questions)
 
-    // 4. Set the state to our new copy
-    this.setState({
-      questions: questions
-    });
-  }
+  //   // 4. Set the state to our new copy
+  //   this.setState({
+  //     questions: questions
+  //   });
+  // }
 
   submitButtonPressed() {
     // Need some way to prevent the defgault behaviour of the sumbit (i.e. stop it reloading the page)

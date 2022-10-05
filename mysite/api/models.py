@@ -1,20 +1,5 @@
 from django.db import models
 
-# Create your models here.
-# class Hero(models.Model):
-#     name = models.CharField(max_length=60)
-#     alias = models.CharField(max_length=60)
-#     def __str__(self):
-#         return self.name
-
-# def validate_even(value):
-#     if value % 2 != 0:
-#         raise ValidationError(
-#             _('%(value)s is not an even number'),
-#             params={'value': value},
-#         )
-
-
 class Survey(models.Model):
     name = models.CharField(max_length=60)
 
@@ -23,8 +8,8 @@ class Survey(models.Model):
 
 
 class Question(models.Model):
-    text = models.CharField(max_length=60)
-    surveys = models.ManyToManyField(Survey)
+    text = models.CharField(max_length=120)
+    surveys = models.ManyToManyField(Survey, related_name='questions')
 
     def __str__(self):
         return self.text
@@ -32,7 +17,7 @@ class Question(models.Model):
 
 class Choice(models.Model):
     option = models.CharField(max_length=60)
-    question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question_id = models.ForeignKey(Question, related_name='choices', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.option
@@ -42,7 +27,7 @@ class Result(models.Model):
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_id = models.ForeignKey(Choice, on_delete=models.CASCADE)
     survey_id = models.ForeignKey(Survey, on_delete=models.CASCADE)
-    sub_time = models.TimeField()
+    sub_time = models.DateTimeField()
 
     def __str__(self):
-        return self.choice_id
+        return str(self.choice_id)

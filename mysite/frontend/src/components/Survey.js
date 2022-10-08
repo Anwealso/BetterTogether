@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Routes, Route, useParams } from 'react-router-dom';
 import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup, TextField } from "@material-ui/core";
+import Navbar from "./Navbar";
 
 export default class Survey extends Component {
   constructor(props) {
@@ -50,7 +51,7 @@ export default class Survey extends Component {
     let question = questions[questionIndex];
  
     // 2. Replace the property you're intested in
-    var selectedChoiceOption = e.target.value; // TODO: replace this wil pulling the real choice id out of the form in DOM
+    var selectedChoiceOption = e.target.value;
 
     question.choices.map((choice, index) => {
       if (choice.option === selectedChoiceOption) {
@@ -110,6 +111,8 @@ export default class Survey extends Component {
     return (
       <FormControl>
         <Grid container spacing={1}>
+          <Navbar />
+
           <Grid item xs={12} align="center">
               Survey ID: {this.state.surveyId}
               <br/>
@@ -122,7 +125,7 @@ export default class Survey extends Component {
               <br/>
 
               <div>
-                <h2>Questions:</h2>
+                <h2>Community Wellness Survey</h2>
                 {this.state.questions.map((question, index) => {
                   return (
                     <div key={index} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>

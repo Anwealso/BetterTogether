@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-
 import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
+import Navbar from "./Navbar";
 
 import {
   BrowserRouter as Router,
@@ -20,6 +20,8 @@ export default class HomePage extends Component {
   render() {
     return (
       <Grid container spacing={3}>
+        <Navbar />
+
         <Grid item xs={12} align="center">
           <Typography variant="h3" compact="h3">
             Success!

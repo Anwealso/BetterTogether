@@ -23,9 +23,9 @@ export default class HomePage extends Component {
     };
   }
 
-  renderTestButton() {
+  renderHeroImage() {
     const hero_image = {
-      marginTop: "-15vh",
+      marginTop: "-20vh",
       backgroundImage: "url(../../static/images/senior-volunters.jpg)",
       height: "50%",
       width: "100%",backgroundPosition: "center",
@@ -71,20 +71,9 @@ export default class HomePage extends Component {
         <Navbar />
         
 
-        {this.renderTestButton()}
+        {this.renderHeroImage()}
         <Grid item xs={12} align="center">
-          {/* {this.renderTestButton()} */}
-          <Typography variant="h3" compact="h3">
-            Eldery Wellness Data System
-          </Typography>
-
-          <ButtonGroup disableElevation variant="contained" color="primary">
-
-            <Button color="primary" to="/survey/1" component={Link}>
-              Try the Survey
-            </Button>
-            
-          </ButtonGroup>
+          
         </Grid>
       </Grid>
     );

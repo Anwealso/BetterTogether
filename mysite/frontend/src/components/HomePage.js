@@ -4,6 +4,7 @@ import Survey from "./Survey";
 import Submitted from "./Submitted";
 import Billboard from "./Billboard";
 import Navbar from "./Navbar";
+// import GenericImage from '../../static/images/senior-volunters.jpg'
 
 import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
 
@@ -22,12 +23,57 @@ export default class HomePage extends Component {
     };
   }
 
+  renderTestButton() {
+    const hero_image = {
+      marginTop: "-15vh",
+      backgroundImage: "url(../../static/images/senior-volunters.jpg)",
+      height: "50%",
+      width: "100%",backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      position: "relative"
+    }
+
+    const hero_text = {
+      textAlign: "center",
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      color: "white",
+      fontSize: "3vh"
+    }
+    
+    return (
+      <div style = {hero_image}>
+        <div style = {hero_text}>
+          <Typography variant="h2">
+            Get Involved
+          </Typography>
+          <Typography variant="h5">
+            Join Your Community Today
+          </Typography>
+          <ButtonGroup disableElevation variant="contained" color="primary">
+
+            <Button color="primary" to="/survey/1" component={Link}>
+              Try the Survey
+            </Button>
+            
+          </ButtonGroup>
+        </div>
+      </div>
+    );
+  }
+
   renderHomePage() {
     return (
       <Grid container spacing={3}>
         <Navbar />
+        
 
+        {this.renderTestButton()}
         <Grid item xs={12} align="center">
+          {/* {this.renderTestButton()} */}
           <Typography variant="h3" compact="h3">
             Eldery Wellness Data System
           </Typography>

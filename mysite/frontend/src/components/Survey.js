@@ -13,9 +13,7 @@ export default class Survey extends Component {
 
     this.submitButtonPressed = this.submitButtonPressed.bind(this);
     this.handleVoteChange = this.handleVoteChange.bind(this);
-    
     this.renderSubmitButton = this.renderSubmitButton.bind(this);
-
     this.getSurveyDetails = this.getSurveyDetails.bind(this);
     this.getSurveyDetails();
   }
@@ -26,7 +24,6 @@ export default class Survey extends Component {
         console.log(response)
         if (!response.ok) {
           console.log("Response not okay")
-          // this.props.leaveRoomCallback();
           this.props.history.push("/");
         }
         return response.json();
@@ -54,14 +51,12 @@ export default class Survey extends Component {
  
     // 2. Replace the property you're intested in
     var selectedChoiceOption = e.target.value; // TODO: replace this wil pulling the real choice id out of the form in DOM
-    // console.log(selectedChoiceOption)
 
     question.choices.map((choice, index) => {
       if (choice.option === selectedChoiceOption) {
         question.selectedChoiceId = choice.id
       }
     })
-    // console.log(questions)
 
     // 4. Set the state to our new copy
     this.setState({
@@ -69,49 +64,8 @@ export default class Survey extends Component {
     });
   }
 
-  // handleVoteChangeText(e) { // TODO: Fill out theis funcitona and make it actually work
-  //   let questions = [...this.state.questions];
-  //   var questionIndex = e.target.name.split("-").at(-1)
-  //   let question = questions[questionIndex];
- 
-  //   // 2. Replace the property you're intested in
-  //   var selectedChoiceOption = e.target.value; // TODO: replace this wil pulling the real choice id out of the form in DOM
-  //   // console.log(selectedChoiceOption)
-
-  //   question.choices.map((choice, index) => {
-  //     if (choice.option === selectedChoiceOption) {
-  //       question.selectedChoiceId = choice.id
-  //     }
-  //   })
-  //   // console.log(questions)
-
-  //   // 4. Set the state to our new copy
-  //   this.setState({
-  //     questions: questions
-  //   });
-  // }
 
   submitButtonPressed() {
-    // Need some way to prevent the defgault behaviour of the sumbit (i.e. stop it reloading the page)
-
-    // TODO: Fix this so that submitting without seleecting an option frst doesnt break everything
-    // let questions = [...this.state.questions];
-    // questions.map((question, index) => {
-    //   // Log the selected choice
-    //   // 2. Replace the property you're intested in
-    //   question.selectedChoiceId = 1; // TODO: repklace this wil pulling the real choice id out of the form in DOM
-    //   // 3. Put it back into our array. N.B. we *are* mutating the array here, 
-    //   //    but that's why we made a copy first
-    //   questions[index] = question;
-    //   // 4. Set the state to our new copy
-    //   this.setState({
-    //     questions: questions
-    //   });
-    // });
-    // console.log(JSON.stringify(this.state.questions))
-
-    // TODO: Ideally want to associate this set of answers with a user/session id somehow so we can relate all the question responses to the same user
-
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -143,7 +97,6 @@ export default class Survey extends Component {
           variant="contained"
           color="primary"
           onClick={() => {
-            // this.updateShowSettings(this.state.surveyId+1)
             this.submitButtonPressed()
           }}
         >
@@ -163,23 +116,13 @@ export default class Survey extends Component {
               Survey Name: {this.state.name}
               <br/>
               Num Questions: {this.state.questions.length}
-
               <div>
                 {JSON.stringify(this.state.questions)}
               </div>
               <br/>
 
-
               <div>
                 <h2>Questions:</h2>
-
-                {/* <TextField id="outlined-basic"
-                  label="MyTextField" 
-                  variant="outlined" 
-                  onChange={this.handleVoteChangeText}
-                /> */}
-
-
                 {this.state.questions.map((question, index) => {
                   return (
                     <div key={index} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
@@ -201,8 +144,9 @@ export default class Survey extends Component {
                     </div>
                   );
                 })}
-
               </div>
+
+
           </Grid>
 
           {this.renderSubmitButton()}

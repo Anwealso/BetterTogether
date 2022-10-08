@@ -82,7 +82,7 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              size="large"
+              size="medium"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
@@ -111,7 +111,7 @@ const Navbar = () => {
             >
               {pages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" href="/">{page}</Typography>
+                  <Typography href="/">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -154,7 +154,7 @@ const Navbar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

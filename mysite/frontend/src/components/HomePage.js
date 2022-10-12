@@ -5,6 +5,7 @@ import Submitted from "./Submitted";
 import Billboard from "./Billboard";
 import Navbar from "./Navbar";
 // import GenericImage from '../../static/images/senior-volunters.jpg'
+import Events from "./Events";
 
 import { Grid, Button, ButtonGroup, Typography } from "@mui/material";
 import PrivateRoute from "../utils/PrivateRoute";
@@ -76,8 +77,8 @@ export default class HomePage extends Component {
             gutterBottom={true}
             display="block"
           >
-            We're excited to bring you Onigiri! a community wellness hub,
-            designed to make sure you know what's going on in your community,
+            We&apos;re excited to bring you Onigiri! a community wellness hub,
+            designed to make sure you know what&apos;s going on in your community,
             and help you get involved.
           </Typography>
           <Typography
@@ -86,8 +87,8 @@ export default class HomePage extends Component {
             gutterBottom={true}
             display="block"
           >
-            We've got a few key features that we think you'll love! If you
-            don't, we'd love to here about it! We're here to help you and your
+            We&apos;ve got a few key features that we think you&apos;ll love! If you
+            don&apos;t, we&apos;d love to here about it! We&apos;re here to help you and your
             community, so if you feel we can do better, let us know!
           </Typography>
 
@@ -100,7 +101,7 @@ export default class HomePage extends Component {
             gutterBottom={true}
             display="block"
           >
-            You may have seen our billboards around! They're designed to keep
+            You may have seen our billboards around! They&apos;re designed to keep
             your community up to date with your community. These statics are
             updated live by other people in your community!
           </Typography>
@@ -114,7 +115,7 @@ export default class HomePage extends Component {
             gutterBottom={true}
             display="block"
           >
-            This is whaty feeds our billboards. It's our way of sharing how
+            This is whaty feeds our billboards. It&apos;s our way of sharing how
             everyone is doing around you anonymously. Sometimes sharing can be
             hard, we get that. So we designed a platform so that you can easily
             share what you feel without being confronted.
@@ -129,7 +130,7 @@ export default class HomePage extends Component {
             gutterBottom={true}
             display="block"
           >
-            This is where you can see what's going on in your community. Find
+            This is where you can see what&apos;s going on in your community. Find
             events, groups, and more!
           </Typography>
         </div>

@@ -21,18 +21,11 @@ export default class App extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-    return <h1>Testing React Code
-      1. Building up billboard app
-      2. Write polls app
-      3. Routing billboard and polls app</h1>;
-=======
     // return <h1>Testing React Code</h1>;
     
     return (
       <HomePage />
     );
->>>>>>> eaa011af1157871171531c0b5720d180873847b4
   }
 }
 

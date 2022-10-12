@@ -6,6 +6,16 @@ import Billboard from "./Billboard";
 import Navbar from "./Navbar";
 
 import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
+import PrivateRoute from "../utils/PrivateRoute";
+import { AuthProvider } from "../context/AuthContext";
+// import Home from "/homePage";
+import Login from "./LoginPage";
+import Register from "./Register";
+import ProtectedPage from "./ProtectedPage";
+
+import { useContext } from "react";
+import UserInfo from "../components/UserInfo";
+import AuthContext from "../context/AuthContext";
 
 import {
   BrowserRouter as Router,
@@ -32,6 +42,8 @@ export default class HomePage extends Component {
             Eldery Wellness Data System
           </Typography>
 
+          {/* <h1>Hello, {user.username}</h1> */}
+
           <ButtonGroup disableElevation variant="contained" color="primary">
 
             <Button color="primary" to="/survey/1" component={Link}>
@@ -47,44 +59,53 @@ export default class HomePage extends Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => {
-              return this.renderHomePage()
-            }}
-          />
-          
-          <Route
-            path="/submitted" 
-            render={() => {
-              return <Submitted />
-            }}
-          />
-          
-          {/* <Route
-            path="/create" 
-            render={() => {
-              return <Join />
-            }}
-          /> */}
-          
-          <Route
-            path="/survey/:surveyId"
-            render={(props) => {
-              return <Survey {...props}/>
-            }}
-          />
+        <AuthProvider>
+          <Switch>
 
-          <Route
-            path="/billboard/:billboardId"
-            render={(props) => {
-              return <Billboard {...props}/>
-            }}
-          />
+            <PrivateRoute component={ProtectedPage} path="/protected" exact />
+            <Route component={Login} path="/login" />
+            <Route component={Register} path="/register" />
+            {/* <Route component={Home} path="/" /> */}
 
-        </Switch>
+
+            <Route
+              exact
+              path="/"
+              render={() => {
+                return this.renderHomePage()
+              }}
+            />
+            
+            <Route
+              path="/submitted" 
+              render={() => {
+                return <Submitted />
+              }}
+            />
+            
+            {/* <Route
+              path="/create" 
+              render={() => {
+                return <Join />
+              }}
+            /> */}
+            
+            <Route
+              path="/survey/:surveyId"
+              render={(props) => {
+                return <Survey {...props}/>
+              }}
+            />
+
+            <Route
+              path="/billboard/:billboardId"
+              render={(props) => {
+                return <Billboard {...props}/>
+              }}
+            />
+
+          </Switch>
+        </AuthProvider>
       </Router>
     );
   }

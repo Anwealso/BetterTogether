@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Survey from "./Survey";
 import Submitted from "./Submitted";
 import Billboard from "./Billboard";
+import Navbar from "./Navbar";
 
 import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
 
@@ -24,6 +25,8 @@ export default class HomePage extends Component {
   renderHomePage() {
     return (
       <Grid container spacing={3}>
+        <Navbar />
+
         <Grid item xs={12} align="center">
           <Typography variant="h3" compact="h3">
             Eldery Wellness Data System

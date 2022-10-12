@@ -250,8 +250,13 @@ export default class Survey extends Component {
               </div>
           </Grid>
 
-          {this.renderBackButton()}
-          {this.renderNextButton()}  
+          <Grid item xs={6}>
+            {this.renderBackButton()}
+          </Grid>
+
+          <Grid item xs={6}>
+            {this.renderNextButton()}
+          </Grid>
 
           {this.renderSubmitButton()}
 

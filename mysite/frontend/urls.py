@@ -7,6 +7,6 @@ urlpatterns = [
 
     path('survey/<str:surveyId>', index),
     path('submitted', index),
-
+    path('events', index),
     path('billboard/<str:billboardId>', index),
 ]

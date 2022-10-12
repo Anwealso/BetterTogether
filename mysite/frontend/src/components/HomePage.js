@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Survey from "./Survey";
 import Submitted from "./Submitted";
 import Billboard from "./Billboard";
+import Events from "./Events";
 
 import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
 
@@ -71,6 +72,13 @@ export default class HomePage extends Component {
             path="/survey/:surveyId"
             render={(props) => {
               return <Survey {...props}/>
+            }}
+          />
+
+          <Route
+            path="/events"
+            render={(props) => {
+              return <Events {...props}/>
             }}
           />
 

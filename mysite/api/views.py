@@ -12,16 +12,17 @@ from .serializers import SurveySerializer, QuestionSerializer, ChoiceSerializer,
 import logging
 from datetime import datetime
 
-# from django.shortcuts import render
-# from django.http import JsonResponse
-
-# from rest_framework import generics, status
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
-
-# from .serializers import RoomSerializer, CreateRoomSerializer, UpdateRoomSerializer
-# from .models import Room
-
+# Authentication Imports
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.http import JsonResponse
+from .serializers import MyTokenObtainPairSerializer, RegisterSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import generics
+from django.contrib.auth.models import User
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
 
 # ---------------------------------------------------------------------------- #
 #            VIEWS TO LIST OUT ALL THE OBJECTS OF A PARTICULAR CLASS           #
@@ -172,3 +173,35 @@ class GetBillboard(APIView):
                 return Response({'Billboard Not Found': 'Invalid Billboard ID.'}, status=status.HTTP_404_NOT_FOUND)
 
         return Response({'Bad Request': 'Billboard ID paramater not found in request'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
+
+
+@api_view(['GET'])
+def getRoutes(request):
+    routes = [
+        '/api/token/',
+        '/api/register/',
+        '/api/token/refresh/'
+    ]
+    return Response(routes)
+
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def testEndPoint(request):
+    if request.method == 'GET':
+        data = f"Congratulation {request.user}, your API just responded to GET request"
+        return Response({'response': data}, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        text = request.POST.get('text')
+        data = f'Congratulation your API just responded to POST request with text: {text}'
+        return Response({'response': data}, status=status.HTTP_200_OK)
+    return Response({}, status.HTTP_400_BAD_REQUEST)

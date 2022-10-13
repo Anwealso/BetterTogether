@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Routes, Route, useParams } from 'react-router-dom';
 import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup, TextField } from "@material-ui/core";
+import Navbar from "./Navbar";
 
 export default class Survey extends Component {
   constructor(props) {
@@ -9,24 +10,27 @@ export default class Survey extends Component {
     this.state = {
       surveyId: parseInt(this.props.match.params.surveyId),
       questions: [],
+      currentQuestionIndex: 0,
     };
 
     this.submitButtonPressed = this.submitButtonPressed.bind(this);
-    this.handleVoteChange = this.handleVoteChange.bind(this);
     
+    this.handleVoteChange = this.handleVoteChange.bind(this);
     this.renderSubmitButton = this.renderSubmitButton.bind(this);
 
-    this.getSurveyDetails = this.getSurveyDetails.bind(this);
-    this.getSurveyDetails();
+    this.renderNextButton = this.renderNextButton.bind(this);
+    this.renderBackButton = this.renderBackButton.bind(this);
+    this.handleBack = this.handleBack.bind(this);
+    this.handleNext = this.handleNext.bind(this);
   }
 
-  getSurveyDetails() {
+  componentDidMount() {
+    // Get all the survey details
     return fetch("/api/get-survey" + "?id=" + this.state.surveyId)
       .then((response) => {
         console.log(response)
         if (!response.ok) {
           console.log("Response not okay")
-          // this.props.leaveRoomCallback();
           this.props.history.push("/");
         }
         return response.json();
@@ -44,6 +48,7 @@ export default class Survey extends Component {
           name: data.name,
           questions: this.state.questions.concat(...data.questions)
         });
+        
       });
   }
 
@@ -53,15 +58,13 @@ export default class Survey extends Component {
     let question = questions[questionIndex];
  
     // 2. Replace the property you're intested in
-    var selectedChoiceOption = e.target.value; // TODO: replace this wil pulling the real choice id out of the form in DOM
-    // console.log(selectedChoiceOption)
+    var selectedChoiceOption = e.target.value;
 
     question.choices.map((choice, index) => {
       if (choice.option === selectedChoiceOption) {
         question.selectedChoiceId = choice.id
       }
     })
-    // console.log(questions)
 
     // 4. Set the state to our new copy
     this.setState({
@@ -69,49 +72,24 @@ export default class Survey extends Component {
     });
   }
 
-  // handleVoteChangeText(e) { // TODO: Fill out theis funcitona and make it actually work
-  //   let questions = [...this.state.questions];
-  //   var questionIndex = e.target.name.split("-").at(-1)
-  //   let question = questions[questionIndex];
- 
-  //   // 2. Replace the property you're intested in
-  //   var selectedChoiceOption = e.target.value; // TODO: replace this wil pulling the real choice id out of the form in DOM
-  //   // console.log(selectedChoiceOption)
+  handleNext() {
+    if (this.state.currentQuestionIndex < this.state.questions.length-1) {
+      this.setState({
+        currentQuestionIndex: this.state.currentQuestionIndex + 1
+      });
+    } 
+  }
 
-  //   question.choices.map((choice, index) => {
-  //     if (choice.option === selectedChoiceOption) {
-  //       question.selectedChoiceId = choice.id
-  //     }
-  //   })
-  //   // console.log(questions)
+  handleBack() {
+    if (this.state.currentQuestionIndex > 0) {
+      this.setState({
+        currentQuestionIndex: this.state.currentQuestionIndex - 1
+      });
+    } 
+  }
 
-  //   // 4. Set the state to our new copy
-  //   this.setState({
-  //     questions: questions
-  //   });
-  // }
 
   submitButtonPressed() {
-    // Need some way to prevent the defgault behaviour of the sumbit (i.e. stop it reloading the page)
-
-    // TODO: Fix this so that submitting without seleecting an option frst doesnt break everything
-    // let questions = [...this.state.questions];
-    // questions.map((question, index) => {
-    //   // Log the selected choice
-    //   // 2. Replace the property you're intested in
-    //   question.selectedChoiceId = 1; // TODO: repklace this wil pulling the real choice id out of the form in DOM
-    //   // 3. Put it back into our array. N.B. we *are* mutating the array here, 
-    //   //    but that's why we made a copy first
-    //   questions[index] = question;
-    //   // 4. Set the state to our new copy
-    //   this.setState({
-    //     questions: questions
-    //   });
-    // });
-    // console.log(JSON.stringify(this.state.questions))
-
-    // TODO: Ideally want to associate this set of answers with a user/session id somehow so we can relate all the question responses to the same user
-
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -137,72 +115,147 @@ export default class Survey extends Component {
   }
 
   renderSubmitButton() {
-    return (
-      <Grid item xs={12} align="center">
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            // this.updateShowSettings(this.state.surveyId+1)
-            this.submitButtonPressed()
-          }}
-        >
-          Submit
-        </Button>
-      </Grid>
-    );
+    // Only show if we are on the last question of the survey
+    if (this.state.currentQuestionIndex == this.state.questions.length-1) {
+      return (
+        <Grid item xs={12} align="center">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              this.submitButtonPressed()
+            }}
+          >
+            Submit
+          </Button>
+        </Grid>
+      );
+    }
+  }
+
+  renderNextButton() {
+    if (this.state.currentQuestionIndex < this.state.questions.length-1) {
+      return (
+        <Grid item xs={12} align="center">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              this.handleNext()
+            }}
+          >
+            &gt;
+          </Button>
+        </Grid>
+      );
+    }
+  }
+
+  renderBackButton() {
+    if (this.state.currentQuestionIndex > 0) {
+      return (
+        <Grid item xs={12} align="center">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              this.handleBack()
+            }}
+          >
+            &lt;
+          </Button>
+        </Grid>
+      );
+    }
   }
 
   render() {
     return (
       <FormControl>
         <Grid container spacing={1}>
+          <Navbar />
+
           <Grid item xs={12} align="center">
               Survey ID: {this.state.surveyId}
               <br/>
               Survey Name: {this.state.name}
               <br/>
               Num Questions: {this.state.questions.length}
-
               <div>
                 {JSON.stringify(this.state.questions)}
               </div>
               <br/>
 
-
               <div>
-                <h2>Questions:</h2>
+                <h2>Community Wellness Survey</h2>
+                {/* let question = this.state.questions.at(this.state.currentQuestionIndex)
+                let index = this.state.currentQuestionIndex */}
 
-                {/* <TextField id="outlined-basic"
-                  label="MyTextField" 
-                  variant="outlined" 
-                  onChange={this.handleVoteChangeText}
-                /> */}
+                {/* <div style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
+                  <FormLabel id="demo-radio-buttons-group-label">Q{this.state.currentQuestionIndex+1}. {[this.state.questions[this.state.currentQuestionIndex]].text}</FormLabel>
+                  <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue=""
+                    name={"radio-buttons-group-" + this.state.currentQuestionIndex}
+                    onChange={this.handleVoteChange}
+                  >
+
+                    {[[this.state.questions[this.state.currentQuestionIndex]].choices].map((temp, index) => {
+                      if (this.state.questions[this.state.currentQuestionIndex]) {
+                        console.log("LIGMA")
+                        console.log(this.state.questions[this.state.currentQuestionIndex])
+                        console.log(this.state.questions[this.state.currentQuestionIndex].choices[index])
+                        
+                        let choice = this.state.questions[this.state.currentQuestionIndex].choices[index]
+                        
+                        console.log(this.state.questions[this.state.currentQuestionIndex].choices[index].option)
+
+                        return (
+                          <FormControlLabel key={index} value={choice.option} control={<Radio />} label={choice.option} />
+                        );
+                      }
+                    })}
+
+                  </RadioGroup>
+                </div> */}
 
 
-                {this.state.questions.map((question, index) => {
-                  return (
-                    <div key={index} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
-                      <FormLabel id="demo-radio-buttons-group-label">Q{index+1}. {question.text}</FormLabel>
-                      <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue=""
-                        name={"radio-buttons-group-" + index}
-                        onChange={this.handleVoteChange}
-                      >
+                {
+                  this.state.questions.map((question, index) => {
 
-                        {question.choices.map((choice, index) => {
-                          return (
-                            <FormControlLabel key={index} value={choice.option} control={<Radio />} label={choice.option} />
-                          );
-                        })}
+                    return (
+                      <div key={index} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
+                        <FormLabel id="demo-radio-buttons-group-label">Q{index+1}. {question.text}</FormLabel>
+                        <RadioGroup
+                          aria-labelledby="demo-radio-buttons-group-label"
+                          defaultValue=""
+                          name={"radio-buttons-group-" + index}
+                          onChange={this.handleVoteChange}
+                        >
 
-                      </RadioGroup>
-                    </div>
-                  );
-                })}
+                          {question.choices.map((choice, index) => {
+                            return (
+                              <FormControlLabel key={index} value={choice.option} control={<Radio />} label={choice.option} />
+                            );
+                          })}
+
+                        </RadioGroup>
+                      </div>
+                    );
+
+                  })
+                }
+
 
               </div>
+          </Grid>
+
+          <Grid item xs={6}>
+            {this.renderBackButton()}
+          </Grid>
+
+          <Grid item xs={6}>
+            {this.renderNextButton()}
           </Grid>
 
           {this.renderSubmitButton()}

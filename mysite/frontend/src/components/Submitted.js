@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-import { Grid, Button, ButtonGroup, Typography } from "@mui/material";
+import { Grid, ButtonGroup, Typography } from "@mui/material";
 import Navbar from "./Navbar";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Navigate,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class HomePage extends Component {
   constructor(props) {

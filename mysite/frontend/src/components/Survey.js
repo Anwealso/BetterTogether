@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-import { Routes, Route, useParams } from "react-router-dom";
 import {
   Grid,
   Button,
-  Typography,
   Radio,
   FormControl,
   FormControlLabel,
   FormLabel,
   RadioGroup,
-  TextField,
 } from "@mui/material";
 import Navbar from "./Navbar";
 

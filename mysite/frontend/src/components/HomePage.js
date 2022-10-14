@@ -14,17 +14,7 @@ import Login from "./LoginPage";
 import Register from "./Register";
 import ProtectedPage from "./ProtectedPage";
 
-import { useContext } from "react";
-import UserInfo from "../components/UserInfo";
-import AuthContext from "../context/AuthContext";
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -153,26 +143,23 @@ export default class HomePage extends Component {
     return (
       <Router>
         <AuthProvider>
-          <Switch>
-            <PrivateRoute component={ProtectedPage} path="/protected" exact />
-            <Route component={Login} path="/login" />
-            <Route component={Register} path="/register" />
+          <Routes>
+            {/* <PrivateRoute component={ProtectedPage} path="/protected" exact /> */}
+            <Route
+              path="/protected"
+              element={
+                <PrivateRoute>
+                  <ProtectedPage />
+                </PrivateRoute>
+              }
+            />
+            <Route element={<Login />} path="/login" />
+            <Route element={<Register />} path="/register" />
             {/* <Route component={Home} path="/" /> */}
 
-            <Route
-              exact
-              path="/"
-              render={() => {
-                return this.renderHomePage();
-              }}
-            />
+            <Route exact path="/" element={this.renderHomePage()} />
 
-            <Route
-              path="/submitted"
-              render={() => {
-                return <Submitted />;
-              }}
-            />
+            <Route path="/submitted" element={<Submitted />} />
 
             {/* <Route
               path="/create" 
@@ -181,20 +168,13 @@ export default class HomePage extends Component {
               }}
             /> */}
 
-            <Route
-              path="/survey/:surveyId"
-              render={(props) => {
-                return <Survey {...props} />;
-              }}
-            />
+            <Route path="/survey/:surveyId" element={<Survey/>} />
 
             <Route
               path="/billboard/:billboardId"
-              render={(props) => {
-                return <Billboard {...props} />;
-              }}
+              element={<Billboard/>}
             />
-          </Switch>
+          </Routes>
         </AuthProvider>
       </Router>
     );

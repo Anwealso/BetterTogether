@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import { Grid, Avatar, Typography, Box } from "@mui/material";
+import React from "react";
 import { render } from "react-dom";
 import HomePage from "./HomePage";
 

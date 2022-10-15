@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import { createRoot } from 'react-dom/client';
+import React, { Component } from "react";
+import { render } from "react-dom";
 import HomePage from "./HomePage";
 
 export default class App extends Component {
@@ -30,5 +30,4 @@ export default class App extends Component {
 }
 
 const appDiv = document.getElementById("app");
-const root = createRoot(appDiv);
-root.render(<App />);
+render(<App />, appDiv);

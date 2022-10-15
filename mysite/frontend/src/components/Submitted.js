@@ -1,20 +1,13 @@
 import React, { Component } from "react";
-import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
+import { Grid, ButtonGroup, Typography } from "@mui/material";
 import Navbar from "./Navbar";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Navigate,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
@@ -32,15 +25,14 @@ export default class HomePage extends Component {
           </Typography>
 
           <ButtonGroup disableElevation variant="contained" color="primary">
-
             <Link color="primary" to="/">
               Take the survey again
             </Link>
-            
           </ButtonGroup>
         </Grid>
       </Grid>
-    );  }
+    );
+  }
 
   // render() {
   //   return (
@@ -69,5 +61,4 @@ export default class HomePage extends Component {
   //     </Router>
   //   );
   // }
-
 }

@@ -1,6 +1,6 @@
 from random import choices
 from rest_framework import serializers
-from .models import Survey, Question, Choice, Result
+from .models import Survey, Question, Choice, Result, Event
 
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
@@ -32,6 +32,11 @@ class ResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = Result
         fields = ["id", "question_id", "choice_id", "survey_id", "sub_time"]
+
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = ["title", "location", "time", "description", "image"]
 
 # class SubmitSurveySerializer(serializers.ModelSerializer):
 #     class Meta:

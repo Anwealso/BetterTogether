@@ -6,8 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, status
 
-from .models import Survey, Question, Choice, Result
-from .serializers import SurveySerializer, QuestionSerializer, ChoiceSerializer, ResultSerializer
+from .models import Survey, Question, Choice, Result, Event
+from .serializers import SurveySerializer, QuestionSerializer, ChoiceSerializer, ResultSerializer, EventSerializer
 
 import logging
 from datetime import datetime
@@ -56,13 +56,30 @@ class ResultViewSet(viewsets.ModelViewSet):
     queryset = Result.objects.all()
     serializer_class = ResultSerializer
 
-class ResultViewSet(viewsets.ModelViewSet):
+class EventViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows questions to be viewed or edited.
+    API endpoint that allows Events to be viewed or edited.
     """
-    queryset = Result.objects.all()
-    serializer_class = ResultSerializer
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
 
+# class GetEvents(APIView):
+#     serializer_class = SurveySerializer
+#     lookup_url_kwarg = 'id'
+
+#     def get(self, request, format=None):
+#         survey_id = request.GET.get(self.lookup_url_kwarg)
+#         if survey_id != None:
+#             try:
+#                 survey = Survey.objects.get(id=survey_id)
+#                 # data = SurveySerializer(survey[0]).data
+#                 data = SurveySerializer(survey).data
+#                 # data['is_host'] = self.request.session.session_key == survey[0].host
+#                 return Response(data, status=status.HTTP_200_OK)
+#             except:
+#                 return Response({'Survey Not Found': 'Invalid Survey ID.'}, status=status.HTTP_404_NOT_FOUND)
+
+#         return Response({'Bad Request': 'Survey ID paramater not found in request'}, status=status.HTTP_400_BAD_REQUEST)
 
 # ---------------------------------------------------------------------------- #
 #                             VIEWS FOR DATA INPUT                             #

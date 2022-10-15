@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 // import GenericImage from '../../static/images/senior-volunters.jpg'
 import Events from "./Events";
 
-import { Grid, Button, ButtonGroup, Typography } from "@mui/material";
+import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
 import PrivateRoute from "../utils/PrivateRoute";
 import { AuthProvider } from "../context/AuthContext";
 // import Home from "/homePage";
@@ -15,12 +15,23 @@ import Login from "./LoginPage";
 import Register from "./Register";
 import ProtectedPage from "./ProtectedPage";
 
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useContext } from "react";
+import UserInfo from "../components/UserInfo";
+import AuthContext from "../context/AuthContext";
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Navigate,
+} from "react-router-dom";
 
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+    };
   }
 
   renderHeroImage() {
@@ -28,12 +39,11 @@ export default class HomePage extends Component {
       marginTop: "-12vh",
       backgroundImage: "url(../../static/images/senior-volunters.jpg)",
       height: "50%",
-      width: "100%",
-      backgroundPosition: "center",
+      width: "100%",backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
-      position: "relative",
-    };
+      position: "relative"
+    }
 
     const hero_text = {
       textAlign: "center",
@@ -42,18 +52,24 @@ export default class HomePage extends Component {
       left: "50%",
       transform: "translate(-50%, -50%)",
       color: "white",
-      fontSize: "3vh",
-    };
-
+      fontSize: "3vh"
+    }
+    
     return (
-      <div style={hero_image}>
-        <div style={hero_text}>
-          <Typography variant="h2">Get Involved</Typography>
-          <Typography variant="h5">Join Your Community Today</Typography>
+      <div style = {hero_image}>
+        <div style = {hero_text}>
+          <Typography variant="h2">
+            Get Involved
+          </Typography>
+          <Typography variant="h5">
+            Join Your Community Today
+          </Typography>
           <ButtonGroup disableElevation variant="contained" color="primary">
+
             <Button color="primary" to="/survey/1" component={Link}>
               Try the Survey
             </Button>
+            
           </ButtonGroup>
         </div>
       </div>
@@ -64,10 +80,11 @@ export default class HomePage extends Component {
     return (
       <Grid container spacing={3}>
         <Navbar />
+        
 
         {this.renderHeroImage()}
         {/* <Grid item xs={12} align="center"> */}
-        <div style={{ margin: "auto", marginTop: "-2vh", maxWidth: 600 }}>
+          <div style={{ margin: "auto", marginTop:"-2vh", maxWidth: 600 }}>
           <Typography variant="h3" gutterBottom={true} display="block">
             Hey There!
           </Typography>
@@ -105,7 +122,6 @@ export default class HomePage extends Component {
             your community up to date with your community. These statics are
             updated live by other people in your community!
           </Typography>
-          <Typography variant="h5">Join Your Community Today</Typography>
           <Typography variant="h4" gutterBottom={true} display="block">
             Surveys
           </Typography>
@@ -133,8 +149,8 @@ export default class HomePage extends Component {
             This is where you can see what&apos;s going on in your community. Find
             events, groups, and more!
           </Typography>
-        </div>
-
+          </div>
+          
         {/* </Grid> */}
       </Grid>
     );
@@ -144,38 +160,51 @@ export default class HomePage extends Component {
     return (
       <Router>
         <AuthProvider>
-          <Routes>
-            {/* <PrivateRoute component={ProtectedPage} path="/protected" exact /> */}
-            <Route
-              path="/protected"
-              element={
-                <PrivateRoute>
-                  <ProtectedPage />
-                </PrivateRoute>
-              }
-            />
-            <Route element={<Login />} path="/login" />
-            <Route element={<Register />} path="/register" />
+          <Switch>
+
+            <PrivateRoute component={ProtectedPage} path="/protected" exact />
+            <Route component={Login} path="/login" />
+            <Route component={Register} path="/register" />
             {/* <Route component={Home} path="/" /> */}
 
-            <Route exact path="/" element={this.renderHomePage()} />
 
-            <Route path="/submitted" element={<Submitted />} />
-
+            <Route
+              exact
+              path="/"
+              render={() => {
+                return this.renderHomePage()
+              }}
+            />
+            
+            <Route
+              path="/submitted" 
+              render={() => {
+                return <Submitted />
+              }}
+            />
+            
             {/* <Route
               path="/create" 
               render={() => {
                 return <Join />
               }}
             /> */}
-
-            <Route path="/survey/:surveyId" element={<Survey/>} />
+            
+            <Route
+              path="/survey/:surveyId"
+              render={(props) => {
+                return <Survey {...props}/>
+              }}
+            />
 
             <Route
               path="/billboard/:billboardId"
-              element={<Billboard/>}
+              render={(props) => {
+                return <Billboard {...props}/>
+              }}
             />
-          </Routes>
+
+          </Switch>
         </AuthProvider>
       </Router>
     );

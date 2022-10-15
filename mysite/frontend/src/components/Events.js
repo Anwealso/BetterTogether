@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Routes, Route, useParams } from 'react-router-dom';
 import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup , Card, CardContent, CardActions, CardMedia} from "@material-ui/core";
 import Navbar from "./Navbar";
+import UserInfo from "../components/UserInfo";
 
 export default class Events extends Component {
   constructor(props) {
@@ -25,6 +26,11 @@ export default class Events extends Component {
     // Fix the fact that this is not unmounting when we go to another page
   }
 
+  subscribeToEvent(parameter1, parameter2, parameter3) {
+    console.log("yes")
+    console.log(Navbar.user)
+  }
+
   renderMedia(props) {
     return (
       <div>
@@ -46,7 +52,7 @@ export default class Events extends Component {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Subscribe</Button>
+          <Button size="small"  onClick={() => { this.subscribeToEvent(); }}>Subscribe</Button>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>

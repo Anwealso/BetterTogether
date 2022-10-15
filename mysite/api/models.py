@@ -40,7 +40,14 @@ class Event(models.Model):
     time = models.DateTimeField()
     description = models.CharField(max_length=300)
     image = models.CharField(max_length=200, null=True)
-    attendees = models.ManyToManyField(User, related_name='events', blank=True)
 
     def __str__(self):
         return self.title
+
+
+class Attendance(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} : {self.event}"

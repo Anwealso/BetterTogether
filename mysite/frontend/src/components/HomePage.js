@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import Survey from "./Survey";
 import Submitted from "./Submitted";
 import Billboard from "./Billboard";
-import Events from "./Events";
 import Navbar from "./Navbar";
 // import GenericImage from '../../static/images/senior-volunters.jpg'
 
@@ -170,13 +169,6 @@ export default class HomePage extends Component {
             /> */}
 
             <Route path="/survey/:surveyId" element={<Survey/>} />
-
-          <Route
-            path="/events"
-            render={(props) => {
-              return <Events {...props}/>
-            }}
-          />
 
             <Route
               path="/billboard/:billboardId"

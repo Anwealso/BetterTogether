@@ -13,7 +13,6 @@ router = routers.DefaultRouter()
 router.register(r'surveys', SurveyViewSet)
 router.register(r'questions', QuestionViewSet)
 router.register(r'choices', ChoiceViewSet)
-router.register(r'events', EventViewSet)
 # router.register(r'token', MyTokenObtainPairView)
 # router.register(r'register', RegisterView)
 

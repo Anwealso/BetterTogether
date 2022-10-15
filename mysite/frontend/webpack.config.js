@@ -1,4 +1,3 @@
-
 const path = require("path");
 const webpack = require("webpack");
 
@@ -17,6 +16,10 @@ module.exports = {
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
     ],
   },
   optimization: {
@@ -24,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
+      "process.env.NODE_ENV": JSON.stringify("development"),
     }),
   ],
 };

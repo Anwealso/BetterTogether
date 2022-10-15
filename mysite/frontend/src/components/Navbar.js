@@ -13,9 +13,10 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-const pages = ["Survey", "Together App"];
-const settings = ["Profile", "Account", "Logout"];
-const links = ['/survey/1', '/events'];
+const pages = ['Survey', 'Together App'];
+const page_links = ['/survey/1', '/events'];
+const settings = ['Account', 'Logout'];
+const settings_links = ['/account', '/logout'];
 
 import { useContext } from "react";
 import UserInfo from "../components/UserInfo";
@@ -128,7 +129,7 @@ const Navbar = () => {
               }}
             >
               {pages.map((page, index) => (
-                <a key={`${index}-page`} href={links[index]} style={{color: "inherit", textDecoration: "none"}}>
+                <a key={`${index}-page`} href={page_links[index]} style={{color: "inherit", textDecoration: "none"}}>
                   <MenuItem 
                     key={page} 
                     onClick={handleCloseNavMenu}
@@ -148,7 +149,7 @@ const Navbar = () => {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
-                href={links[index]}
+                href={page_links[index]}
               >
                 {page}
               </Button>
@@ -181,10 +182,12 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={logoutUser}>
-                  <Typography>{setting}</Typography>
-                </MenuItem>
+              {settings.map((setting, index) => (
+                <a key={`${index}-settings`} href={settings_links[index]}>
+                  <MenuItem key={setting} onClick={logoutUser}>
+                    <Typography>{setting}</Typography>
+                  </MenuItem>
+                </a>
               ))}
             </Menu>
           </Box>

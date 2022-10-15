@@ -9,6 +9,6 @@ urlpatterns = [
     path('submitted', index),
     path('register', index),
     path('login', index),
-    path('events', index),
+
     path('billboard/<str:billboardId>', index),
 ]

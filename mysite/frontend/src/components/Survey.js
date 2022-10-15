@@ -17,6 +17,8 @@ export default class Survey extends Component {
     
     this.handleVoteChange = this.handleVoteChange.bind(this);
     this.renderSubmitButton = this.renderSubmitButton.bind(this);
+    
+    this.renderChoices = this.renderChoices.bind(this);
 
     this.renderNextButton = this.renderNextButton.bind(this);
     this.renderBackButton = this.renderBackButton.bind(this);
@@ -169,6 +171,36 @@ export default class Survey extends Component {
     }
   }
 
+  renderChoices() {
+    console.log(this.state.questions[this.state.currentQuestionIndex])
+    console.log("hello")
+
+    var elems = []
+
+    if (this.state.questions[this.state.currentQuestionIndex] && this.state.questions[this.state.currentQuestionIndex].choices) {
+      console.log("running");
+      {this.state.questions[this.state.currentQuestionIndex].choices.map((choice, index) => {
+        // if (this.state.questions[this.state.currentQuestionIndex]) {
+        // console.log(word)
+        // console.log(this.state.questions[])
+        //   console.log(this.state.questions[this.state.currentQuestionIndex])
+        //   console.log(this.state.questions[this.state.currentQuestionIndex].choices)
+        //   console.log(typeof(this.state.questions[this.state.currentQuestionIndex].choices))
+
+          
+        //   let choice = this.state.questions[this.state.currentQuestionIndex].choices[index]
+        //   console.log(choice)
+          
+          // console.log(choice)
+
+          console.log("showing")
+          elems.push(<FormControlLabel key={choice} value={choice.option} control={<Radio />} label={choice.option} />)
+      })}
+
+      return elems
+    }
+  }
+
   render() {
     return (
       <FormControl>
@@ -176,7 +208,7 @@ export default class Survey extends Component {
           <Navbar />
 
           <Grid item xs={12} align="center">
-              Survey ID: {this.state.surveyId}
+              {/* Survey ID: {this.state.surveyId}
               <br/>
               Survey Name: {this.state.name}
               <br/>
@@ -184,14 +216,20 @@ export default class Survey extends Component {
               <div>
                 {JSON.stringify(this.state.questions)}
               </div>
+              <div>
+                {this.state.questions.map((question) => {
+                  return (
+                    <div>"{question.id}: {question.selectedChoiceId}"</div>
+                  );
+                })}
+              </div> */}
+
               <br/>
 
               <div>
                 <h2>Community Wellness Survey</h2>
-                {/* let question = this.state.questions.at(this.state.currentQuestionIndex)
-                let index = this.state.currentQuestionIndex */}
 
-                {/* <div style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
+                <div key={this.state.currentQuestionIndex} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
                   <FormLabel id="demo-radio-buttons-group-label">Q{this.state.currentQuestionIndex+1}. {[this.state.questions[this.state.currentQuestionIndex]].text}</FormLabel>
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
@@ -200,51 +238,10 @@ export default class Survey extends Component {
                     onChange={this.handleVoteChange}
                   >
 
-                    {[[this.state.questions[this.state.currentQuestionIndex]].choices].map((temp, index) => {
-                      if (this.state.questions[this.state.currentQuestionIndex]) {
-                        console.log("LIGMA")
-                        console.log(this.state.questions[this.state.currentQuestionIndex])
-                        console.log(this.state.questions[this.state.currentQuestionIndex].choices[index])
-                        
-                        let choice = this.state.questions[this.state.currentQuestionIndex].choices[index]
-                        
-                        console.log(this.state.questions[this.state.currentQuestionIndex].choices[index].option)
-
-                        return (
-                          <FormControlLabel key={index} value={choice.option} control={<Radio />} label={choice.option} />
-                        );
-                      }
-                    })}
+                    {this.renderChoices()}
 
                   </RadioGroup>
-                </div> */}
-
-
-                {
-                  this.state.questions.map((question, index) => {
-
-                    return (
-                      <div key={index} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
-                        <FormLabel id="demo-radio-buttons-group-label">Q{index+1}. {question.text}</FormLabel>
-                        <RadioGroup
-                          aria-labelledby="demo-radio-buttons-group-label"
-                          defaultValue=""
-                          name={"radio-buttons-group-" + index}
-                          onChange={this.handleVoteChange}
-                        >
-
-                          {question.choices.map((choice, index) => {
-                            return (
-                              <FormControlLabel key={index} value={choice.option} control={<Radio />} label={choice.option} />
-                            );
-                          })}
-
-                        </RadioGroup>
-                      </div>
-                    );
-
-                  })
-                }
+                </div>
 
 
               </div>

@@ -31,3 +31,15 @@ class Result(models.Model):
 
     def __str__(self):
         return str(self.choice_id)
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=60)
+    location = models.CharField(max_length=100)
+    time = models.DateTimeField()
+    description = models.CharField(max_length=300)
+    image = models.CharField(max_length=100, null=True)
+    attendees = models.ManyToManyField(Survey, related_name='events')
+
+    def __str__(self):
+        return self.title

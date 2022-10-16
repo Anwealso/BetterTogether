@@ -24,6 +24,7 @@ router.register(r'attendance', AttendanceViewSet)
 urlpatterns = [
     path('get-survey', GetSurvey.as_view()),
     path('submit-survey', SubmitSurvey.as_view()),
+    path('submit-attendance', SubmitAttendance.as_view()),
 
     path('get-billboard', GetBillboard.as_view()),
 

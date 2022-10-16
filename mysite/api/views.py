@@ -154,6 +154,69 @@ class SubmitSurvey(APIView):
 
         return Response({'Bad Request': 'Invalid post data, did not find a survey ID'}, status=status.HTTP_400_BAD_REQUEST)
 
+class SubmitAttendance(APIView):
+    # TODO: Create a serialiserr to convert the request into an object and invoke it here
+    # serializer_class = CreateRoomSerializer
+
+    def post(self, request, format=None):
+        # if not self.request.session.exists(self.request.session.session_key):
+        #     self.request.session.create()
+        # logging.debug(request.data)
+
+        # Check the db to see that the requested survey exists
+        # for question in request.data.get("questions"):
+            # logging.debug(question)
+        
+
+        user_instance = User.objects.filter(id=request.data.get("user"))[0]
+        event_instance = Event.objects.filter(id=request.data.get("event"))[0]
+
+
+        # Save the survey results to the database
+        result = Attendance(user = user_instance, event = event_instance)
+        
+        logging.debug(result)
+        # logging.debug(result.sub_time)
+        result.save()
+
+        # return Response(ResultSerializer(result).data, status=status.HTTP_201_CREATED)
+
+        return Response({'message': 'Survey Submitted!'}, status=status.HTTP_200_OK)
+
+        # survey_id = request.data.get("surveyId")
+        # if survey_id != None:
+        #     survey_instances = Survey.objects.filter(id=survey_id)
+        #     if len(survey_instances) > 0:
+        #         survey_instance = survey_instances[0]
+
+        #         # TODO: Fix up this fiasco with the date not properly being shown in admin protal (and maybe not even being recorded)
+        #         # sub_time = request.data.get("submitTime")
+        #         # sub_time = make_aware(datetime.strptime(sub_time, "%d/%m/%Y, %H:%M:%S")) # convert datetime string format
+        #         sub_time = make_aware(datetime.now())
+        #         logging.debug(sub_time)
+
+        #         for question in request.data.get("questions"):
+        #             # logging.debug(question)
+
+        #             question_instance = Question.objects.filter(id=question["id"])[0]
+        #             selected_choice_instance = Choice.objects.filter(id=question["selectedChoiceId"])[0]
+
+
+        #             # Save the survey results to the database
+        #             result = Result(question_id=question_instance, choice_id=selected_choice_instance, survey_id=survey_instance, sub_time=sub_time)
+                    
+        #             logging.debug(result)
+        #             logging.debug(result.sub_time)
+        #             result.save()
+
+        #         # return Response(ResultSerializer(result).data, status=status.HTTP_201_CREATED)
+
+        #         return Response({'message': 'Survey Submitted!'}, status=status.HTTP_200_OK)
+
+        #     return Response({'Bad Request': 'Invalid Survey ID'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # return Response({'Bad Request': 'Invalid post data, did not find a survey ID'}, status=status.HTTP_400_BAD_REQUEST)
+
 
 class GetBillboard(APIView):
     # serializer_class = SurveySerializer

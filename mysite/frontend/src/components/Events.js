@@ -18,7 +18,7 @@ export default class Events extends Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(()=> this.getPosts(), 1000);
+    this.timer = setInterval(()=> this.getPosts(), 100000);
   }
   
   componentWillUnmount() {
@@ -29,6 +29,28 @@ export default class Events extends Component {
 
   subscribeToEvent(event_id) {
     const user = this.state.user.user_id
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user: this.state.user.user_id,
+        event: event_id,
+      }),
+    };
+    fetch("/api/submit-attendance", requestOptions)
+      .then((response) => {
+        console.log(response)
+
+        if (response.ok) {
+          console.log("fuck yesssss")
+          // this.props.history.push("/submitted");
+        } else {
+          this.setState({ error: "Survey not found." });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     // console.log(user + " Subcribing to " + event_id)
     // const response = await fetch("/api/atten/", {
     //   method: "POST",
@@ -45,7 +67,7 @@ export default class Events extends Component {
     // } else {
     //   alert("Something went wrong!");
     // }
-    console.log("go")
+    // console.log("go")
   }
 
   renderMedia(props) {

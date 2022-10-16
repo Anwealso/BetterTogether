@@ -12,6 +12,7 @@ import PrivateRoute from "../utils/PrivateRoute";
 import { AuthProvider } from "../context/AuthContext";
 // import Home from "/homePage";
 import Login from "./LoginPage";
+import Logout from "./LogoutPage";
 import Register from "./Register";
 import ProtectedPage from "./ProtectedPage";
 
@@ -132,6 +133,7 @@ export default class HomePage extends Component {
 
             <PrivateRoute component={ProtectedPage} path="/protected" exact />
             <Route component={Login} path="/login" />
+            <Route component={Logout} path="/logout" />
             <Route component={Register} path="/register" />
             {/* <Route component={Home} path="/" /> */}
 

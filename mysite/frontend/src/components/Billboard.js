@@ -4,7 +4,7 @@ import React, { Component } from "react";
 // import PosterImage from '../../static/images/ons_blanked.jpeg';
 import { Grid, Avatar, Typography, Box } from "@material-ui/core";
 // import React from "react";
-import Old from "../../static/frontend/old.jpg";
+import Old from "../../static/images/old.jpg";
 
 export default class Billboard extends Component {
   constructor(props) {

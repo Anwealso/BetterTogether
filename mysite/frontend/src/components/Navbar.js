@@ -15,8 +15,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 const pages = ['Survey', 'Together App'];
 const page_links = ['/survey/1', '/events'];
-const settings = ['Account', 'Logout'];
-const settings_links = ['/account', '/logout'];
+const settings = ['Login', 'Logout'];
+const settings_links = ['/login', '/logout'];
 
 import { useContext } from "react";
 import UserInfo from "../components/UserInfo";
@@ -43,7 +43,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" style={{height: "10%"}}>
+    <AppBar position="static" style={{height: "60px"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           
@@ -175,7 +175,12 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting, index) => (
-                <a href={settings_links[index]}>
+                <a href={settings_links[index]}
+                  style = {{
+                    color: 'inherit',
+                    textDecoration: 'none',
+                  }}
+                >
                   <MenuItem key={setting} onClick={logoutUser}>
                     <Typography>{setting}</Typography>
                   </MenuItem>

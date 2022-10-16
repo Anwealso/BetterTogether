@@ -1,8 +1,10 @@
-function UserInfo({ user }) {
+import jwt_decode from "jwt-decode";
+
+function UserInfo() {
     return (
-      <div>
-        <h1>Hello, {user.username}</h1>
-      </div>
+      localStorage.getItem("authTokens")
+        ? jwt_decode(localStorage.getItem("authTokens"))
+        : null
     );
   }
   

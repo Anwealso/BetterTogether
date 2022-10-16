@@ -6,8 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, status
 
-from .models import Survey, Question, Choice, Result, Event
-from .serializers import SurveySerializer, QuestionSerializer, ChoiceSerializer, ResultSerializer, EventSerializer
+from .models import Survey, Question, Choice, Result, Event, Attendance
+from .serializers import SurveySerializer, QuestionSerializer, ChoiceSerializer, ResultSerializer, EventSerializer, AttendanceSerializer
 
 import logging
 from datetime import datetime
@@ -62,6 +62,13 @@ class EventViewSet(viewsets.ModelViewSet):
     """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+class AttendanceViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Events to be viewed or edited.
+    """
+    queryset = Attendance.objects.all()
+    serializer_class = AttendanceSerializer
 
 # class GetEvents(APIView):
 #     serializer_class = SurveySerializer

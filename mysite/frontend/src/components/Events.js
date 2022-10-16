@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Routes, Route, useParams } from 'react-router-dom';
 import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup , Card, CardContent, CardActions, CardMedia} from "@material-ui/core";
 import Navbar from "./Navbar";
-import UserInfo from "../components/UserInfo";
+import UserInfo from "./UserInfo";
 
 export default class Events extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ export default class Events extends Component {
 
     this.state = {
       events: [],
+      user: UserInfo()
     };
 
     this.getPosts = this.getPosts.bind(this);
@@ -26,9 +27,25 @@ export default class Events extends Component {
     // Fix the fact that this is not unmounting when we go to another page
   }
 
-  subscribeToEvent(parameter1, parameter2, parameter3) {
-    console.log("stay")
-    console.log(Navbar.user)
+  subscribeToEvent(event_id) {
+    const user = this.state.user.user_id
+    // console.log(user + " Subcribing to " + event_id)
+    // const response = await fetch("/api/atten/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify({
+    //     user,
+    //     event_id
+    //   })
+    // });
+    // if (response.status === 201) {
+    //   history.push("/login");
+    // } else {
+    //   alert("Something went wrong!");
+    // }
+    console.log("go")
   }
 
   renderMedia(props) {
@@ -52,7 +69,7 @@ export default class Events extends Component {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small"  onClick={() => { this.subscribeToEvent(); }}>Subscribe</Button>
+          <Button size="small"  onClick={() => { this.subscribeToEvent(props.id); }}>Subscribe</Button>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>

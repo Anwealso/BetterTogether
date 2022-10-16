@@ -6,6 +6,7 @@ urlpatterns = [
     path('', index),
 
     path('survey/<str:surveyId>', index),
+    path('event/<str:eventId>', index),
     path('submitted', index),
     path('register', index),
     path('login', index),

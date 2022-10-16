@@ -5,6 +5,8 @@ import Submitted from "./Submitted";
 import Billboard from "./Billboard";
 import Events from "./Events";
 import Navbar from "./Navbar";
+import Event from "./Event";
+import HeroImage from "./HeroImage";
 // import GenericImage from '../../static/images/senior-volunters.jpg'
 
 import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
@@ -35,47 +37,7 @@ export default class HomePage extends Component {
     };
   }
 
-  renderHeroImage() {
-    const hero_image = {
-      marginTop: "-12vh",
-      backgroundImage: "url(../../static/images/senior-volunters.jpg)",
-      height: "50%",
-      width: "100%",backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",
-      position: "relative"
-    }
-
-    const hero_text = {
-      textAlign: "center",
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      color: "white",
-      fontSize: "3vh"
-    }
-    
-    return (
-      <div style = {hero_image}>
-        <div style = {hero_text}>
-          <Typography variant="h2">
-            Get Involved
-          </Typography>
-          <Typography variant="h5">
-            Join Your Community Today
-          </Typography>
-          <ButtonGroup disableElevation variant="contained" color="primary">
-
-            <Button color="primary" to="/survey/1" component={Link}>
-              Try the Survey
-            </Button>
-            
-          </ButtonGroup>
-        </div>
-      </div>
-    );
-  }
+  
 
   renderHomePage() {
     return (
@@ -83,7 +45,7 @@ export default class HomePage extends Component {
         <Navbar />
         
 
-        {this.renderHeroImage()}
+        {HeroImage()}
         {/* <Grid item xs={12} align="center"> */}
           <div style={{ margin: "auto", marginTop:"-2vh", maxWidth: 600 }}>
           <Typography variant="h3" gutterBottom={true} display="block">
@@ -166,6 +128,14 @@ export default class HomePage extends Component {
                 return <Survey {...props}/>
               }}
             />
+
+            <Route
+              path="/event/:eventId"
+              render={(props) => {
+                return <Event {...props}/>
+              }}
+            />
+
 
           <Route
             path="/events"

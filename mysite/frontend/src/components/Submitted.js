@@ -34,13 +34,14 @@ export default class HomePage extends Component {
           <ButtonGroup disableElevation variant="contained" color="primary">
 
             <Link color="primary" to="/">
-              Take the survey again
+              Back to the home page
             </Link>
             
           </ButtonGroup>
         </Grid>
       </Grid>
-    );  }
+    );
+  }
 
   // render() {
   //   return (

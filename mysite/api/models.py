@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Survey(models.Model):
     name = models.CharField(max_length=60)
@@ -31,3 +32,22 @@ class Result(models.Model):
 
     def __str__(self):
         return str(self.choice_id)
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=60)
+    location = models.CharField(max_length=100)
+    time = models.DateTimeField()
+    description = models.CharField(max_length=300)
+    image = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return self.title
+
+
+class Attendance(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} : {self.event}"

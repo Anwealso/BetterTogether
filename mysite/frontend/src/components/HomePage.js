@@ -45,7 +45,7 @@ export default class HomePage extends Component {
         <Navbar />
         
 
-        {HeroImage()}
+        {HeroImage("url(../../static/images/senior-volunters.jpg)")}
         {/* <Grid item xs={12} align="center"> */}
           <div style={{ margin: "auto", marginTop:"-2vh", maxWidth: 600 }}>
           <Typography variant="h3" gutterBottom={true} display="block">

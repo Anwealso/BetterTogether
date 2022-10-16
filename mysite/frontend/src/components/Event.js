@@ -8,204 +8,43 @@ export default class Event extends Component {
 
     this.state = {
       eventId: parseInt(this.props.match.params.eventId),
-      questions: [],
-      currentQuestionIndex: 0,
+      event: null,
     };
-
-    this.submitButtonPressed = this.submitButtonPressed.bind(this);
-    
-    this.handleVoteChange = this.handleVoteChange.bind(this);
-    this.renderSubmitButton = this.renderSubmitButton.bind(this);
-    
-    this.renderChoices = this.renderChoices.bind(this);
-
-    this.renderNextButton = this.renderNextButton.bind(this);
-    this.renderBackButton = this.renderBackButton.bind(this);
-    this.handleBack = this.handleBack.bind(this);
-    this.handleNext = this.handleNext.bind(this);
   }
 
   componentDidMount() {
     // Get all the survey details
-    return fetch("/api/get-survey" + "?id=" + this.state.eventId)
-      .then((response) => {
-        console.log(response)
-        if (!response.ok) {
-          console.log("Response not okay")
-          this.props.history.push("/");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Retrieved data from API")
-        console.log(data)
-        console.log(data.questions[0].text)
-        console.log(this.state.questions.concat(data.questions))
-        console.log(this.state.questions.concat(data.questions)[0].text)
-        console.log(this.state.questions.concat(data.questions)[0]['text'])
-        console.log(Object.keys(this.state.questions.concat(data.questions)[0]))
-        
-        this.setState({
-          name: data.name,
-          questions: this.state.questions.concat(...data.questions)
-        });
-        
-      });
-  }
-
-  handleVoteChange(e) {
-    let questions = [...this.state.questions];
-    var questionIndex = e.target.name.split("-").at(-1)
-    let question = questions[questionIndex];
- 
-    // 2. Replace the property you're intested in
-    var selectedChoiceOption = e.target.value;
-
-    question.choices.map((choice, index) => {
-      if (choice.option === selectedChoiceOption) {
-        question.selectedChoiceId = choice.id
+    return fetch("/api/events")
+    .then((response) => {
+      if (!response.ok) {
+        console.log("Response not okay")
+        this.props.history.push("/");
       }
+      return response.json();
     })
-
-    // 4. Set the state to our new copy
-    this.setState({
-      questions: questions
-    });
-  }
-
-  handleNext() {
-    if (this.state.currentQuestionIndex < this.state.questions.length-1) {
-      this.setState({
-        currentQuestionIndex: this.state.currentQuestionIndex + 1
-      });
-    } 
-  }
-
-  handleBack() {
-    if (this.state.currentQuestionIndex > 0) {
-      this.setState({
-        currentQuestionIndex: this.state.currentQuestionIndex - 1
-      });
-    } 
-  }
-
-
-  submitButtonPressed() {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        surveyId: this.state.eventId,
-        questions: this.state.questions,
-        submitTime: new Date().toLocaleString() ,
-      }),
-    };
-    fetch("/api/submit-survey", requestOptions)
-      .then((response) => {
-        console.log(response)
-
-        if (response.ok) {
-          this.props.history.push("/submitted");
-        } else {
-          this.setState({ error: "Survey not found." });
+    .then((data) => {
+      console.log("Retrieved data from API")
+      console.log(data)
+      for (const obj in data) {
+        if (data[obj].id == this.state.eventId) {
+          this.setState({
+            event: data[obj]
+          });
         }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  renderSubmitButton() {
-    // Only show if we are on the last question of the survey
-    if (this.state.currentQuestionIndex == this.state.questions.length-1) {
-      return (
-        <Grid item xs={12} align="center">
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              this.submitButtonPressed()
-            }}
-          >
-            Submit
-          </Button>
-        </Grid>
-      );
-    }
-  }
-
-  renderNextButton() {
-    if (this.state.currentQuestionIndex < this.state.questions.length-1) {
-      return (
-        <Grid item xs={12} align="center">
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              this.handleNext()
-            }}
-          >
-            &gt;
-          </Button>
-        </Grid>
-      );
-    }
-  }
-
-  renderBackButton() {
-    if (this.state.currentQuestionIndex > 0) {
-      return (
-        <Grid item xs={12} align="center">
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              this.handleBack()
-            }}
-          >
-            &lt;
-          </Button>
-        </Grid>
-      );
-    }
-  }
-
-  renderChoices() {
-    console.log(this.state.questions[this.state.currentQuestionIndex])
-    console.log("hello")
-
-    var elems = []
-
-    if (this.state.questions[this.state.currentQuestionIndex] && this.state.questions[this.state.currentQuestionIndex].choices) {
-      console.log("running");
-      {this.state.questions[this.state.currentQuestionIndex].choices.map((choice, index) => {
-        // if (this.state.questions[this.state.currentQuestionIndex]) {
-        // console.log(word)
-        // console.log(this.state.questions[])
-        //   console.log(this.state.questions[this.state.currentQuestionIndex])
-        //   console.log(this.state.questions[this.state.currentQuestionIndex].choices)
-        //   console.log(typeof(this.state.questions[this.state.currentQuestionIndex].choices))
-
-          
-        //   let choice = this.state.questions[this.state.currentQuestionIndex].choices[index]
-        //   console.log(choice)
-          
-          // console.log(choice)
-
-          console.log("showing")
-          elems.push(<FormControlLabel key={choice} value={choice.option} control={<Radio />} label={choice.option} />)
-      })}
-
-      return elems
-    }
+      }
+    });
+    
+      // });
   }
 
   render() {
     return (
       <div style={{width: "100%"}}>
         <Navbar />
+        <h1>yes</h1>
+        {console.log(this.state.event)}
 
-        <FormControl style={{width: "100%"}}>
+        {/* <FormControl style={{width: "100%"}}>
           <Grid container spacing={1}>
             <Grid item xs={12} align="center">
                 {/* Survey ID: {this.state.surveyId}
@@ -224,7 +63,7 @@ export default class Event extends Component {
                   })}
                 </div> */}
 
-                <br/>
+                {/* <br/>
 
                 <div>
                   <h2>Community Wellness Survey</h2>
@@ -253,12 +92,12 @@ export default class Event extends Component {
 
             <Grid item xs={6}>
               {this.renderNextButton()}
-            </Grid>
+            </Grid> */}
 
-            {this.renderSubmitButton()}
+            {/* {this.renderSubmitButton()} */}
 
-          </Grid>
-        </FormControl>
+          {/* </Grid> */}
+        {/* </FormControl> */}
 
       </div>
     );

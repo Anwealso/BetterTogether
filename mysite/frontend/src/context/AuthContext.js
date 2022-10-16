@@ -1,6 +1,6 @@
-import React, { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   );
   const [loading, setLoading] = useState(true);
 
-  const history = useNavigate();
+  const history = useHistory();
 
   const loginUser = async (username, password) => {
     const response = await fetch("/api/token/", {
@@ -93,6 +93,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-AuthProvider.propTypes = {
-  firstname: PropTypes.string.isRequired
-}

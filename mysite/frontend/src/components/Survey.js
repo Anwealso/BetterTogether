@@ -1,13 +1,6 @@
 import React, { Component } from "react";
-import {
-  Grid,
-  Button,
-  Radio,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  RadioGroup,
-} from "@mui/material";
+import { Routes, Route, useParams } from 'react-router-dom';
+import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup, TextField } from "@material-ui/core";
 import Navbar from "./Navbar";
 
 export default class Survey extends Component {
@@ -21,7 +14,7 @@ export default class Survey extends Component {
     };
 
     this.submitButtonPressed = this.submitButtonPressed.bind(this);
-
+    
     this.handleVoteChange = this.handleVoteChange.bind(this);
     this.renderSubmitButton = this.renderSubmitButton.bind(this);
     
@@ -37,66 +30,66 @@ export default class Survey extends Component {
     // Get all the survey details
     return fetch("/api/get-survey" + "?id=" + this.state.surveyId)
       .then((response) => {
-        console.log(response);
+        console.log(response)
         if (!response.ok) {
-          console.log("Response not okay");
+          console.log("Response not okay")
           this.props.history.push("/");
         }
         return response.json();
       })
       .then((data) => {
-        console.log("Retrieved data from API");
-        console.log(data);
-        console.log(data.questions[0].text);
-        console.log(this.state.questions.concat(data.questions));
-        console.log(this.state.questions.concat(data.questions)[0].text);
-        console.log(this.state.questions.concat(data.questions)[0]["text"]);
-        console.log(
-          Object.keys(this.state.questions.concat(data.questions)[0])
-        );
-
+        console.log("Retrieved data from API")
+        console.log(data)
+        console.log(data.questions[0].text)
+        console.log(this.state.questions.concat(data.questions))
+        console.log(this.state.questions.concat(data.questions)[0].text)
+        console.log(this.state.questions.concat(data.questions)[0]['text'])
+        console.log(Object.keys(this.state.questions.concat(data.questions)[0]))
+        
         this.setState({
           name: data.name,
-          questions: this.state.questions.concat(...data.questions),
+          questions: this.state.questions.concat(...data.questions)
         });
+        
       });
   }
 
   handleVoteChange(e) {
     let questions = [...this.state.questions];
-    var questionIndex = e.target.name.split("-").at(-1);
+    var questionIndex = e.target.name.split("-").at(-1)
     let question = questions[questionIndex];
-
+ 
     // 2. Replace the property you're intested in
     var selectedChoiceOption = e.target.value;
 
     question.choices.map((choice, index) => {
       if (choice.option === selectedChoiceOption) {
-        question.selectedChoiceId = choice.id;
+        question.selectedChoiceId = choice.id
       }
-    });
+    })
 
     // 4. Set the state to our new copy
     this.setState({
-      questions: questions,
+      questions: questions
     });
   }
 
   handleNext() {
-    if (this.state.currentQuestionIndex < this.state.questions.length - 1) {
+    if (this.state.currentQuestionIndex < this.state.questions.length-1) {
       this.setState({
-        currentQuestionIndex: this.state.currentQuestionIndex + 1,
+        currentQuestionIndex: this.state.currentQuestionIndex + 1
       });
-    }
+    } 
   }
 
   handleBack() {
     if (this.state.currentQuestionIndex > 0) {
       this.setState({
-        currentQuestionIndex: this.state.currentQuestionIndex - 1,
+        currentQuestionIndex: this.state.currentQuestionIndex - 1
       });
-    }
+    } 
   }
+
 
   submitButtonPressed() {
     const requestOptions = {
@@ -105,12 +98,12 @@ export default class Survey extends Component {
       body: JSON.stringify({
         surveyId: this.state.surveyId,
         questions: this.state.questions,
-        submitTime: new Date().toLocaleString(),
+        submitTime: new Date().toLocaleString() ,
       }),
     };
     fetch("/api/submit-survey", requestOptions)
       .then((response) => {
-        console.log(response);
+        console.log(response)
 
         if (response.ok) {
           this.props.history.push("/submitted");
@@ -125,14 +118,14 @@ export default class Survey extends Component {
 
   renderSubmitButton() {
     // Only show if we are on the last question of the survey
-    if (this.state.currentQuestionIndex == this.state.questions.length - 1) {
+    if (this.state.currentQuestionIndex == this.state.questions.length-1) {
       return (
         <Grid item xs={12} align="center">
           <Button
             variant="contained"
             color="primary"
             onClick={() => {
-              this.submitButtonPressed();
+              this.submitButtonPressed()
             }}
           >
             Submit
@@ -143,14 +136,14 @@ export default class Survey extends Component {
   }
 
   renderNextButton() {
-    if (this.state.currentQuestionIndex < this.state.questions.length - 1) {
+    if (this.state.currentQuestionIndex < this.state.questions.length-1) {
       return (
         <Grid item xs={12} align="center">
           <Button
             variant="contained"
             color="primary"
             onClick={() => {
-              this.handleNext();
+              this.handleNext()
             }}
           >
             &gt;
@@ -168,7 +161,7 @@ export default class Survey extends Component {
             variant="contained"
             color="primary"
             onClick={() => {
-              this.handleBack();
+              this.handleBack()
             }}
           >
             &lt;
@@ -263,6 +256,7 @@ export default class Survey extends Component {
           </Grid>
 
           {this.renderSubmitButton()}
+
         </Grid>
       </FormControl>
     );

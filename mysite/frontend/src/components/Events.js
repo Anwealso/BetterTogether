@@ -27,7 +27,7 @@ export default class Events extends Component {
   }
 
   subscribeToEvent(parameter1, parameter2, parameter3) {
-    console.log("yes")
+    console.log("stay")
     console.log(Navbar.user)
   }
 

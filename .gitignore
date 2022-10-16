@@ -14,5 +14,3 @@ mysite/frontend/node_modules/*
 
 # macOS caches
 *.DS_Store
-
-# mysite/frontend/static/*

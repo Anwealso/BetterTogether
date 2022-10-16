@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Routes, Route, useParams } from 'react-router-dom';
-import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup , Card, CardContent, CardActions, CardMedia} from "@material-ui/core";
+import { Grid, Button, Typography, Card, CardContent, CardActions, CardMedia} from "@material-ui/core";
 import Navbar from "./Navbar";
 import UserInfo from "./UserInfo";
 
@@ -15,6 +14,8 @@ export default class Events extends Component {
 
     this.getPosts = this.getPosts.bind(this);
     this.getPosts();
+    this.checkAttendance = this.checkAttendance.bind(this);
+    // this.getPosts = this..bind(this);
   }
 
   componentDidMount() {
@@ -27,8 +28,42 @@ export default class Events extends Component {
     // Fix the fact that this is not unmounting when we go to another page
   }
 
+  checkAttendance(event_id) {
+    // let check = false
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user: this.state.user.user_id,
+        event: event_id,
+      }),
+    };
+    fetch("/api/check-attendance", requestOptions)
+      .then((response) => {
+        console.log(response)
+        return response.json()
+      }).then((data) => {
+        // console.log("hello2?")
+        // console.log(data.message == 1)
+        if (data.message == 1) {
+          return "outlined" 
+        } else {
+          return "contained"
+        }
+      })
+
+    // console.log("hello?")
+
+    // return check
+
+    // if (check === true) {
+    //   return "contained"
+    // } else {
+    //   return "outlined"
+    // }
+  }
+
   subscribeToEvent(event_id) {
-    const user = this.state.user.user_id
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -42,32 +77,15 @@ export default class Events extends Component {
         console.log(response)
 
         if (response.ok) {
-          console.log("fuck yesssss")
-          // this.props.history.push("/submitted");
+          console.log("Subscribed")
         } else {
           this.setState({ error: "Survey not found." });
         }
+        return response.json()
       })
       .catch((error) => {
         console.log(error);
       });
-    // console.log(user + " Subcribing to " + event_id)
-    // const response = await fetch("/api/atten/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify({
-    //     user,
-    //     event_id
-    //   })
-    // });
-    // if (response.status === 201) {
-    //   history.push("/login");
-    // } else {
-    //   alert("Something went wrong!");
-    // }
-    // console.log("go")
   }
 
   renderMedia(props) {
@@ -83,15 +101,17 @@ export default class Events extends Component {
           <Typography gutterBottom variant="h5" component="div">
             {props.title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2">
           At {props.location}, {props.time.substring(8,10)}/{props.time.substring(5,7)}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2">
             {props.description}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small"  onClick={() => { this.subscribeToEvent(props.id); }}>Subscribe</Button>
+          {/* {this.checkAttendance(props.id).then(console.log())} */}
+          {/* variant={} */}
+          <Button size="small" variant={this.checkAttendance(props.id)} onClick={() => { this.subscribeToEvent(props.id); }}>Subscribe</Button>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
@@ -130,7 +150,7 @@ export default class Events extends Component {
 
                 {this.state.events.map((event) => {
                     return (      
-                      <Grid style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
+                      <Grid key={event.id} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
                         {this.renderMedia(event)}
                        </Grid>
                     );

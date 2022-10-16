@@ -155,10 +155,8 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt={user !== null ? user.username : ""}
-                  src="/static/images/avatar/2.jpg"
-                />
+                <Avatar alt={(user !== null) ? user.username : ""} src="/static/images/avatar/2.jpg" />
+                {console.log(user.user_id)}
               </IconButton>
             </Tooltip>
             <Menu

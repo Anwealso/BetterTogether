@@ -93,3 +93,6 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+// AuthProvider.propTypes = {
+//   firstname: PropTypes.string.isRequired
+// }

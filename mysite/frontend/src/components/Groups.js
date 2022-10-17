@@ -3,12 +3,12 @@ import { Grid, Button, Typography, Card, CardContent, CardActions, CardMedia} fr
 import Navbar from "./Navbar";
 import UserInfo from "./UserInfo";
 
-export default class Events extends Component {
+export default class Groups extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      events: [],
+      groups: [],
       user: UserInfo()
     };
 
@@ -28,14 +28,14 @@ export default class Events extends Component {
     // Fix the fact that this is not unmounting when we go to another page
   }
 
-  checkAttendance(event_id) {
+  checkAttendance(group_id) {
     // let check = false
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         user: this.state.user.user_id,
-        event: event_id,
+        group: group_id,
       }),
     };
     fetch("/api/check-attendance", requestOptions)
@@ -63,13 +63,13 @@ export default class Events extends Component {
     // }
   }
 
-  subscribeToEvent(event_id) {
+  subscribeToGroup(group_id) {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         user: this.state.user.user_id,
-        event: event_id,
+        group: group_id,
       }),
     };
     fetch("/api/submit-attendance", requestOptions)
@@ -102,7 +102,7 @@ export default class Events extends Component {
             {props.title}
           </Typography>
           <Typography variant="body2">
-          At {props.location}, {props.time.substring(8,10)}/{props.time.substring(5,7)}
+          At {props.location}
           </Typography>
           <Typography variant="body2">
             {props.description}
@@ -111,7 +111,7 @@ export default class Events extends Component {
         <CardActions>
           {/* {this.checkAttendance(props.id).then(console.log())} */}
           {/* variant={} */}
-          <Button size="small" variant={this.checkAttendance(props.id)} onClick={() => { this.subscribeToEvent(props.id); }}>Subscribe</Button>
+          <Button size="small" variant={this.checkAttendance(props.id)} onClick={() => { this.subscribeToGroup(props.id); }}>Subscribe</Button>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
@@ -119,9 +119,9 @@ export default class Events extends Component {
     );
   }
 
-  // Feth from api and save to events array from state
+  // Feth from api and save to groups array from state
   getPosts() {
-    return fetch("/api/events")
+    return fetch("/api/groups")
       .then((response) => {
         console.log(response)
         if (!response.ok) {
@@ -134,7 +134,7 @@ export default class Events extends Component {
         console.log("Retrieved data from API")
         console.log(data)
         this.setState({
-          events: data
+          groups: data
         });
       });
   }
@@ -148,10 +148,10 @@ export default class Events extends Component {
 
           <Grid item xs={12} align="center">
 
-                {this.state.events.map((event) => {
+                {this.state.groups.map((group) => {
                     return (      
-                      <Grid key={event.id} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
-                        {this.renderMedia(event)}
+                      <Grid key={group.id} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
+                        {this.renderMedia(group)}
                        </Grid>
                     );
                  })}

@@ -6,11 +6,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, status
 
-from .models import Survey, Question, Choice, Result, Event
-from .serializers import SurveySerializer, QuestionSerializer, ChoiceSerializer, ResultSerializer, EventSerializer
+from .models import *
+from .serializers import *
 
 import logging
 from datetime import datetime
+import csv
+from django.http import HttpResponse
 
 # Authentication Imports
 from rest_framework.decorators import api_view
@@ -62,6 +64,21 @@ class EventViewSet(viewsets.ModelViewSet):
     """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+class AttendanceViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Events to be viewed or edited.
+    """
+    queryset = Attendance.objects.all()
+    serializer_class = AttendanceSerializer
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Events to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
 
 # class GetEvents(APIView):
 #     serializer_class = SurveySerializer
@@ -147,6 +164,56 @@ class SubmitSurvey(APIView):
 
         return Response({'Bad Request': 'Invalid post data, did not find a survey ID'}, status=status.HTTP_400_BAD_REQUEST)
 
+class SubmitAttendance(APIView):
+    # TODO: Create a serialiserr to convert the request into an object and invoke it here
+    # serializer_class = CreateRoomSerializer
+
+    def post(self, request, format=None):
+
+        user_instance = User.objects.filter(id=request.data.get("user"))[0]
+        event_instance = Event.objects.filter(id=request.data.get("event"))[0]
+
+        attendance_check = Attendance.objects.filter(user=request.data.get("user"), event=request.data.get("event"))
+
+        if len(attendance_check) > 0:
+            return Response({'message': 'Already going'}, status=status.HTTP_400_BAD_REQUEST)
+
+        result = Attendance(user = user_instance, event = event_instance)
+        result.save()
+
+        return Response({'message': 'Survey Submitted!'}, status=status.HTTP_200_OK)
+
+
+class CheckAttendance(APIView):
+    # TODO: Create a serialiserr to convert the request into an object and invoke it here
+    # serializer_class = CreateRoomSerializer
+
+    def post(self, request, format=None):
+
+        user_instance = User.objects.filter(id=request.data.get("user"))[0]
+        event_instance = Event.objects.filter(id=request.data.get("event"))[0]
+
+        attendance_check = Attendance.objects.filter(user=request.data.get("user"), event=request.data.get("event"))
+
+        if len(attendance_check) > 0:
+            return Response({'message': 1}, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': 0}, status=status.HTTP_200_OK)
+
+
+class RemoveAttendance(APIView):
+    # TODO: Create a serialiserr to convert the request into an object and invoke it here
+    # serializer_class = CreateRoomSerializer
+
+    def post(self, request, format=None):
+
+        user_instance = User.objects.filter(id=request.data.get("user"))[0]
+        event_instance = Event.objects.filter(id=request.data.get("event"))[0]
+
+        Attendance.objects.filter(user=request.data.get("user"), event=request.data.get("event")).delete()
+
+        return Response({'message': 'removed'}, status=status.HTTP_200_OK)
+
 
 class GetBillboard(APIView):
     # serializer_class = SurveySerializer
@@ -200,6 +267,19 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
+class ExportCSVSurvey(APIView):
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="responsedataexport.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(['ID', 'QuestionID', 'ChoiceID', 'SurveyID', 'Submission Time'])
+        Results = Result.objects.all()
+        results_list = Results.values_list("id", "question_id", "choice_id", "survey_id", "sub_time")
+        for result in results_list:
+            writer.writerow(result)
+
+        return response
 
 @api_view(['GET'])
 def getRoutes(request):
@@ -222,3 +302,5 @@ def testEndPoint(request):
         data = f'Congratulation your API just responded to POST request with text: {text}'
         return Response({'response': data}, status=status.HTTP_200_OK)
     return Response({}, status.HTTP_400_BAD_REQUEST)
+
+

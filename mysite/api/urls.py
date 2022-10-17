@@ -14,6 +14,8 @@ router.register(r'surveys', SurveyViewSet)
 router.register(r'questions', QuestionViewSet)
 router.register(r'choices', ChoiceViewSet)
 router.register(r'events', EventViewSet)
+router.register(r'attendance', AttendanceViewSet)
+router.register(r'groups', GroupViewSet)
 # router.register(r'token', MyTokenObtainPairView)
 # router.register(r'register', RegisterView)
 
@@ -23,6 +25,9 @@ router.register(r'events', EventViewSet)
 urlpatterns = [
     path('get-survey', GetSurvey.as_view()),
     path('submit-survey', SubmitSurvey.as_view()),
+    path('submit-attendance', SubmitAttendance.as_view()),
+    path('check-attendance', CheckAttendance.as_view()),
+    path('remove-attendance', RemoveAttendance.as_view()),
 
     path('get-billboard', GetBillboard.as_view()),
 
@@ -32,7 +37,10 @@ urlpatterns = [
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', RegisterView.as_view(), name='auth_register'),
-    path('test/', testEndPoint, name='test')
+    path('test/', testEndPoint, name='test'),
+
+    path('results/', ExportCSVSurvey.as_view())
+
 
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

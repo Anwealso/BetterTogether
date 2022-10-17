@@ -8,6 +8,7 @@ import Navbar from "./Navbar";
 import Event from "./Event";
 import HeroImage from "./HeroImage";
 import Groups from "./Groups";
+import TogetherApp from "./TogetherApp";
 // import GenericImage from '../../static/images/senior-volunters.jpg'
 
 import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
@@ -137,6 +138,12 @@ export default class HomePage extends Component {
               }}
             />
 
+          <Route
+            path="/together"
+            render={(props) => {
+              return <TogetherApp {...props}/>
+            }}
+          />
 
           <Route
             path="/events"

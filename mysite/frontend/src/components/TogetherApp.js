@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Button, Typography, Card, CardContent, CardActions, CardMedia} from "@material-ui/core";
+import { Grid, Button, Typography, Card, CardContent, CardActions, CardActionArea, CardMedia} from "@material-ui/core";
 import Navbar from "./Navbar";
 import UserInfo from "./UserInfo";
 
@@ -23,10 +23,12 @@ export default class TogetherApp extends Component {
 
       <div style={{width:"100%"}}>
         <Navbar />
-
+        
         <Grid container spacing={2} style={{display:"flex", flexDirection:"column", alignItems:"center", overflow:"scroll"}}>
+          
           <Grid item xs={10} style={{padding:"3vw"}}>
             <Card>
+              <CardActionArea href="/together/get">
               <CardMedia
                 component="img"
                 height="300"
@@ -40,10 +42,12 @@ export default class TogetherApp extends Component {
                 Feeling lonely? Or do you just want to find new people to connect with? Click here to find out what's going on around you.
                 </Typography>
               </CardContent>
+            </CardActionArea>
             </Card>
           </Grid>
           <Grid item xs={10} style={{padding:"3vw"}}>
             <Card>
+              <CardActionArea href="/together/give">
               <CardMedia
                 component="img"
                 height="300"
@@ -57,6 +61,7 @@ export default class TogetherApp extends Component {
                 Want to join your community? Volunteer today!
                 </Typography>
               </CardContent>
+            </CardActionArea>
             </Card>
           </Grid>
         </Grid>

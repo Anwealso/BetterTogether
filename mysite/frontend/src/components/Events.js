@@ -30,6 +30,10 @@ export default class Events extends Component {
 
   checkAttendance(event_id) {
     // let check = false
+    if (this.state.user === null) {
+      return "contained"
+    }
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

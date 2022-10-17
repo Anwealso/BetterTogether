@@ -11,10 +11,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import MenuItem from '@material-ui/core/MenuItem';
-import AdbIcon from '@material-ui/icons/Adb';
+// import AdbIcon from '@material-ui/core/icons/Adb';
 
 const pages = ['Survey', 'Together App'];
-const settings = ['Profile', 'Account', 'Logout'];
+const page_links = ['/survey/1', '/events'];
+const settings = ['Login', 'Logout'];
+const settings_links = ['/login', '/logout'];
 
 import { useContext } from "react";
 import UserInfo from "../components/UserInfo";
@@ -41,10 +43,11 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" style={{height: "10%"}}>
+    <AppBar position="static" style={{height: "60px"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          
+          {/* Company Logo */}
           <Typography
             variant="h6"
             noWrap
@@ -64,12 +67,12 @@ const Navbar = () => {
           </Typography>
 
 
-          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+          {/* Company Name */}
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -77,6 +80,8 @@ const Navbar = () => {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
+            }}
+            style={{
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -84,8 +89,10 @@ const Navbar = () => {
             Stand Together Against Loneliness
           </Typography>
 
-
+          
+          {/* Navbar Main Section */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            {/* Currently Logged in Account Icon */}
             <IconButton
               size="medium"
               aria-label="account of current user"
@@ -96,6 +103,8 @@ const Navbar = () => {
             >
               <MenuIcon />
             </IconButton>
+            
+            {/* Mobile Navbar Links */}
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -115,30 +124,38 @@ const Navbar = () => {
               }}
             >
               {pages.map((page, index) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography href="/">{page}</Typography>
-                </MenuItem>
+                <a href={page_links[index]} style={{color: "inherit", textDecoration: "none"}}>
+                  <MenuItem 
+                    key={page} 
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography>{page}</Typography>
+                  </MenuItem>
+                </a>
               ))}
             </Menu>
           </Box>
 
 
+          {/* Desktop Navbar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                href={page_links[index]}
               >
                 {page}
               </Button>
             ))}
           </Box>
 
+          {/* User Settings Dropdown Menu */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={user.username} src="/static/images/avatar/2.jpg" />
+                <Avatar alt={(user !== null) ? user.username : ""} src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -157,10 +174,17 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={logoutUser}>
-                  <Typography>{setting}</Typography>
-                </MenuItem>
+              {settings.map((setting, index) => (
+                <a href={settings_links[index]}
+                  style = {{
+                    color: 'inherit',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <MenuItem key={setting} onClick={logoutUser}>
+                    <Typography>{setting}</Typography>
+                  </MenuItem>
+                </a>
               ))}
             </Menu>
           </Box>

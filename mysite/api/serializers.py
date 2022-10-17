@@ -1,6 +1,6 @@
 from random import choices
 from rest_framework import serializers
-from .models import Survey, Question, Choice, Result, Event, Attendance
+from .models import *
 
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
@@ -36,12 +36,17 @@ class ResultSerializer(serializers.ModelSerializer):
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ["id", "title", "location", "time", "description", "image"]
+        fields = ["id", "title", "location", "time", "description", "image", "group"]
 
 class AttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
         fields = ['id', 'user', 'event']
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ["id", "title", "location", "description", "image"]
 
 # class SubmitSurveySerializer(serializers.ModelSerializer):
 #     class Meta:

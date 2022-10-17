@@ -130,13 +130,27 @@ export default class HomePage extends Component {
                 return <Survey {...props}/>
               }}
             />
+          <Route
+            path="/together/event/:eventId"
+            render={(props) => {
+              return <Event {...props}/>
+            }}
+          />
 
-            <Route
-              path="/event/:eventId"
-              render={(props) => {
-                return <Event {...props}/>
-              }}
-            />
+          <Route
+            path="/together/events"
+            render={(props) => {
+              return <Events {...props}/>
+            }}
+          />
+
+
+          <Route
+            path="/together/groups"
+            render={(props) => {
+              return <Groups {...props}/>
+            }}
+          />
 
           <Route
             path="/together"
@@ -145,20 +159,6 @@ export default class HomePage extends Component {
             }}
           />
 
-          <Route
-            path="/events"
-            render={(props) => {
-              return <Events {...props}/>
-            }}
-          />
-
-
-          <Route
-            path="/groups"
-            render={(props) => {
-              return <Groups {...props}/>
-            }}
-          />
 
             <Route
               path="/billboard/:billboardId"

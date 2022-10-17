@@ -14,5 +14,7 @@ urlpatterns = [
     path('events', index),
     path('groups', index),
     path('together', index),
+    path('together/events', index),
+    path('together/groups', index),
     path('billboard/<str:billboardId>', index),
 ]

@@ -69,6 +69,7 @@ export default class Billboard extends Component {
           style={{
             height: "90%",
             width: "100%",
+            color: "#FFFFFF",
           }}
         >
           <img
@@ -79,24 +80,69 @@ export default class Billboard extends Component {
             variant="h1"
             style={{
               marginBottom: "40px",
-              top: "200px",
-              colour: "#052B00",
+              top: "100px",
               position: "absolute",
               fontWeight: "1200",
+              left: "50px",
             }}
           >
-            Life's Better Together
+            Life's
+          </Typography>
+          <Typography
+            variant="h1"
+            style={{
+              marginBottom: "40px",
+              top: "200px",
+              position: "absolute",
+              fontWeight: "1200",
+              left: "50px",
+            }}
+          >
+            Better
+          </Typography>
+          <Typography
+            variant="h1"
+            style={{
+              marginBottom: "40px",
+              top: "300px",
+              position: "absolute",
+              fontWeight: "1200",
+              left: "50px",
+            }}
+          >
+            Together
           </Typography>
           <Typography
             variant="h4"
             style={{
-              colour: "#052B00",
-              top: "300px",
+              marginBottom: "40px",
+              top: "500px",
               position: "absolute",
+              left: "50px",
             }}
           >
-            20% of older Australians say they have experienced loneliness in the
-            last 6 months
+            20% of older Australians say they have experienced
+          </Typography>
+          <Typography
+            variant="h4"
+            style={{
+              marginBottom: "40px",
+              top: "550px",
+              position: "absolute",
+              left: "50px",
+            }}
+          >
+            loneliness in the last 6 months
+          </Typography>
+          <Typography
+            variant="h4"
+            style={{
+              top: "650px",
+              position: "absolute",
+              left: "50px",
+            }}
+          >
+            Get involved as a friender today.
           </Typography>
         </div>
         <div
@@ -167,7 +213,7 @@ export default class Billboard extends Component {
             />
             <Typography
               variant="h3"
-              style={{ fontWeight: "900", colour: "#052B00" }}
+              style={{ fontWeight: "900", colour: "#052B00", left: "150px" }}
             >
               Together Australia
             </Typography>

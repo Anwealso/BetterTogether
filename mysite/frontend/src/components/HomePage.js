@@ -7,6 +7,7 @@ import Events from "./Events";
 import Navbar from "./Navbar";
 import Event from "./Event";
 import HeroImage from "./HeroImage";
+import Groups from "./Groups";
 // import GenericImage from '../../static/images/senior-volunters.jpg'
 
 import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
@@ -141,6 +142,14 @@ export default class HomePage extends Component {
             path="/events"
             render={(props) => {
               return <Events {...props}/>
+            }}
+          />
+
+
+          <Route
+            path="/groups"
+            render={(props) => {
+              return <Groups {...props}/>
             }}
           />
 

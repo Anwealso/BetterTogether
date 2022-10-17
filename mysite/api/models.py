@@ -60,7 +60,7 @@ class Event(models.Model):
     time = models.DateTimeField()
     description = models.CharField(max_length=300)
     image = models.CharField(max_length=200, null=True)
-    group = models.ForeignKey(Group, related_name='events', on_delete=models.CASCADE, blank=True)
+    group = models.ForeignKey(Group, related_name='events', on_delete=models.CASCADE, blank=True, null=True)
 
 
     def __str__(self):

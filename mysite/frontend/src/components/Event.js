@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup, TextField } from "@material-ui/core";
 import Navbar from "./Navbar";
+import HeroImage from "./HeroImage";
 
 export default class Event extends Component {
   constructor(props) {
@@ -41,8 +42,8 @@ export default class Event extends Component {
     return (
       <div style={{width: "100%"}}>
         <Navbar />
-        <h1>yes</h1>
-        {console.log(this.state.event)}
+        {HeroImage((this.state.event !== null) ? "url(" + this.state.event.image + ")": "", (this.state.event !== null) ? this.state.event.title: "")}
+
 
         {/* <FormControl style={{width: "100%"}}>
           <Grid container spacing={1}>

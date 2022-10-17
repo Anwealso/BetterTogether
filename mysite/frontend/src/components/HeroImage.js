@@ -1,6 +1,6 @@
 import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
 
-function HeroImage(image) {
+function HeroImage(image, title) {
     const hero_image = {
       marginTop: "-12vh",
       backgroundImage: image,
@@ -25,7 +25,7 @@ function HeroImage(image) {
       <div style = {hero_image}>
         <div style = {hero_text}>
           <Typography variant="h2">
-            Get Involved
+            {title}
           </Typography>
           <Typography variant="h5">
             Join Your Community Today

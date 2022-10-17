@@ -14,7 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 // import AdbIcon from '@material-ui/core/icons/Adb';
 
 const pages = ['Survey', 'Together App'];
-const page_links = ['/survey/1', '/events'];
+const page_links = ['/survey/1', '/together'];
 const settings = ['Login', 'Logout'];
 const settings_links = ['/login', '/logout'];
 

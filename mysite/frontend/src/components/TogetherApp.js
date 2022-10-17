@@ -21,74 +21,47 @@ export default class TogetherApp extends Component {
   render() {
     return (
 
-      <Grid container spacing={1}>
-          <Navbar />
+      <div style={{width:"100%"}}>
+        <Navbar />
 
-          {/* <Grid item xs={12} align="center">
-
-                
-            <div>
-            <Card sx={{ maxWidth: 345 }}>
+        <Grid container spacing={2} style={{display:"flex", flexDirection:"column", alignItems:"center", overflow:"scroll"}}>
+          <Grid item xs={10} style={{padding:"3vw"}}>
+            <Card>
               <CardMedia
                 component="img"
-                height="140"
-                image={props.image}
+                height="300"
+                image="https://images.theconversation.com/files/456640/original/file-20220406-22-skjmyw.jpg?ixlib=rb-1.1.0&rect=0%2C50%2C6699%2C3349&q=45&auto=format&w=668&h=324&fit=crop"
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  {props.title}
+                  Find Help
                 </Typography>
                 <Typography variant="body2">
-                At {props.location}
-                </Typography>
-                <Typography variant="body2">
-                  {props.description}
+                Feeling lonely? Or do you just want to find new people to connect with? Click here to find out what's going on around you.
                 </Typography>
               </CardContent>
-              <CardActions>
-                <Button size="small" variant={this.checkAttendance(props.id)} onClick={() => { this.subscribeToGroup(props.id); }}>Subscribe</Button>
-                <Button size="small">Learn More</Button>
-              </CardActions>
             </Card>
-            </div>
-          </Grid>*/}
-        <Grid container spacing={2}>
-          <Grid item xs={8}>
-            <Card sx={{ maxWidth: 345 }}>
+          </Grid>
+          <Grid item xs={10} style={{padding:"3vw"}}>
+            <Card>
               <CardMedia
                 component="img"
-                height="140"
-                image="url()"
+                height="300"
+                image="https://www.wslhd.health.nsw.gov.au/Images/UserUploadedImages/3818/Adult%20and%20elderly%20community%20services%20(1).png"
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  {/* {props.title} */}
+                  Give Help
                 </Typography>
                 <Typography variant="body2">
-                At 
-                </Typography>
-                <Typography variant="body2">
-                  {/* {props.description} */}
+                Want to join your community? Volunteer today!
                 </Typography>
               </CardContent>
-              <CardActions>
-                {/* <Button size="small" variant={this.checkAttendance(props.id)} onClick={() => { this.subscribeToGroup(props.id); }}>Subscribe</Button>
-                <Button size="small">Learn More</Button> */}
-              </CardActions>
             </Card>
-          </Grid>
-          <Grid item xs={4}>
-            {/* <Item>xs=4</Item> */}
-          </Grid>
-          <Grid item xs={4}>
-            {/* <Item>xs=4</Item> */}
-          </Grid>
-          <Grid item xs={8}>
-            {/* <Item>xs=8</Item> */}
           </Grid>
         </Grid>
 
-        </Grid> 
+        </div> 
       );
   }
 }

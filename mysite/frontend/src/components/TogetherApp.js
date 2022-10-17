@@ -54,7 +54,28 @@ export default class TogetherApp extends Component {
           </Grid>*/}
         <Grid container spacing={2}>
           <Grid item xs={8}>
-            {/* <Item>xs=8</Item> */}
+            <Card sx={{ maxWidth: 345 }}>
+              <CardMedia
+                component="img"
+                height="140"
+                image="url()"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {/* {props.title} */}
+                </Typography>
+                <Typography variant="body2">
+                At 
+                </Typography>
+                <Typography variant="body2">
+                  {/* {props.description} */}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                {/* <Button size="small" variant={this.checkAttendance(props.id)} onClick={() => { this.subscribeToGroup(props.id); }}>Subscribe</Button>
+                <Button size="small">Learn More</Button> */}
+              </CardActions>
+            </Card>
           </Grid>
           <Grid item xs={4}>
             {/* <Item>xs=4</Item> */}

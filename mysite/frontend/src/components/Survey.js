@@ -172,28 +172,10 @@ export default class Survey extends Component {
   }
 
   renderChoices() {
-    console.log(this.state.questions[this.state.currentQuestionIndex])
-    console.log("hello")
-
     var elems = []
 
     if (this.state.questions[this.state.currentQuestionIndex] && this.state.questions[this.state.currentQuestionIndex].choices) {
-      console.log("running");
       {this.state.questions[this.state.currentQuestionIndex].choices.map((choice, index) => {
-        // if (this.state.questions[this.state.currentQuestionIndex]) {
-        // console.log(word)
-        // console.log(this.state.questions[])
-        //   console.log(this.state.questions[this.state.currentQuestionIndex])
-        //   console.log(this.state.questions[this.state.currentQuestionIndex].choices)
-        //   console.log(typeof(this.state.questions[this.state.currentQuestionIndex].choices))
-
-          
-        //   let choice = this.state.questions[this.state.currentQuestionIndex].choices[index]
-        //   console.log(choice)
-          
-          // console.log(choice)
-
-          console.log("showing")
           elems.push(<FormControlLabel key={choice} value={choice.option} control={<Radio />} label={choice.option} />)
       })}
 

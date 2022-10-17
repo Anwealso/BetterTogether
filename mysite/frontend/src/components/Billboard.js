@@ -20,11 +20,11 @@ export default class Billboard extends Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(()=> this.getBillboardDetails(), 1000);
+    this.timer = setInterval(() => this.getBillboardDetails(), 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer)
+    clearInterval(this.timer);
     this.timer = null;
     // Fix the fact that this is not unmounting when we go to another page
   }
@@ -32,17 +32,17 @@ export default class Billboard extends Component {
   getBillboardDetails() {
     return fetch("/api/get-billboard" + "?id=" + this.state.billboardId)
       .then((response) => {
-        console.log(response)
+        console.log(response);
         if (!response.ok) {
-          console.log("Response not okay")
+          console.log("Response not okay");
           this.props.history.push("/");
         }
         return response.json();
       })
       .then((data) => {
-        console.log("Retrieved data from API")
-        console.log(data)
-        console.log(data.text) // program will probably crash here since we didnt send any text
+        console.log("Retrieved data from API");
+        console.log(data);
+        console.log(data.text); // program will probably crash here since we didnt send any text
 
         this.setState({
           name: data.name,

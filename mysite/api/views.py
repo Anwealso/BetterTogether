@@ -11,6 +11,8 @@ from .serializers import *
 
 import logging
 from datetime import datetime
+import csv
+from django.http import HttpResponse
 
 # Authentication Imports
 from rest_framework.decorators import api_view
@@ -265,6 +267,19 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
+class ExportCSVSurvey(APIView):
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="responsedataexport.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(['ID', 'QuestionID', 'ChoiceID', 'SurveyID', 'Submission Time'])
+        Results = Result.objects.all()
+        results_list = Results.values_list("id", "question_id", "choice_id", "survey_id", "sub_time")
+        for result in results_list:
+            writer.writerow(result)
+
+        return response
 
 @api_view(['GET'])
 def getRoutes(request):
@@ -287,3 +302,5 @@ def testEndPoint(request):
         data = f'Congratulation your API just responded to POST request with text: {text}'
         return Response({'response': data}, status=status.HTTP_200_OK)
     return Response({}, status.HTTP_400_BAD_REQUEST)
+
+

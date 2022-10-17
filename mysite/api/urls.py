@@ -37,7 +37,10 @@ urlpatterns = [
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', RegisterView.as_view(), name='auth_register'),
-    path('test/', testEndPoint, name='test')
+    path('test/', testEndPoint, name='test'),
+
+    path('results/', ExportCSVSurvey.as_view())
+
 
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

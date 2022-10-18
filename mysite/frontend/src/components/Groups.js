@@ -15,7 +15,6 @@ export default class Groups extends Component {
     this.getPosts = this.getPosts.bind(this);
     this.getPosts();
     this.checkAttendance = this.checkAttendance.bind(this);
-    // this.getPosts = this..bind(this);
   }
 
   componentDidMount() {

@@ -6,22 +6,25 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, status
 
-from .models import Survey, Question, Choice, Result
-from .serializers import SurveySerializer, QuestionSerializer, ChoiceSerializer, ResultSerializer
+from .models import *
+from .serializers import *
 
 import logging
 from datetime import datetime
+import csv
+from django.http import HttpResponse
 
-# from django.shortcuts import render
-# from django.http import JsonResponse
-
-# from rest_framework import generics, status
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
-
-# from .serializers import RoomSerializer, CreateRoomSerializer, UpdateRoomSerializer
-# from .models import Room
-
+# Authentication Imports
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.http import JsonResponse
+from .serializers import MyTokenObtainPairSerializer, RegisterSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import generics
+from django.contrib.auth.models import User
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
 
 # ---------------------------------------------------------------------------- #
 #            VIEWS TO LIST OUT ALL THE OBJECTS OF A PARTICULAR CLASS           #
@@ -55,13 +58,45 @@ class ResultViewSet(viewsets.ModelViewSet):
     queryset = Result.objects.all()
     serializer_class = ResultSerializer
 
-class ResultViewSet(viewsets.ModelViewSet):
+class EventViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows questions to be viewed or edited.
+    API endpoint that allows Events to be viewed or edited.
     """
-    queryset = Result.objects.all()
-    serializer_class = ResultSerializer
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
 
+class AttendanceViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Events to be viewed or edited.
+    """
+    queryset = Attendance.objects.all()
+    serializer_class = AttendanceSerializer
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Events to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+
+# class GetEvents(APIView):
+#     serializer_class = SurveySerializer
+#     lookup_url_kwarg = 'id'
+
+#     def get(self, request, format=None):
+#         survey_id = request.GET.get(self.lookup_url_kwarg)
+#         if survey_id != None:
+#             try:
+#                 survey = Survey.objects.get(id=survey_id)
+#                 # data = SurveySerializer(survey[0]).data
+#                 data = SurveySerializer(survey).data
+#                 # data['is_host'] = self.request.session.session_key == survey[0].host
+#                 return Response(data, status=status.HTTP_200_OK)
+#             except:
+#                 return Response({'Survey Not Found': 'Invalid Survey ID.'}, status=status.HTTP_404_NOT_FOUND)
+
+#         return Response({'Bad Request': 'Survey ID paramater not found in request'}, status=status.HTTP_400_BAD_REQUEST)
 
 # ---------------------------------------------------------------------------- #
 #                             VIEWS FOR DATA INPUT                             #
@@ -129,6 +164,56 @@ class SubmitSurvey(APIView):
 
         return Response({'Bad Request': 'Invalid post data, did not find a survey ID'}, status=status.HTTP_400_BAD_REQUEST)
 
+class SubmitAttendance(APIView):
+    # TODO: Create a serialiserr to convert the request into an object and invoke it here
+    # serializer_class = CreateRoomSerializer
+
+    def post(self, request, format=None):
+
+        user_instance = User.objects.filter(id=request.data.get("user"))[0]
+        event_instance = Event.objects.filter(id=request.data.get("event"))[0]
+
+        attendance_check = Attendance.objects.filter(user=request.data.get("user"), event=request.data.get("event"))
+
+        if len(attendance_check) > 0:
+            return Response({'message': 'Already going'}, status=status.HTTP_400_BAD_REQUEST)
+
+        result = Attendance(user = user_instance, event = event_instance)
+        result.save()
+
+        return Response({'message': 'Survey Submitted!'}, status=status.HTTP_200_OK)
+
+
+class CheckAttendance(APIView):
+    # TODO: Create a serialiserr to convert the request into an object and invoke it here
+    # serializer_class = CreateRoomSerializer
+
+    def post(self, request, format=None):
+
+        user_instance = User.objects.filter(id=request.data.get("user"))[0]
+        event_instance = Event.objects.filter(id=request.data.get("event"))[0]
+
+        attendance_check = Attendance.objects.filter(user=request.data.get("user"), event=request.data.get("event"))
+
+        if len(attendance_check) > 0:
+            return Response({'message': 1}, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': 0}, status=status.HTTP_200_OK)
+
+
+class RemoveAttendance(APIView):
+    # TODO: Create a serialiserr to convert the request into an object and invoke it here
+    # serializer_class = CreateRoomSerializer
+
+    def post(self, request, format=None):
+
+        user_instance = User.objects.filter(id=request.data.get("user"))[0]
+        event_instance = Event.objects.filter(id=request.data.get("event"))[0]
+
+        Attendance.objects.filter(user=request.data.get("user"), event=request.data.get("event")).delete()
+
+        return Response({'message': 'removed'}, status=status.HTTP_200_OK)
+
 
 class GetBillboard(APIView):
     # serializer_class = SurveySerializer
@@ -172,3 +257,50 @@ class GetBillboard(APIView):
                 return Response({'Billboard Not Found': 'Invalid Billboard ID.'}, status=status.HTTP_404_NOT_FOUND)
 
         return Response({'Bad Request': 'Billboard ID paramater not found in request'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
+
+class ExportCSVSurvey(APIView):
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="responsedataexport.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(['ID', 'QuestionID', 'ChoiceID', 'SurveyID', 'Submission Time'])
+        Results = Result.objects.all()
+        results_list = Results.values_list("id", "question_id", "choice_id", "survey_id", "sub_time")
+        for result in results_list:
+            writer.writerow(result)
+
+        return response
+
+@api_view(['GET'])
+def getRoutes(request):
+    routes = [
+        '/api/token/',
+        '/api/register/',
+        '/api/token/refresh/'
+    ]
+    return Response(routes)
+
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def testEndPoint(request):
+    if request.method == 'GET':
+        data = f"Congratulation {request.user}, your API just responded to GET request"
+        return Response({'response': data}, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        text = request.POST.get('text')
+        data = f'Congratulation your API just responded to POST request with text: {text}'
+        return Response({'response': data}, status=status.HTTP_200_OK)
+    return Response({}, status.HTTP_400_BAD_REQUEST)
+
+

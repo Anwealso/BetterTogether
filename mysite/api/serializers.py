@@ -1,6 +1,12 @@
 from random import choices
 from rest_framework import serializers
-from .models import Survey, Question, Choice, Result
+from .models import *
+
+from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
@@ -27,7 +33,59 @@ class ResultSerializer(serializers.ModelSerializer):
         model = Result
         fields = ["id", "question_id", "choice_id", "survey_id", "sub_time"]
 
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = ["id", "title", "location", "time", "description", "image", "group"]
+
+class AttendanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attendance
+        fields = ['id', 'user', 'event']
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ["id", "title", "location", "description", "image"]
+
 # class SubmitSurveySerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Survey
 #         fields = ["name", "questions"]
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        # Add custom claims
+        token['username'] = user.username
+        token['email'] = user.email
+        # ...
+        return token
+
+class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(
+        write_only=True, required=True, validators=[validate_password])
+    password2 = serializers.CharField(write_only=True, required=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'password', 'password2')
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError(
+                {"password": "Password fields didn't match."})
+
+        return attrs
+
+    def create(self, validated_data):
+        user = User.objects.create(
+            username=validated_data['username']
+        )
+
+        user.set_password(validated_data['password'])
+        user.save()
+
+        return user

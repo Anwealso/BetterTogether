@@ -5,7 +5,6 @@ dependencies:
   - pip:
     - Django
     - djangorestframework
-    - numpy
-    - pandas
-    - sklearn
-    - matplotlib
+    - django-cors-headers
+    - djangorestframework-simplejwt
+    - PyJWT

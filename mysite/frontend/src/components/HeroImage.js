@@ -12,11 +12,11 @@ function HeroImage(image, title) {
     }
 
     const hero_text = {
-      textAlign: "center",
+      textAlign: "left",
       position: "absolute",
       top: "50%",
       left: "50%",
-      transform: "translate(-50%, -50%)",
+      transform: "translate(-60%, -50%)",
       color: "white",
       fontSize: "3vh"
     }
@@ -27,7 +27,7 @@ function HeroImage(image, title) {
             style={{
               background: "rgb(2,0,36)",
               background:
-                "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(6,71,162,0.7041383203672094) 0%, rgba(0,212,255,0) 100%)",
+                "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(6,71,162,0.7) 0%, rgba(0,212,255,0) 100%)",
               width: "110vw",
               height: "100%",
               position: "absolute",

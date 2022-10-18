@@ -40,12 +40,11 @@ export default class Event extends Component {
   }
 
   render() {
-    const yep = <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14163.32930707494!2d152.97944090000001!3d-27.4433358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b9156d130da8fcb%3A0x3bd766e2dfb13937!2sAshgrove%20Golf%20Course%2C%20The%20Gap%20QLD%204061!5e0!3m2!1sen!2sau!4v1665986810247!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     return (
       <div style={{width: "100%"}}>
         <Navbar />
         {HeroImage((this.state.event !== null) ? "url(" + this.state.event.image + ")": "", (this.state.event !== null) ? this.state.event.title: "")}
-        {Map()}
+        {Map(this.state.event.location.substring(iframeSource.indexOf("!2s") + 3, iframeSource.indexOf("!5e0")).replaceAll("%2C%20", ", ").replaceAll("%20", " ").replaceAll("&#39;", "'"))}
         
         {/* <FormControl style={{width: "100%"}}>
           <Grid container spacing={1}>

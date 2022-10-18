@@ -4,10 +4,13 @@ import React, { Component } from "react";
 // import PosterImage from '../../static/images/ons_blanked.jpeg';
 import { Grid, Avatar, Typography, Box, Card } from "@material-ui/core";
 const imgArray = [
-  "old_young_man_pub_1.jpeg",
-  "grandma_cooking_1.jpeg",
-  "grandma_cooking_2.jpeg",
-  "grandma_cooking_3.jpeg",
+  "neighbours_3.jpeg",
+  "old.jpg",
+  "old2.jpg",
+  "old3.jpg",
+  "old4.jpg",
+  "old5.jpg",
+  "old6.jpg",
 ];
 export default class Billboard extends Component {
   timer = null;
@@ -18,7 +21,7 @@ export default class Billboard extends Component {
       percentage: 20,
       billboardId: parseInt(this.props.match.params.billboardId),
       questions: [],
-      image: "old_young_man_pub_1.jpeg",
+      image: "oldplay.jpg",
     };
 
     this.getBillboardDetails = this.getBillboardDetails.bind(this);
@@ -27,7 +30,7 @@ export default class Billboard extends Component {
 
   componentDidMount() {
     // this.timer = setInterval(() => this.getBillboardDetails(), 5000);
-    this.timer = setInterval(() => this.changeImage(), 10000);
+    this.timer = setInterval(() => this.changeImage(), 5000);
   }
 
   changeImage() {
@@ -89,7 +92,7 @@ export default class Billboard extends Component {
             style={{
               background: "rgb(2,0,36)",
               background:
-                "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(6,71,162,1) 0%, rgba(0,212,255,0) 100%)",
+                "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(6,71,162,0.7041383203672094) 0%, rgba(0,212,255,0) 100%)",
               width: "100vw",
               height: "100%",
               position: "absolute",

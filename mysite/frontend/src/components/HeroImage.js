@@ -23,11 +23,21 @@ function HeroImage(image, title) {
     
     return (
       <div style = {hero_image}>
+        <div
+            style={{
+              background: "rgb(2,0,36)",
+              background:
+                "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(6,71,162,0.7041383203672094) 0%, rgba(0,212,255,0) 100%)",
+              width: "110vw",
+              height: "100%",
+              position: "absolute",
+            }}
+          />
         <div style = {hero_text}>
           <Typography variant="h2">
             {title}
           </Typography>
-          <Typography variant="h5">
+          <Typography variant="h2">
             Join Your Community Today
           </Typography>
           <ButtonGroup disableElevation variant="contained" color="primary">

@@ -15,7 +15,6 @@ export default class Groups extends Component {
     this.getPosts = this.getPosts.bind(this);
     this.getPosts();
     this.checkAttendance = this.checkAttendance.bind(this);
-    // this.getPosts = this..bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +29,10 @@ export default class Groups extends Component {
 
   checkAttendance(group_id) {
     // let check = false
+    if (this.state.user === null) {
+      return "contained"
+    }
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -64,6 +67,10 @@ export default class Groups extends Component {
   }
 
   subscribeToGroup(group_id) {
+    if (this.state.user === null) {
+      return "contained"
+    }
+    
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

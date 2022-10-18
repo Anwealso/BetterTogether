@@ -214,7 +214,7 @@ export default class Survey extends Component {
 
                   <div key={this.state.currentQuestionIndex} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "20px", width: "50%", overflow: "scroll"}}>
                     <FormLabel id="demo-radio-buttons-group-label">
-                      Q{this.state.currentQuestionIndex+1}.{(this.state.questions[this.state.currentQuestionIndex] === undefined) ? "" : String(this.state.questions[this.state.currentQuestionIndex].text)}
+                      Q{this.state.currentQuestionIndex+1}.{" "}{(this.state.questions[this.state.currentQuestionIndex] === undefined) ? "" : String(this.state.questions[this.state.currentQuestionIndex].text)}
                     </FormLabel>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"

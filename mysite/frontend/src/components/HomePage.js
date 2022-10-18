@@ -65,16 +65,13 @@ export default class HomePage extends Component {
             Billboards
           </Typography>
           <Typography variant="p" align="left" gutterBottom={true} display="block">
-            You may have seen our billboards around! They're designed to keep your community up to date with your community. These statics are updated live by other people in your community!
-          </Typography>
-          <Typography variant="h5">
-            Join Your Community Today
+            You may have seen our billboards around! They're designed to keep you up to date with your community. These statics are updated live by the responses of your community members!
           </Typography>
           <Typography variant="h4" gutterBottom={true} display="block">
             Surveys
           </Typography>
           <Typography variant="p" align="left" gutterBottom={true} display="block">
-            This is whaty feeds our billboards. It's our way of sharing how everyone is doing around you anonymously. Sometimes sharing can be hard, we get that. So we designed a platform so that you can easily share what you feel without being confronted.
+            This is what feeds our billboards. It's our way of sharing how everyone is doing around you anonymously. Sometimes sharing can be hard, we get that. So we designed a platform so that you can easily share what you feel without being confronted.
           </Typography>
 
           <Typography variant="h4" gutterBottom={true} display="block">

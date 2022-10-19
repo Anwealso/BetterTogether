@@ -158,7 +158,7 @@ export default class Events extends Component {
 
                 {this.state.events.map((event) => {
                     return (      
-                      <Grid key={event.id} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>
+                      <Grid key={event.id} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", maxwidth: "500px"}}>
                         {this.renderMedia(event)}
                        </Grid>
                     );

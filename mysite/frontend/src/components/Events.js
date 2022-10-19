@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Grid, Button, Typography, Card, CardContent, CardActions, CardMedia} from "@material-ui/core";
 import Navbar from "./Navbar";
 import UserInfo from "./UserInfo";
+import { Link } from 'react-router-dom';
 
 export default class Events extends Component {
   constructor(props) {
@@ -94,11 +95,11 @@ export default class Events extends Component {
 
   renderMedia(props) {
     return (
-      <div>
-      <Card sx={{ maxWidth: 345 }}>
+      <div style={{ maxWidth: "600px" }}>
+      <Card sx={{ maxWidth: "345px" }}>
         <CardMedia
           component="img"
-          height="140"
+          height="250"
           image={props.image}
         />
         <CardContent>
@@ -106,7 +107,8 @@ export default class Events extends Component {
             {props.title}
           </Typography>
           <Typography variant="body2">
-          At {props.location}, {props.time.substring(8,10)}/{props.time.substring(5,7)}
+            {console.log(props.location)}
+          At {props.location.substring(props.location.indexOf("!2s") + 3, props.location.indexOf("!5e0")).replaceAll("%2C%20", ", ").replaceAll("%20", " ").replaceAll("&#39;", "'").replaceAll("%26", "&")}, {props.time.substring(8,10)}/{props.time.substring(5,7)}
           </Typography>
           <Typography variant="body2">
             {props.description}
@@ -116,7 +118,9 @@ export default class Events extends Component {
           {/* {this.checkAttendance(props.id).then(console.log())} */}
           {/* variant={} */}
           <Button size="small" variant={this.checkAttendance(props.id)} onClick={() => { this.subscribeToEvent(props.id); }}>Subscribe</Button>
-          <Button size="small">Learn More</Button>
+          <Link to={"/together/event/" + props.id}>
+            <Button size="small">Learn More</Button>
+          </Link>
         </CardActions>
       </Card>
       </div>

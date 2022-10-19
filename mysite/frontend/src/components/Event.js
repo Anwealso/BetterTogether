@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup, TextField } from "@material-ui/core";
 import Navbar from "./Navbar";
 import HeroImage from "./HeroImage";
+import Map from "./Map";
 
 export default class Event extends Component {
   constructor(props) {
@@ -43,8 +44,9 @@ export default class Event extends Component {
       <div style={{width: "100%"}}>
         <Navbar />
         {HeroImage((this.state.event !== null) ? "url(" + this.state.event.image + ")": "", (this.state.event !== null) ? this.state.event.title: "")}
-
-
+        {Map((this.state.event !== null) ? this.state.event.location: "")}
+        {/* .substring(iframeSource.indexOf("!2s") + 3, iframeSource.indexOf("!5e0")).replaceAll("%2C%20", ", ").replaceAll("%20", " ").replaceAll("&#39;", "'") */}
+        
         {/* <FormControl style={{width: "100%"}}>
           <Grid container spacing={1}>
             <Grid item xs={12} align="center">

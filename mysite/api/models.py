@@ -46,7 +46,7 @@ class Group(models.Model):
 
 class Event(models.Model):
     title = models.CharField(max_length=60)
-    location = models.CharField(max_length=100)
+    location = models.CharField(max_length=300)
     time = models.DateTimeField()
     description = models.CharField(max_length=300)
     image = models.CharField(max_length=200, null=True)

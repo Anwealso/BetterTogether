@@ -2,7 +2,7 @@ import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
 
 function HeroImage(image, title) {
     const hero_image = {
-      marginTop: "-12vh",
+      // marginTop: "vh",
       backgroundImage: image,
       height: "50%",
       width: "100%",backgroundPosition: "center",

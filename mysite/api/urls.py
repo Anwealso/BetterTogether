@@ -16,12 +16,8 @@ router.register(r'choices', ChoiceViewSet)
 router.register(r'events', EventViewSet)
 router.register(r'attendance', AttendanceViewSet)
 router.register(r'groups', GroupViewSet)
-# router.register(r'token', MyTokenObtainPairView)
-# router.register(r'register', RegisterView)
 
-
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
+# Set up the url routing for the API
 urlpatterns = [
     path('get-survey', GetSurvey.as_view()),
     path('submit-survey', SubmitSurvey.as_view()),
@@ -33,14 +29,10 @@ urlpatterns = [
 
     path('', include(router.urls)),
 
-
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', RegisterView.as_view(), name='auth_register'),
     path('test/', testEndPoint, name='test'),
 
     path('results/', ExportCSVSurvey.as_view())
-
-
-    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

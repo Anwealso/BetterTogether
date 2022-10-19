@@ -96,7 +96,7 @@ export default class Events extends Component {
   renderMedia(props) {
     return (
       <div style={{ maxWidth: "600px" }}>
-      <Card sx={{ maxWidth: "345px" }}>
+      <Card>
         <CardMedia
           component="img"
           height="250"

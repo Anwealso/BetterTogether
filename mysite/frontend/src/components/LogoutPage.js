@@ -31,7 +31,6 @@ const LogoutPage = () => {
         </ButtonGroup>
       </Grid>
     </Grid>
-
   );
 };
 

@@ -13,11 +13,6 @@ export default class TogetherApp extends Component {
     };
   }
 
-  // renderMedia(props) {
-  //   return (
-  //   );
-  // }
-
   render() {
     return (
 
@@ -57,8 +52,9 @@ export default class TogetherApp extends Component {
                 <Typography gutterBottom variant="h5" component="div">
                   Give Help
                 </Typography>
+                
                 <Typography variant="body2">
-                Want to join your community? Volunteer today!
+                  Want to join your community? Volunteer today!
                 </Typography>
               </CardContent>
             </CardActionArea>

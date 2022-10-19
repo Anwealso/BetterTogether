@@ -35,8 +35,6 @@ export default class Event extends Component {
         }
       }
     });
-    
-      // });
   }
 
   render() {
@@ -45,63 +43,6 @@ export default class Event extends Component {
         <Navbar />
         {HeroImage((this.state.event !== null) ? "url(" + this.state.event.image + ")": "", (this.state.event !== null) ? this.state.event.title: "")}
         {Map((this.state.event !== null) ? this.state.event.location: "")}
-        {/* .substring(iframeSource.indexOf("!2s") + 3, iframeSource.indexOf("!5e0")).replaceAll("%2C%20", ", ").replaceAll("%20", " ").replaceAll("&#39;", "'") */}
-        
-        {/* <FormControl style={{width: "100%"}}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} align="center">
-                {/* Survey ID: {this.state.surveyId}
-                <br/>
-                Survey Name: {this.state.name}
-                <br/>
-                Num Questions: {this.state.questions.length}
-                <div>
-                  {JSON.stringify(this.state.questions)}
-                </div>
-                <div>
-                  {this.state.questions.map((question) => {
-                    return (
-                      <div>"{question.id}: {question.selectedChoiceId}"</div>
-                    );
-                  })}
-                </div> */}
-
-                {/* <br/>
-
-                <div>
-                  <h2>Community Wellness Survey</h2>
-
-                  <div key={this.state.currentQuestionIndex} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "20px", width: "50%", height: "500px", overflow: "scroll"}}>
-                    <FormLabel id="demo-radio-buttons-group-label">Q{this.state.currentQuestionIndex+1}. {[this.state.questions[this.state.currentQuestionIndex]].text}</FormLabel>
-                    <RadioGroup
-                      aria-labelledby="demo-radio-buttons-group-label"
-                      defaultValue=""
-                      name={"radio-buttons-group-" + this.state.currentQuestionIndex}
-                      onChange={this.handleVoteChange}
-                    >
-
-                      {this.renderChoices()}
-
-                    </RadioGroup>
-                  </div>
-
-
-                </div>
-            </Grid>
-
-            <Grid item xs={6}>
-              {this.renderBackButton()}
-            </Grid>
-
-            <Grid item xs={6}>
-              {this.renderNextButton()}
-            </Grid> */}
-
-            {/* {this.renderSubmitButton()} */}
-
-          {/* </Grid> */}
-        {/* </FormControl> */}
-
       </div>
     );
   }

@@ -11,7 +11,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import MenuItem from '@material-ui/core/MenuItem';
-// import AdbIcon from '@material-ui/core/icons/Adb';
 
 const pages = ['Survey', 'Together App'];
 const page_links = ['/survey/1', '/together'];

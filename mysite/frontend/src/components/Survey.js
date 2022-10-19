@@ -59,7 +59,6 @@ export default class Survey extends Component {
     var questionIndex = e.target.name.split("-").at(-1)
     let question = questions[questionIndex];
  
-    // 2. Replace the property you're intested in
     var selectedChoiceOption = e.target.value;
 
     question.choices.map((choice, index) => {
@@ -68,7 +67,6 @@ export default class Survey extends Component {
       }
     })
 
-    // 4. Set the state to our new copy
     this.setState({
       questions: questions
     });
@@ -191,23 +189,6 @@ export default class Survey extends Component {
         <FormControl style={{width: "100%"}}>
           <Grid container spacing={1}>
             <Grid item xs={12} align="center">
-                {/* Survey ID: {this.state.surveyId}
-                <br/>
-                Survey Name: {this.state.name}
-                <br/>
-                Num Questions: {this.state.questions.length}
-                <div>
-                  {JSON.stringify(this.state.questions)}
-                </div>
-                <div>
-                  {this.state.questions.map((question) => {
-                    return (
-                      <div>"{question.id}: {question.selectedChoiceId}"</div>
-                    );
-                  })}
-                </div> */}
-
-                <br/>
 
                 <div>
                   <h2>Community Wellness Survey</h2>

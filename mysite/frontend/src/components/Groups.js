@@ -24,7 +24,6 @@ export default class Groups extends Component {
   componentWillUnmount() {
     clearInterval(this.timer) 
     this.timer = null;
-    // Fix the fact that this is not unmounting when we go to another page
   }
 
   checkAttendance(group_id) {
@@ -46,24 +45,12 @@ export default class Groups extends Component {
         console.log(response)
         return response.json()
       }).then((data) => {
-        // console.log("hello2?")
-        // console.log(data.message == 1)
         if (data.message == 1) {
           return "outlined" 
         } else {
           return "contained"
         }
       })
-
-    // console.log("hello?")
-
-    // return check
-
-    // if (check === true) {
-    //   return "contained"
-    // } else {
-    //   return "outlined"
-    // }
   }
 
   subscribeToGroup(group_id) {
@@ -116,8 +103,6 @@ export default class Groups extends Component {
           </Typography>
         </CardContent>
         <CardActions>
-          {/* {this.checkAttendance(props.id).then(console.log())} */}
-          {/* variant={} */}
           <Button size="small" variant={this.checkAttendance(props.id)} onClick={() => { this.subscribeToGroup(props.id); }}>Subscribe</Button>
           <Button size="small">Learn More</Button>
         </CardActions>
@@ -152,9 +137,8 @@ export default class Groups extends Component {
 
       <Grid container spacing={1}>
           <Navbar />
-
+          
           <Grid item xs={12} align="center">
-
                 {this.state.groups.map((group) => {
                     return (      
                       <Grid key={group.id} style={{backgroundColor: "ghostwhite", borderRadius: "20px", margin: "10px", padding: "10px", width: "50%"}}>

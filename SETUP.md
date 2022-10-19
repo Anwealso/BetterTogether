@@ -10,7 +10,7 @@ Follow [this guide](https://docs.anaconda.com/anaconda/install/)
 
 ### Setup the Virtual Environment with Conda
 
-Run Alex's bash script (from the project root dir) that sets up the conda env and installs all the required dependancies
+Run bash script (from the project root dir) that sets up the conda env and installs all the required dependancies
 
 ```bash
 bash install_backend.sh
@@ -54,6 +54,7 @@ As it says in the terminal output, view the server [on localhost port 8000 here]
 ---
 
 ## Frontend
+This step and onwards is only necessary if you wish to update the front end (for making compiled js). The website can be viewed with just the django local server and the included precompiled js in this repo.
 
 ### Install Node.js
 

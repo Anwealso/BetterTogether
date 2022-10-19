@@ -13,7 +13,6 @@ Tools:
 ## Frontend
 
 * React
-* Redux (for state management???)
 
 ## API
 

@@ -14,7 +14,7 @@ function HeroImage(image, title) {
     const hero_text = {
       textAlign: "left",
       position: "absolute",
-      top: "50%",
+      top: "60%",
       left: "50%",
       transform: "translate(-60%, -50%)",
       color: "white",

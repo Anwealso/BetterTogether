@@ -1,4 +1,6 @@
-# Alex's Installation and Environment Setup Guide
+# Installation and Environment Setup Guide
+
+First and foremost, there is a deployed version of this app available at s4480158-onigiri@uqcloud.net. These steps can be followed if you wish to run the server locally, make changes, etc.
 
 ---
 

@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-// import { Routes, Route, useParams } from 'react-router-dom';
-// import { Grid, Button, Typography, Radio, FormControl, FormControlLabel, FormLabel, RadioGroup } from "@mui/material";
-// import PosterImage from '../../static/images/ons_blanked.jpeg';
 import { Grid, Avatar, Typography, Box, Card } from "@material-ui/core";
 const imgArray = [
   "neighbours_3.jpeg",
@@ -25,17 +22,14 @@ export default class Billboard extends Component {
     };
 
     this.getBillboardDetails = this.getBillboardDetails.bind(this);
-    // this.getBillboardDetails();
   }
 
   componentDidMount() {
-    // this.timer = setInterval(() => this.getBillboardDetails(), 5000);
     this.timer = setInterval(() => this.changeImage(), 5000);
   }
 
   changeImage() {
     const raand = Math.floor(Math.random() * imgArray.length - 1) + 1;
-    console.log(raand);
     this.setState({ image: imgArray[raand] });
   }
   componentWillUnmount() {
@@ -47,18 +41,11 @@ export default class Billboard extends Component {
   getBillboardDetails() {
     return fetch("/api/get-billboard" + "?id=" + this.state.billboardId)
       .then((response) => {
-        console.log(response);
         if (!response.ok) {
-          console.log("Response not okay");
-          // this.props.history.push("/");
         }
         return response.json();
       })
       .then((data) => {
-        console.log("Retrieved data from API");
-        console.log(data);
-        console.log(data.text); // program will probably crash here since we didnt send any text
-
         this.setState({
           name: data.name,
           text: data.text,
@@ -67,7 +54,6 @@ export default class Billboard extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div
         className="main"

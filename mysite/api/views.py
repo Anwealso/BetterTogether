@@ -80,24 +80,6 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 
-# class GetEvents(APIView):
-#     serializer_class = SurveySerializer
-#     lookup_url_kwarg = 'id'
-
-#     def get(self, request, format=None):
-#         survey_id = request.GET.get(self.lookup_url_kwarg)
-#         if survey_id != None:
-#             try:
-#                 survey = Survey.objects.get(id=survey_id)
-#                 # data = SurveySerializer(survey[0]).data
-#                 data = SurveySerializer(survey).data
-#                 # data['is_host'] = self.request.session.session_key == survey[0].host
-#                 return Response(data, status=status.HTTP_200_OK)
-#             except:
-#                 return Response({'Survey Not Found': 'Invalid Survey ID.'}, status=status.HTTP_404_NOT_FOUND)
-
-#         return Response({'Bad Request': 'Survey ID paramater not found in request'}, status=status.HTTP_400_BAD_REQUEST)
-
 # ---------------------------------------------------------------------------- #
 #                             VIEWS FOR DATA INPUT                             #
 # ---------------------------------------------------------------------------- #
@@ -111,9 +93,7 @@ class GetSurvey(APIView):
         if survey_id != None:
             try:
                 survey = Survey.objects.get(id=survey_id)
-                # data = SurveySerializer(survey[0]).data
                 data = SurveySerializer(survey).data
-                # data['is_host'] = self.request.session.session_key == survey[0].host
                 return Response(data, status=status.HTTP_200_OK)
             except:
                 return Response({'Survey Not Found': 'Invalid Survey ID.'}, status=status.HTTP_404_NOT_FOUND)
@@ -121,14 +101,7 @@ class GetSurvey(APIView):
         return Response({'Bad Request': 'Survey ID paramater not found in request'}, status=status.HTTP_400_BAD_REQUEST)
 
 class SubmitSurvey(APIView):
-    # TODO: Create a serialiserr to convert the request into an object and invoke it here
-    # serializer_class = CreateRoomSerializer
-
     def post(self, request, format=None):
-        # if not self.request.session.exists(self.request.session.session_key):
-        #     self.request.session.create()
-        # logging.debug(request.data)
-
         # Check the db to see that the requested survey exists
         survey_id = request.data.get("surveyId")
         if survey_id != None:
@@ -136,18 +109,12 @@ class SubmitSurvey(APIView):
             if len(survey_instances) > 0:
                 survey_instance = survey_instances[0]
 
-                # TODO: Fix up this fiasco with the date not properly being shown in admin protal (and maybe not even being recorded)
-                # sub_time = request.data.get("submitTime")
-                # sub_time = make_aware(datetime.strptime(sub_time, "%d/%m/%Y, %H:%M:%S")) # convert datetime string format
                 sub_time = make_aware(datetime.now())
                 logging.debug(sub_time)
 
                 for question in request.data.get("questions"):
-                    # logging.debug(question)
-
                     question_instance = Question.objects.filter(id=question["id"])[0]
                     selected_choice_instance = Choice.objects.filter(id=question["selectedChoiceId"])[0]
-
 
                     # Save the survey results to the database
                     result = Result(question_id=question_instance, choice_id=selected_choice_instance, survey_id=survey_instance, sub_time=sub_time)
@@ -156,8 +123,6 @@ class SubmitSurvey(APIView):
                     logging.debug(result.sub_time)
                     result.save()
 
-                # return Response(ResultSerializer(result).data, status=status.HTTP_201_CREATED)
-
                 return Response({'message': 'Survey Submitted!'}, status=status.HTTP_200_OK)
 
             return Response({'Bad Request': 'Invalid Survey ID'}, status=status.HTTP_400_BAD_REQUEST)
@@ -165,11 +130,7 @@ class SubmitSurvey(APIView):
         return Response({'Bad Request': 'Invalid post data, did not find a survey ID'}, status=status.HTTP_400_BAD_REQUEST)
 
 class SubmitAttendance(APIView):
-    # TODO: Create a serialiserr to convert the request into an object and invoke it here
-    # serializer_class = CreateRoomSerializer
-
     def post(self, request, format=None):
-
         user_instance = User.objects.filter(id=request.data.get("user"))[0]
         event_instance = Event.objects.filter(id=request.data.get("event"))[0]
 
@@ -185,11 +146,7 @@ class SubmitAttendance(APIView):
 
 
 class CheckAttendance(APIView):
-    # TODO: Create a serialiserr to convert the request into an object and invoke it here
-    # serializer_class = CreateRoomSerializer
-
     def post(self, request, format=None):
-
         user_instance = User.objects.filter(id=request.data.get("user"))[0]
         event_instance = Event.objects.filter(id=request.data.get("event"))[0]
 
@@ -202,9 +159,6 @@ class CheckAttendance(APIView):
 
 
 class RemoveAttendance(APIView):
-    # TODO: Create a serialiserr to convert the request into an object and invoke it here
-    # serializer_class = CreateRoomSerializer
-
     def post(self, request, format=None):
 
         user_instance = User.objects.filter(id=request.data.get("user"))[0]
@@ -216,17 +170,14 @@ class RemoveAttendance(APIView):
 
 
 class GetBillboard(APIView):
-    # serializer_class = SurveySerializer
     lookup_url_kwarg = 'id'
 
     def get(self, request, format=None):
         billboard_id = int(request.GET.get(self.lookup_url_kwarg))
 
         if billboard_id != None:
-            if billboard_id == 1:
-                # Do billboard 0 logic...
-                # Get the percentage votes for red
-                
+            if billboard_id == 1:   
+                # Do billboard 1 logic...             
                 logging.debug(Result.objects.filter(question_id=1))
                 logging.debug(Result.objects.filter(question_id=1))
 
@@ -241,8 +192,7 @@ class GetBillboard(APIView):
                 return Response({'text': percentage_red}, status=status.HTTP_200_OK)
 
             elif billboard_id == 2:
-                # Do billboard 1 logic...
-                # Get the percentage votes for blue                
+                # Do billboard 2 logic...
                 num_red = len(Result.objects.filter(question_id=1).filter(choice_id=Choice.objects.filter(question_id=1).filter(option="Red")[0].id))
                 num_blue = len(Result.objects.filter(question_id=1).filter(choice_id=Choice.objects.filter(question_id=1).filter(option="Blue")[0].id))
                 if num_red + num_blue == 0:

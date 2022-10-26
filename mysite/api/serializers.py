@@ -48,12 +48,6 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = ["id", "title", "location", "description", "image"]
 
-# class SubmitSurveySerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Survey
-#         fields = ["name", "questions"]
-
-
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):

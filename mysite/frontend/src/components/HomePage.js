@@ -47,7 +47,6 @@ export default class HomePage extends Component {
       <Grid container spacing={3}>
         <Navbar />
         
-
         {HeroImage("url(../../static/images/senior-volunters.jpg)")}
         {/* <Grid item xs={12} align="center"> */}
           <div style={{ margin: "auto", marginTop:"3vh", padding:"50px", maxWidth: 600 }}>
@@ -81,8 +80,6 @@ export default class HomePage extends Component {
             This is where you can see what's going on in your community. Find events, groups, and more!
           </Typography>
           </div>
-          
-        {/* </Grid> */}
       </Grid>
     );
   }
@@ -114,13 +111,6 @@ export default class HomePage extends Component {
                 return <Submitted />
               }}
             />
-            
-            {/* <Route
-              path="/create" 
-              render={() => {
-                return <Join />
-              }}
-            /> */}
             
             <Route
               path="/survey/:surveyId"

@@ -26,11 +26,9 @@ export default class Events extends Component {
   componentWillUnmount() {
     clearInterval(this.timer) 
     this.timer = null;
-    // Fix the fact that this is not unmounting when we go to another page
   }
 
   checkAttendance(event_id) {
-    // let check = false
     if (this.state.user === null) {
       return "contained"
     }
@@ -48,24 +46,12 @@ export default class Events extends Component {
         console.log(response)
         return response.json()
       }).then((data) => {
-        // console.log("hello2?")
-        // console.log(data.message == 1)
         if (data.message == 1) {
           return "outlined" 
         } else {
           return "contained"
         }
       })
-
-    // console.log("hello?")
-
-    // return check
-
-    // if (check === true) {
-    //   return "contained"
-    // } else {
-    //   return "outlined"
-    // }
   }
 
   subscribeToEvent(event_id) {
@@ -115,8 +101,6 @@ export default class Events extends Component {
           </Typography>
         </CardContent>
         <CardActions>
-          {/* {this.checkAttendance(props.id).then(console.log())} */}
-          {/* variant={} */}
           <Button size="small" variant={this.checkAttendance(props.id)} onClick={() => { this.subscribeToEvent(props.id); }}>Subscribe</Button>
           <Link to={"/together/event/" + props.id}>
             <Button size="small">Learn More</Button>

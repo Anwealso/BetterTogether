@@ -2,7 +2,6 @@ import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
 
 function HeroImage(image, title) {
     const hero_image = {
-      // marginTop: "vh",
       backgroundImage: image,
       height: "50%",
       width: "100%",backgroundPosition: "center",
@@ -37,15 +36,12 @@ function HeroImage(image, title) {
           <Typography variant="h2">
             {title}
           </Typography>
+          
           <Typography variant="h2">
             Join Your Community Today
           </Typography>
-          <ButtonGroup disableElevation variant="contained" color="primary">
 
-            {/* <Button color="primary" to="/survey/1" component={Link}>
-              Try the Survey
-            </Button> */}
-            
+          <ButtonGroup disableElevation variant="contained" color="primary">
           </ButtonGroup>
         </div>
       </div>

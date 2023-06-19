@@ -14,7 +14,7 @@ If you are setting up for the first time, please follow the  install guide in SE
 `Username: admin`
 `Password: 123`
 
-## Current Sitemap (Depracated)
+## Current Sitemap (Deprecated)
 
 ```/``` goes to the surveys homepage, which shows a list of all the available surveys
 

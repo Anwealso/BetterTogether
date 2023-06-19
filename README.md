@@ -1,20 +1,14 @@
-# Interactive Campaign Billboard - DECO3801 Team Project
+# Multi-Modal Social Welfare Campaign - DECO3801 Team Project
 
-Social welfare visibility system integrating interactive live-data display billboards, info website and 
+An interactive campaign prompting people to come together by highlighting the struggles of loneliness in society - especially among older people. The campaign system consists of a collection of hosted react apps integrating functionalities such as: interactive live-data display billboards, campaign home website and online research collection survey to gather community data.  
 
 ---
 
-If you are setting up for the first time, please follow the  install guide in SETUP.md.
+## Installation
 
-## Important Notes
+Follow the  install guide in SETUP.md.
 
- * **Make sure to create a new personal branch / feature branch when you start working on a new feature!!!**
-
-* Login credentials for the django server admin account:
-`Username: admin`
-`Password: 123`
-
-## Current Sitemap (Deprecated)
+## Current Sitemap
 
 ```/``` goes to the surveys homepage, which shows a list of all the available surveys
 

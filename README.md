@@ -1,6 +1,6 @@
-# Onigiri - DECO3801 Team Project
+# Interactive Campaign Billboard - DECO3801 Team Project
 
-Social welfare visibility system
+Social welfare visibility system integrating interactive live-data display billboards, info website and 
 
 ---
 
